@@ -6,6 +6,7 @@
 *.fls
 *.out
 *.toc
+*.pdf
 
 ## Intermediate documents:
 *.dvi
@@ -124,3 +125,8 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+#Texpad
+.texpadtmp
+
+.DS_Store
