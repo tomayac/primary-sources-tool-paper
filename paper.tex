@@ -82,36 +82,39 @@ and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 \subsection{Freebase}
 
 Freebase\footnote{Freebase: \url{https://www.freebase.com}} is an open source and
-collaborative knowledge base created in 2007 by Metaweb and bought in 2010 by Google.
+collaborative knowledge base created in 2007 by Metaweb and acquired in 2010 by Google.
 It was used as the open core of the Google Knowledge Graph,
-and also in many use cases outside of Google.
+and also has many use cases outside of Google.
+
 Due to the success of Wikidata,
-it was decided to close Freebase and support the migration of Freebase' content to Wikidata.
-Freebase' content relies on the notions of topics, facts, types, and properties.
-Each Freebase topic has a~stable identifier called a~mid and one or more types
-and uses properties from these types in order to provide facts.
+it was decided to close Freebase and support the migration of its contents to Wikidata.
+Freebase relies on the notions of \emph{topics}, \emph{facts}, \emph{types}, and \emph{properties}.
+Each Freebase topic has a~stable identifier called \emph{``mid''} (for Metaweb ID),
+one or more types, and uses properties from these types in order to provide facts.
 For example, the Freebase topic for Barack Obama has the mid \texttt{/m/02mjmr}
 and the type \texttt{/government/us\_president} that allows the entity to have
 a fact with the property \texttt{/government/us\_president/presidency\_number}
 and the literal integer ``44'' as the value.
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/freebase-cvt-obama.png}
-\caption{Example of CVT: presidency of Barack Obama}
+\caption{\todo{Crop, get PDF version} Example of CVT: presidency of Barack Obama}
 \label{fig-cvt-obama}
 \end{figure}
 
-To represent complex values like geocoordinates or to annotate relations,
-for example in order to add start and end dates for a~position held,
+To represent complex values like geographic coordinates or to annotate relations,
+for example, in order to add start and end dates for a~position held,
 Freebase has introduced the notion of Compound Value Types (CVTs, see \autoref{fig-cvt-obama}).
 They behave like topics, \emph{e.g.}, have a~mid and can have types,
 but do not have the \texttt{/common/topic} type.
-The content of Freebase has been imported from various sources like Wikipedia or IMDB
-and, so, Google does not own the copyright of some parts of the Freebase content
+
+The contents of Freebase have been imported from various sources like Wikipedia
+or the Internet Movie Database IMDB,
+in consequence Google does not own the copyright of some parts of the contents of the knowledge base
 like images or long entity descriptions extracted from Wikipedia.
-As of the closing of Freebase, it counted more than 3~billion facts
-about almost 50M~entities.
+As of the closing of Freebase on March~31, 2015,
+it counted more than 3~billion facts about almost 50M~entities.
 
 \subsection{Wikidata}
 
@@ -121,11 +124,11 @@ launched in October 2012 and hosted by the Wikimedia Foundation.
 Its community has been growing quickly since the beginning and as of mid 2015,
 the community comprises about 6,000 active contributors.
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/Wikidata-statement.png}
-\caption{An example of Wikidata statement (from
-\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg})}
+\caption{\todo{Get PDF version} An example of Wikidata statement (from
+	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg})}
 \label{fig-statement}
 \end{figure}
 
@@ -200,7 +203,7 @@ A statistics dashboard has also been created in order to monitor the curation wo
 and the source code of the tool is available on GitHub:
 \url{https://github.com/google/primarysources}.
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/primary-sources.png}
 \caption{Primary Sources user interface}
@@ -256,7 +259,7 @@ whereas the topics that were not mapped have an average of 5.7~facts.
 We have mapped the majority of topics with more than 80~facts.
 This allows us to conclude that we have mapped the most important items of Freebase.
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/facts-topics-mapping.png}
 \caption{Number of mapped and not mapped topics with more than x facts.
@@ -293,7 +296,7 @@ for \texttt{/government\_position\_held/from} and ``end time (P582)'' for
 With this mapping the created Wikidata statement will be
 like the one presented in \autoref{fig-statement-obama}.
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/wikidata-statement-obama.png}
 \caption{Target Wikidata statement}
@@ -389,7 +392,7 @@ For example, a~lot of cities in the United States have duplicate CVTs for the po
 where the only change is the encoding of the source
 %\footnote{See, for example, \url{http://www.freebase.com/m/01jr6}.}.
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/wikidata-time-space.png}
 \caption{Time and spatial distribution of Wikidata items.
@@ -397,7 +400,7 @@ Longitude is in $x$ axis and time, following a~power law ($y' = y^8$), is in $y$
 \label{fig-time-space-wikidata}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/freebase-time-space.png}
 \caption{Same figure for Freebase entities}
