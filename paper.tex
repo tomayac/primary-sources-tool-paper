@@ -81,7 +81,7 @@ and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 
 \subsection{Freebase}
 
-Freebase\footnote{Freebase: \url{https://www.freebase.com}} is an open source and
+Freebase\footnote{Freebase: \url{https://www.freebase.com/}} is an open source and
 collaborative knowledge base created in 2007 by Metaweb and acquired in 2010 by Google.
 It was used as the open core of the Google Knowledge Graph,
 and also has many use cases outside of Google.
@@ -100,12 +100,12 @@ and the literal integer ``44'' as the value.
 \centering
 \includegraphics[width=8.45 cm]{img/freebase-cvt-obama.png}
 \caption{\todo{Crop, get PDF version} Example of CVT: presidency of Barack Obama}
-\label{fig-cvt-obama}
+\label{fig:cvt-obama}
 \end{figure}
 
 To represent complex values like geographic coordinates or to annotate relations,
 for example, in order to add start and end dates for a~position held,
-Freebase has introduced the notion of Compound Value Types (CVTs, see \autoref{fig-cvt-obama}).
+Freebase has introduced the notion of Compound Value Types (CVTs, see \autoref{fig:cvt-obama}).
 They behave like topics, \emph{e.g.}, have a~mid and can have types,
 but do not have the \texttt{/common/topic} type.
 
@@ -118,33 +118,39 @@ it counted more than 3~billion facts about almost 50M~entities.
 
 \subsection{Wikidata}
 
-Wikidata\footnote{Wikidata: \url{https://www.wikidata.org}}
+Wikidata\footnote{Wikidata: \url{https://www.wikidata.org/wiki/Wikidata:Main_Page}}
 is a~collaborative knowledge base
 launched in October 2012 and hosted by the Wikimedia Foundation.
-Its community has been growing quickly since the beginning and as of mid 2015,
+Its community has been growing quickly since the beginning, and as of mid 2015,
 the community comprises about 6,000 active contributors.
+
+Wikidata contents rely on the notions of \emph{item} and \emph{statement}.
+An item represent a~concept, has a~stable identifier and may have some labels,
+descriptions, and aliases in multiple languages, links to pages about this concept
+in the others Wikimedia projects, like Wikipedia, and statements.
+Contrary to Freebase, Wikidata encodes with its statements not true facts,
+but \emph{claims} from different sources.
+
+A~statement is composed of one claim and zero or more references for this claim.
+The claim itself is composed of one main property--value couple that encodes
+the main (claimed) fact like ``population is 8,173,900'' and optional qualifiers
+to add information about it like ``as of June 2012''.
+\autoref{fig:statement} illustrates the used nomenclature with an example.
+
+The contents of Wikidata are freely available under a~Creative Commons~0 (CC0) license.
+As of mid 2015, Wikidata counted about 66M~statements on 14M~entities.
+For more background information about Wikidata, see~\cite{vrandevcic2014wikidata}
+by Vrandečić and Krötzsch.
+For a~comparison between Freebase and Wikidata,
+we refer the reader to~\cite{farbercomparative} by Färber \emph{et~al.}
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/Wikidata-statement.png}
 \caption{\todo{Get PDF version} An example of Wikidata statement (from
 	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg})}
-\label{fig-statement}
+\label{fig:statement}
 \end{figure}
-
-Wikidata content relies on the notions of item and statement.
-An item represent a~concept, has a~stable identifier and may has some labels,
-descriptions and aliases in multiple languages, links to pages about this concept
-in the others Wikimedia projects, like Wikipedia, and statements.
-Contrary to Freebase, Wikidata encodes with its statements not true facts
-but claims from different sources.
-A statement is composed of one claim and zero or more references of this claim.
-The claim itself is composed on one main (property, value) couple that encodes
-the main fact like ``population is 8,173,900'' and optional qualifiers
-to add information about the main affirmation like ``as of June 2012''.
-As of mid 2015, Wikidata counted about 66M~statements on 14M~entities.
-For more about Wikidata see \cite{vrandevcic2014wikidata}
-and for a~comparison between Freebase and Wikidata see \cite{farbercomparative}.
 
 \section{Challenges of the migration}\label{sec:challenges-of-the-migration}
 
@@ -154,8 +160,8 @@ Migrating data from Freebase to Wikidata faced a~number of challenges:
 \label{sec-licensing}
 
 The first challenge is regarding the licenses under which the datasets are published.
-Wikidata is published under a~Creative Commons~0 (CC0) licence (similar to the public domain),
-while Freebase is under a~Creative Commons By licence and contains data
+Wikidata is published under a~Creative Commons~0 (CC0) license (similar to the public domain),
+while Freebase is under a~Creative Commons By license and contains data
 imported from external projects not owned by Google,
 like images or descriptions extracted from Wikipedia.
 In a~first step we filtered the Freebase dump from this kind of content
@@ -170,7 +176,7 @@ some specific data like populations and unemployment rates.
 For these two specific cases we have just kept the references from Freebase.
 In order to provide the Wikidata community with references for the facts in Freebase
 we have reused data from the Knowledge Vault, another Google project with the aim
-to extract facts from the web (see \cite{dong2014knowledge}).
+to extract facts from the web (see~\cite{dong2014knowledge}).
 Whereas the fact extraction was usually correct, the pages Knowledge Vault extracted
 the references from often do not meet the requirement for a~good reference:
 they include pages in social networks, shopping sites, filesharers, \emph{etc.}
@@ -287,20 +293,20 @@ In order to keep a~simple mapping associating one Wikidata property to one Freeb
 we map both the property linking the topic to the CVT
 and the main property of the CVT to the same Wikidata property, and, during the mapping process,
 we pick the later as the main property of the CVT.
-For example, if we try to map the same CVT as \autoref{fig-cvt-obama}
+For example, if we try to map the same CVT as \autoref{fig:cvt-obama}
 we will use the Wikidata property ``position held (P39)'' to map
 \texttt{/politician/government\_positions\_held} and
 \texttt{/government\_position\_held/office\_position\_or\_title}, use ``start time (P580)''
 for \texttt{/government\_position\_held/from} and ``end time (P582)'' for
 \texttt{/government\_position\_held/to}.
 With this mapping the created Wikidata statement will be
-like the one presented in \autoref{fig-statement-obama}.
+like the one presented in \autoref{fig:statement-obama}.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/wikidata-statement-obama.png}
 \caption{Target Wikidata statement}
-\label{fig-statement-obama}
+\label{fig:statement-obama}
 \end{figure}
 
 For CVTs that include sources, we map the property that links the CVT
@@ -382,7 +388,7 @@ but are far less common.
 Another point is that CVTs use a~lot of facts to tell the same thing that
 would be represented by a~single Wikidata statement.
 For example, to encode that Barack Obama is the president of the United States from June~20, 2009,
-Freebase requires more than six facts as shown in \autoref{fig-cvt-obama}.
+Freebase requires more than six facts as shown in \autoref{fig:cvt-obama}.
 If we try to encode Wikidata statements as if they were Freebase facts, \emph{i.e.},
 by removing sources, representing statements with qualifiers using CVTs
 and adding reverse properties it would lead to 110M of facts,
@@ -397,19 +403,19 @@ where the only change is the encoding of the source
 \includegraphics[width=8.45 cm]{img/wikidata-time-space.png}
 \caption{Time and spatial distribution of Wikidata items.
 Longitude is in $x$ axis and time, following a~power law ($y' = y^8$), is in $y$ axis}
-\label{fig-time-space-wikidata}
+\label{fig:time-space-wikidata}
 \end{figure}
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/freebase-time-space.png}
 \caption{Same figure for Freebase entities}
-\label{fig-time-space-freebase}
+\label{fig:time-space-freebase}
 \end{figure}
 
 We have also created a~time-spatial visualization of Freebase and Wikidata in order
 to get an idea of the coverage of the two knowledge bases
-(see \autoref{fig-time-space-wikidata} and \autoref{fig-time-space-freebase}).
+(see \autoref{fig:time-space-wikidata} and \autoref{fig:time-space-freebase}).
 The used method is to extract the earliest date and the longitude
 linked to each knowledge base entities
 and propagate them to the connected entities which do not have such data
