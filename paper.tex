@@ -58,20 +58,26 @@ and provide an analysis of the process so far.
 Moving data between two knowledge bases that do not share a~similar design
 is usually a~problematic task and requires the careful mapping between their structures.
 In this paper, we describe how we facilitated the migration of Freebase content to Wikidata.
-That migration made no exception to the rule, and had a~number of structural challenges.
-Even more challenging was the cultural difference between the two involved communities.
+That migration was no exception to this rule, and had a~number of \emph{structural} challenges.
+Even more challenging was the \emph{cultural} difference between the two involved communities.
 The Freebase and Wikidata communities have a~very different background,
 subtly different goals and understandings of their tasks,
 and different requirements regarding their data.
-This paper is structured as follows.
-After a~short introduction to the two databases, we describe our methodology and
-the metrics used to measure the migration.
-In order to support the migration, we have developed a~set of open source tools
-that we present in the following.
-We then present the results of the migration and discuss these numbers,
-as well as proposed next steps.
+\todo{Expand}
 
-\section{Background}
+The remainder of this paper is structured as follows.
+After an introduction to the two collaborative knowledge bases
+Freebase and Wikidata in \autoref{sec:background},
+we describe our methodology and the metrics used to measure the migration
+in \autoref{sec:challenges-of-the-migration}.
+In order to support the migration, we have developed a~set of open source tools
+that we present in \autoref{sec:primary-sources-tool}.
+We then present the results of the migration
+and discuss these statistics in \autoref{sec:statistics-of-the-migration}.
+The paper terminates with an outlook at proposed next steps
+and a~conclusion in \autoref{sec:future-work-and-conclusion}.
+
+\section{Background}\label{sec:background}
 
 \subsection{Freebase}
 
@@ -137,7 +143,7 @@ As of mid 2015, Wikidata counted about 66M~statements on 14M~entities.
 For more about Wikidata see \cite{vrandevcic2014wikidata}
 and for a~comparison between Freebase and Wikidata see \cite{farbercomparative}.
 
-\section{Challenges of the migration}
+\section{Challenges of the migration}\label{sec:challenges-of-the-migration}
 
 Migrating data from Freebase to Wikidata faced a~number of challenges:
 
@@ -167,7 +173,7 @@ the references from often do not meet the requirement for a~good reference:
 they include pages in social networks, shopping sites, filesharers, \emph{etc.}
 It became necessary to filter and curate the references before inclusion in Wikidata.
 
-\subsection{Data quality}
+\subsection{Data Quality}
 
 The quality of the data in Freebase was challenged by the Wikidata community.
 For example, a~small city in France had an ISO country code%
@@ -206,7 +212,7 @@ More than 12M~statements are uploaded to the tool.
 
 \subsection{Mappings}
 
-\subsubsection{Mappings of items}
+\subsubsection{Mappings of Items}
 
 Another challenge is to get a~good mapping between Freebase topics and properties
 and Wikidata items and properties.
@@ -257,7 +263,7 @@ This allows us to conclude that we have mapped the most important items of Freeb
 Note the log scale on both axis.}
 \end{figure}
 
-\subsubsection{Mapping of properties}
+\subsubsection{Mapping of Properties}
 
 For the mapping between Freebase and Wikidata properties we have chosen to do it by hand
 with the help of the Wikidata community.
@@ -315,7 +321,21 @@ a higher precision than year because we do not know
 if there are in Julian or Gregorian calendar and so,
 we are not able to fill the ``calendar'' metadata of the Wikidata ``time'' datatype.
 
-\section{How numbers lie}
+\section{Primary Sources Tool}\label{sec:primary-sources-tool}
+
+\subsection{Data Preparation}
+
+\todo{Denny: write me}
+
+\subsection{Back-end of the Tool}
+
+\todo{Sebastian: write me}
+
+\subsection{Front-end of the Tool}
+
+\todo{Tom: write me}
+
+\section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
 Here is an overview of the size of the last dump of Freebase:
 
@@ -408,7 +428,7 @@ and good metrics of success for the migration and we could state that, for a~kno
 containing far more triples than the other does not mean
 it contains the same proportion of additional good data.
 
-\section{Statistics on the migration}
+\subsection{Raw Statistics}
 
 From the Freebase dump we have been able to create more than 17M~Wikidata claims
 (\emph{i.e.}, statement without references) including 1.5M~IDs.
@@ -434,7 +454,7 @@ and \texttt{/people/person/height\_meters} that Wikidata are not supporting yet.
 58\% of the statements created from reviewed fact are already in Wikidata,
 allowing us to add 0.25M~of new reviewed statements to Wikidata.
 
-\section{What could we do next?}
+\section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
 
 We believe that the main way of improvements is to extend the migration to more Freebase topics
 by suggesting Wikidata users to create new Wikidata items.
@@ -452,8 +472,6 @@ We have also started to investigate on importing some labels
 that are in Freebase and are missing in Wikidata.
 In the 17.2M~of Freebase labels for mapped topics only 0.9M, \emph{i.e.},
 5\%, are missing in Wikidata.
-
-\section{Conclusion}
 
 We have been able in a~fairly short amount of time to provide to the Wikidata community
 more than 14M~of new Wikidata statements using a~new tool
