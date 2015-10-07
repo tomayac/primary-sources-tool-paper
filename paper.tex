@@ -175,17 +175,20 @@ from 3~billion facts in the original corpus.
 
 \subsection{References}
 
-The second challenge is that the Wikidata community is very interested to have references
-for their statements, sources that Freebase usually did not store except for
-some specific data like populations and unemployment rates.
-For these two specific cases we have just kept the references from Freebase.
-In order to provide the Wikidata community with references for the facts in Freebase
-we have reused data from the Knowledge Vault, another Google project with the aim
-to extract facts from the web (see~\cite{dong2014knowledge}).
+The second challenge is that the Wikidata community is very eager to have references
+for their statements, \emph{i.e.}, sources that Freebase usually did not store,
+except for some specific data like populations and unemployment rates.
+For these two specific cases, we have just kept the references from Freebase.
+In order to provide the Wikidata community with references for the facts in Freebase,
+we have reused data from another Google research project
+called Knowledge Vault~\cite{dong2014knowledge} aimed at extracting facts from the Web.
 Whereas the fact extraction was usually correct, the pages Knowledge Vault extracted
-the references from often do not meet the requirement for a~good reference:
-they include pages in social networks, shopping sites, filesharers, \emph{etc.}
-It became necessary to filter and curate the references before inclusion in Wikidata.
+the references from often do not meet the Wikidata requirements for reliable references:
+they include pages in social networks, shopping sites, file sharing hosters, \emph{etc.}
+It became necessary to filter the references before potential inclusion in Wikidata
+by introducing a~domain blacklist.%
+\footnote{URL blacklist:
+\url{https://www.wikidata.org/wiki/Wikidata:Primary_sources_tool/URL_blacklist}}
 
 \subsection{Data Quality}
 
