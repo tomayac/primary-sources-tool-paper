@@ -99,7 +99,7 @@ and the literal integer ``44'' as the value.
 \begin{figure}[!htbp]
 \centering
 \includegraphics[trim=0cm 3cm 0cm 5cm, width=8.45 cm]{img/freebase-cvt-obama.pdf}
-\caption{Example of CVT: presidency of Barack Obama}
+\caption{Exemplary Compound Value Type (CVT) in Freebase: Presidency of Barack Obama}
 %The source is https://docs.google.com/document/d/1ELrBtxxs4ghhe7FloTUnhvpD3f7RFczT7UfxahAfjgE/edit
 \label{fig:cvt-obama}
 \end{figure}
@@ -148,26 +148,30 @@ we refer the reader to~\cite{farbercomparative} by Färber \emph{et~al.}
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/Wikidata_statement.pdf}
-\caption{An example of Wikidata statement (from
+\caption{Wikidata nomenclature illustrated with an example (Source:
 	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg})}
 \label{fig:statement}
 \end{figure}
 
 \section{Challenges of the migration}\label{sec:challenges-of-the-migration}
 
-Migrating data from Freebase to Wikidata faced a~number of challenges:
+During our ongoing efforts with the migration of Freebase to Wikidata
+we were faced with a~number of technical and non-technical challenges
+that we will outline in the following.
 
 \subsection{Licensing}
 \label{sec-licensing}
 
-The first challenge is regarding the licenses under which the datasets are published.
-Wikidata is published under a~Creative Commons~0 (CC0) license (similar to the public domain),
-while Freebase is under a~Creative Commons By license and contains data
-imported from external projects not owned by Google,
+The first challenge concerns the licenses under which the datasets are published.
+Wikidata is published under a~Creative Commons~0 (CC0~1.0) license
+that effectively puts the data in the public domain,
+whereas Freebase is published under a~Creative Commons Attribution (CC~BY~2.5) license
+and contains data imported from external projects not owned by Google,
 like images or descriptions extracted from Wikipedia.
-In a~first step we filtered the Freebase dump from this kind of content
-before being able to have a~dump that Google could relicense under CC0.
-This step reduces the number of republishable Freebase facts by about 42M~facts.
+In a~first step, we filtered the Freebase dump for this kind of content
+before being able to create a~dump that we could relicense under CC0~1.0.
+This step reduced the number of Freebase facts that could be republished by about 42M~facts
+from 3~billion facts in the original corpus.
 
 \subsection{References}
 
