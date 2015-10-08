@@ -192,40 +192,51 @@ by introducing a~domain blacklist.%
 
 \subsection{Data Quality}
 
-The quality of the data in Freebase was challenged by the Wikidata community.
-For example, a~small city in France had an ISO country code%
-\footnote{See \url{http://www.freebase.com/m/03cc0d0}}.
-Another example, Boston (the city in Massachusetts) has the type \texttt{/people/person}.
-A fully automatic upload of all the content from Freebase into Wikidata
-did not seem advisable as the expectations of the community regarding
-the quality of the content automatically added to Wikidata are high (and rightly so).
-Also, whereas an upload of all the data might have lead to accelerated growth
-in the short term, such a~fast upload might also endanger the sense of ownership
-the Wikidata community has for its data.
-Instead we decided to rely on human curation and created Primary Sources,
-a simple tool which displays statements to the user that may be added to the currently shown item.
-The user can, with only one click, reject the statement or approve it and save it to Wikidata.
-It is currently available as a~gadget, an opt-in option in Wikidata.
-This tool has no dependencies on Freebase and may be easily reused by other projects
-which may want to import data into Wikidata.
-For that we have implemented an upload API and a~feature that allows users
-to display only statements from a~given dataset.
-In fact, during the project one other researcher approached us in order to upload
-a dataset extracted from natural language text.
-A statistics dashboard has also been created in order to monitor the curation work
-\url{https://tools.wmflabs.org/wikidata-primary-sources/status.html}
-and the source code of the tool is available on GitHub:
-\url{https://github.com/google/primarysources}.
+The data quality of Freebase was examined thoroughly by the Wikidata community
+and anecdotal evidence indeed confirmed that there were certain challenges.
+For example, a~small city in France was assigned an ISO country code,%
+\footnote{See \url{http://www.freebase.com/m/03cc0d0}}
+then Boston (the city in Massachusetts) had the type \texttt{/people/person},
+and several other occurrences of data quality issues were revealed.
+In consequence, a~fully automatic upload of all the contents from Freebase into Wikidata
+did not seem advisable as the expectations of the Wikidata community regarding the
+quality of automatically uploaded data are high (and rightly so).
+Despite the fact that an automated upload of all the data
+would have led to accelerated growth in the short term,
+such a~fast increase of available data would certainly have endangered
+the sense of ownership of the Wikidata community for its data.
+As an alternative approach, we decided to rely on crowdsourced human curation
+and created the \emph{Primary Sources Tool},
+a~software solution that displays Freebase statements
+for verification to the user that can be added to the currently shown Wikidata item.
+The tool will be described in more detail in \autoref{sec:primary-sources-tool},
+we provide a~short summary of its functionality here.
+\autoref{fig:primary-sources-tool} shows a~screenshot of the user interface
+of the tool that integrates nicely into the Wikidata user interface.
+The user can, with just one click, reject or approve a~statement,
+and, in case of approval, therewith add the statement to Wikidata.
+The Primary Sources Tool is currently available as a~so-called gadget,
+\emph{i.e.}, as an opt-in feature in Wikidata.
+This tool has no dependencies on Freebase and can be easily reused for other projects
+that want to import datasets into Wikidata.
+Therefore, we have implemented an upload API in the back-end
+and a~filter in the front-end that allows users to display only statements from a~given dataset.
+This flexibility is much-wanted, and during the development period of the project
+another researcher approached us in order to upload a~dataset extracted from natural language text.
+To visualize the migration progress, we have created a~realtime dashboard
+available at \url{https://tools.wmflabs.org/wikidata-primary-sources/status.html}.
+The code of the Primary Sources Tool is openly available
+(\url{https://github.com/google/primarysources}) under the terms of the Apache~2.0 license.
+At the time of writing (October, 2015), the tool has been used by more than hundred users
+who performed about 30,000 approval or rejection actions.
+More than 12M~statements have been uploaded in total.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/primary-sources.png}
-\caption{Primary Sources user interface}
+\caption{Primary Sources Tool user interface}
+\label{fig:primary-sources-tool}
 \end{figure}
-
-Currently (August~18, 2015) the tool has been used by more than a~hundred users
-who have performed more than 15,000 approve or reject actions.
-More than 12M~statements are uploaded to the tool.
 
 \subsection{Mappings}
 
