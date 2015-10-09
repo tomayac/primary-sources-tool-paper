@@ -119,7 +119,7 @@ it counted more than 3~billion facts about almost 50M~entities.
 
 \subsection{Wikidata}
 
-Wikidata\footnote{Wikidata: \url{https://www.wikidata.org/wiki/Wikidata:Main_Page}}
+Wikidata\footnote{Wikidata: \url{https://www.wikidata.org}}
 is a~collaborative knowledge base
 launched in October 2012 and hosted by the Wikimedia Foundation.
 Its community has been growing quickly since the beginning, and as of mid 2015,
@@ -191,6 +191,7 @@ by introducing a~domain blacklist.%
 \url{https://www.wikidata.org/wiki/Wikidata:Primary_sources_tool/URL_blacklist}}
 
 \subsection{Data Quality}
+\label{sec-dataquality}
 
 The data quality of Freebase was examined thoroughly by the Wikidata community
 and anecdotal evidence indeed confirmed that there were certain challenges.
@@ -233,30 +234,32 @@ even if there is only a~single shared Wikipedia link.
 The precision of the mapping is naturally lower compared to Google's mapping,
 as there are more wrong matches (often because there is no clear separation between topics
 and disambiguation pages in Wikipedia), however, the recall increases to 4.4M~links.
-As we have seen before \todo{Where?}, our quality target is not very high \todo{We should never write this},
-so we have chosen to merge the two dumps \todo{The mappings dumps I suppose?} and, for the resulting 6,000 conflicts,
-decided to prioritize the mapping given by Wikidata \todo{That is, Google's?}.
+As we have seen in section \autoref{sec-dataquality} the mapped data will be human curated before the importation,
+so we have chosen to merge the two mapping dumps and, for the resulting 6,000 conflicts,
+decided to prioritize the Google's mapping.
 To improve the resulting mapping, we have also tried to do some reconciliation
-based on external database IDs shared by Freebase and Wikidata, like MusicBrainz \todo{Citation needed}, VIAF \todo{Citation needed}, \emph{etc.}
-With this technique, we were able to match 800K~IDs \todo{IDs? Is that MusicBrainz or VIAF IDs?},
-creating a~mapping for 600K~topics---most of them already in our dataset \todo{Which dataset?}.
+based on external databases IDs shared by Freebase and Wikidata, like
+MusicBrainz,\footnote{MusicBrainz: \url{https://musicbrainz.org}}
+VIAF,\footnote{VIAF: \url{http://viaf.org}} \emph{etc.}
+With this technique, we were able to match 800K~external database IDs \todo{not sure if it's understandable},
+creating a~mapping for 600K~topics---most of them already in the merge of Google's and Samsung's mappings.
 This resulted in an additional 84K items mapped.
-We also used data \todo{What data exactly?} from Google's Knowledge Graph \todo{Citation desirable} to add 100K~further mappings
-by also matching a~topic and an item if they share a~Wikipedia link \todo{Wasn't it leveraging the Knowledge Graph?}.
+We also used Google's Knowledge Graph\footnote{Google Knowledge Graph introduction blog post: \url{https://googleblog.blogspot.com/2012/05/introducing-knowledge-graph-things-not.html} \todo{Better reference?}} to add 100K~further mappings
+by also matching a~topic and an item if they share a~Wikipedia link \todo{Wasn't it leveraging the Knowledge Graph? -- Yes, but not sure how to rewrite this section. I have added a reference to the introduction article. We should maybe have Denny's input about it}.
 There is some potential to add some more data by looking at functional relations
 like ``father'' and ``mother'', but these relations only apply to relatively small sets of data
 (like well known families) and the functional assumptions may run into some edge cases.
 For example, the \texttt{/people/person/parents} property in Freebase also covers stepparents,
 which may create cases where a~person has more than one male or female \texttt{/people/person/parents}.
-Eventually, with these four sources \todo{Google, Samsung, MusicBrainz, VIAF, Knowledge Graph. 5 Sources?}, we mapped 4.56M~items.
+Eventually, with these four sources \todo{Google, Samsung, MusicBrainz, VIAF, Knowledge Graph. 5 Sources? -- Google, Samsung, external IDs, Knowledge Graph}, we mapped 4.56M~items.
 To the best of our knowledge, therewith we have already mapped
 most of the topics that could be mapped automatically, 
-which is also backed by the comparably small increases gained from the ID reconciliation approach \todo{Referring to MusicBrainz and VIAF?}
+which is also backed by the comparably small increases gained from the ID reconciliation approach \todo{Referring to MusicBrainz and VIAF? -- yes}
 and the Knowledge Graph data.
 Furthermore, the mapped topics have an average number of facts of about~13.9,
 whereas the topics that were not mapped have an average number of 5.7~facts.
-We have mapped the majority of topics with more than 80~facts.
-This allows us to conclude that we have mapped the most important items of Freebase \todo{Easy "reviewer 2" question: why 80?}.
+We have mapped the majority of topics with more than 47~facts (191K~non mapped topics \textit{vs.} 195K~mapped).
+This allows us to conclude that we have mapped the most important items of Freebase.
 
 \begin{figure}[!htbp]
 \centering
