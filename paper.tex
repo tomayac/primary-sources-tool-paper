@@ -34,16 +34,20 @@ Thomas Steiner\\
 \begin{abstract}
 Collaborative knowledge bases that make their data available in machine-readable form
 as structured data are central to many companies' data strategies.
-One example of such collaborative knowledge bases is Freebase (\url{www.freebase.com}),
-created with proprietary technologies in 2007 by a~company called Metaweb,
+One such collaborative knowledge base is Freebase (\url{www.freebase.com}),
+initially created with proprietary technologies by a~company called Metaweb,
 which was then acquired by Google in 2010.
 Another example is Wikidata (\url{www.wikidata.org}),
 a~collaborative knowledge base developed in the open since 2012 by Wikimedia Deutschland
 and operated by the Wikimedia Foundation.
-Due to the success of Wikidata, Google decided to shut down Freebase and
-help with the transfer of its content to Wikidata through a~crowdsourcing approach.
-In this paper, we describe the ongoing transfer efforts and challenges,
+Due to the success of Wikidata, in~2015, Google decided to shut down Freebase and
+help the community with the transfer of its content to Wikidata through a~crowdsourcing approach.
+In this paper, we describe the ongoing transfer efforts and data mapping challenges,
 and provide an analysis of the process so far.
+For the task, we have created a~software solution called \emph{Primary Sources Tool}
+that we have released as open source to facilitate this and future data migrations.
+Throughout the migration, we have gained deep insights into both Wikidata and Freebase,
+and share and discuss detailed statistics on both knowledge bases. 
 \end{abstract}
 
 % a~category with the (minimum) three required fields
@@ -87,7 +91,7 @@ It was used as the open core of the Google Knowledge Graph,
 and also has many use cases outside of Google.
 
 Due to the success of Wikidata,
-it was decided to close Freebase and support the migration of its contents to Wikidata.
+it was decided to close Freebase and support the migration of its content to Wikidata.
 Freebase relies on the notions of \emph{topics}, \emph{facts}, \emph{types}, and \emph{properties}.
 Each Freebase topic has a~stable identifier called \emph{``mid''} (for Metaweb ID),
 one or more types, and uses properties from these types in order to provide facts.
@@ -110,9 +114,9 @@ Freebase has introduced the notion of Compound Value Types (CVTs, see \autoref{f
 They behave like topics, \emph{e.g.}, have a~mid and can have types,
 but do not have the \texttt{/common/topic} type.
 
-The contents of Freebase have been imported from various sources like Wikipedia
+The content of Freebase has been imported from various sources like Wikipedia
 or the Internet Movie Database IMDB,
-in consequence Google does not own the copyright of some parts of the contents of the knowledge base
+in consequence Google does not own the copyright of some parts of the content of the knowledge base
 like images or long entity descriptions extracted from Wikipedia.
 As of the closing of Freebase on March~31, 2015,
 it counted more than 3~billion facts about almost 50M~entities.
@@ -125,7 +129,7 @@ launched in October 2012 and hosted by the Wikimedia Foundation.
 Its community has been growing quickly since the beginning, and as of mid 2015,
 the community comprises about 6,000 active contributors.
 
-Wikidata contents rely on the notions of \emph{item} and \emph{statement}.
+Wikidata's data model relies on the notions of \emph{item} and \emph{statement}.
 An item represent a~concept, has a~stable identifier and may have some labels,
 descriptions, and aliases in multiple languages, links to pages about this concept
 in the others Wikimedia projects, like Wikipedia, and statements.
@@ -138,7 +142,7 @@ the main (claimed) fact like ``population is 8,173,900'' and optional qualifiers
 to add information about it like ``as of June 2012''.
 \autoref{fig:statement} illustrates the used nomenclature with an example.
 
-The contents of Wikidata are freely available under a~Creative Commons~0 (CC0) license.
+The content of Wikidata is freely available under a~Creative Commons~0 (CC0) license.
 As of mid 2015, Wikidata counted about 66M~statements on 14M~entities.
 For more background information about Wikidata, see~\cite{vrandevcic2014wikidata}
 by Vrandečić and Krötzsch.
@@ -160,7 +164,7 @@ we were faced with a~number of technical and non-technical challenges
 that we will outline in the following.
 
 \subsection{Licensing}
-\label{sec-licensing}
+\label{sec:licensing}
 
 The first challenge concerns the licenses under which the datasets are published.
 Wikidata is published under a~Creative Commons~0 (CC0~1.0) license
@@ -191,7 +195,7 @@ by introducing a~domain blacklist.%
 \url{https://www.wikidata.org/wiki/Wikidata:Primary_sources_tool/URL_blacklist}}
 
 \subsection{Data Quality}
-\label{sec-dataquality}
+\label{sec:dataquality}
 
 The data quality of Freebase was examined thoroughly by the Wikidata community
 and anecdotal evidence indeed confirmed that there were certain challenges.
@@ -199,7 +203,7 @@ For example, a~small city in France was assigned an ISO country code,%
 \footnote{Freebase item page of the city of Saint-Martin: \url{http://www.freebase.com/m/03cc0d0}}
 then Boston (the city in Massachusetts) had the type \texttt{/people/person},
 and several other occurrences of data quality issues were revealed.
-In consequence, a~fully automatic upload of all the contents from Freebase into Wikidata
+In consequence, a~fully automatic upload of all the content from Freebase into Wikidata
 did not seem advisable as the expectations of the Wikidata community regarding the
 quality of automatically uploaded data are high (and rightly so).
 Despite the fact that an automated upload of all the data
@@ -212,9 +216,9 @@ a~software solution that displays Freebase statements
 for verification to the user that can be added to the currently shown Wikidata item.
 The tool will be described in more detail in \autoref{sec:primary-sources-tool}.
 
-\subsection{Data Mappings}
+\subsection{Data Topic Mappings}
 
-\subsubsection{Mappings of Items}
+\subsubsection{Merger of Existing Mappings}
 
 The last challenge concerns the data mappings between Freebase topics and properties
 and Wikidata items and properties.
@@ -225,7 +229,7 @@ A~first one has been created by Google in October 2013%
 and is based on Wikipedia links already present in Freebase: if a~Freebase topic and
 a~Wikidata item share at least two Wikipedia links, they are assumed to describe the same subject.
 The quality of this mapping is considered very good by the Wikidata community,
-who thus have uploaded it to the Wiki and further curated and maintained it by hand.
+who thus have decided to use it and further curate and maintain it by hand.
 It maps 1.15M~Freebase topics to their corresponding Wikidata items.
 A~second actively maintained mapping has been created by Samsung.%
 \footnote{Samsung mappings: \url{http://github.com/Samsung/KnowledgeSharingPlatform}}
@@ -234,70 +238,79 @@ even if there is only a~single shared Wikipedia link.
 The precision of the mapping is naturally lower compared to Google's mapping,
 as there are more wrong matches (often because there is no clear separation between topics
 and disambiguation pages in Wikipedia), however, the recall increases to 4.4M~links.
-As we have seen in section \autoref{sec-dataquality} the mapped data will be human curated before the importation,
-so we have chosen to merge the two mapping dumps and, for the resulting 6,000 conflicts,
-decided to prioritize the Google's mapping.
-To improve the resulting mapping, we have also tried to do some reconciliation
-based on external databases IDs shared by Freebase and Wikidata, like
-MusicBrainz,\footnote{MusicBrainz: \url{https://musicbrainz.org}}
+As we have shown in \autoref{sec:dataquality},
+that human curation is required before importation anyway,
+which is why we have decided to merge the two mapping dumps,
+and for the resulting 6,000 conflicts decided to prioritize Google's mapping.
+
+\subsubsection{Reconciliation Based on External Database IDs}
+
+To improve the result, we have also done some reconciliation based on third-party database IDs
+shared by Freebase and Wikidata, like MusicBrainz,\footnote{MusicBrainz: \url{https://musicbrainz.org}}
 VIAF,\footnote{VIAF: \url{http://viaf.org}} \emph{etc.}
-With this technique, we were able to match 800K~external database IDs \todo{not sure if it's understandable},
-creating a~mapping for 600K~topics---most of them already in the merge of Google's and Samsung's mappings.
-This resulted in an additional 84K items mapped.
-We also used Google's Knowledge Graph\footnote{Google Knowledge Graph introduction blog post: \url{https://googleblog.blogspot.com/2012/05/introducing-knowledge-graph-things-not.html} \todo{Better reference?}} to add 100K~further mappings
-by also matching a~topic and an item if they share a~Wikipedia link \todo{Wasn't it leveraging the Knowledge Graph? -- Yes, but not sure how to rewrite this section. I have added a reference to the introduction article. We should maybe have Denny's input about it}.
-There is some potential to add some more data by looking at functional relations
+With this technique, we were able to match 800K~external database IDs,
+creating an additional mapping for 600K~topics---%
+most of them already in the merged version of Google's and Samsung's mappings.
+Eventually, this reconciliation effort resulted in an additional 84K mapped items.
+We also used Google's Knowledge Graph~\cite{singhal2012} to add 100K~further mappings
+by also matching a~topic and an item if they share a~Wikipedia link with the Knowledge Graph item.
+There is some potential to add more data by looking at functional relations
 like ``father'' and ``mother'', but these relations only apply to relatively small sets of data
-(like well known families) and the functional assumptions may run into some edge cases.
+(like well known families), and the functional assumptions may run into some edge cases.
 For example, the \texttt{/people/person/parents} property in Freebase also covers stepparents,
 which may create cases where a~person has more than one male or female \texttt{/people/person/parents}.
-Eventually, with these four sources \todo{Google, Samsung, MusicBrainz, VIAF, Knowledge Graph. 5 Sources? -- Google, Samsung, external IDs, Knowledge Graph}, we mapped 4.56M~items.
-To the best of our knowledge, therewith we have already mapped
-most of the topics that could be mapped automatically, 
-which is also backed by the comparably small increases gained from the ID reconciliation approach \todo{Referring to MusicBrainz and VIAF? -- yes}
-and the Knowledge Graph data.
-Furthermore, the mapped topics have an average number of facts of about~13.9,
-whereas the topics that were not mapped have an average number of 5.7~facts.
-We have mapped the majority of topics with more than 47~facts (191K~non mapped topics \textit{vs.} 195K~mapped).
+Eventually, with these four sources (Google mapping, Samsung mapping, external IDs, Knowledge Graph),
+we mapped 4.56M~items in total.
+
+\subsubsection{Mapping Completeness Analysis}
+
+Thanks to these efforts, we have already mapped most of the topics that could be mapped automatically,
+which is also backed by the comparably small increases gained from the ID reconciliation approach 
+and the Knowledge Graph data described in the previous paragraph.
+Furthermore, the \emph{mapped} topics have an average number of facts of about~13.9,
+whereas the topics that were \emph{not} mapped have an average number of only 5.7~facts.
+We have mapped the majority of topics with more than 47~facts
+(191K~non mapped topics \textit{vs.} 195K~mapped topics).
 This allows us to conclude that we have mapped the most important items of Freebase.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/facts-topics-mapping.pdf}
-\caption{Number of mapped and not mapped topics with more than x facts.
-Note the log scale on both axes.}
+\caption{Number of mapped and not mapped topics with more than $x$ facts (log scale on both axes)}
 %Data sheet: https://docs.google.com/spreadsheets/d/1jYGVIqAmyouHKjvhM6FbpgTD8bb5tkJy9PEMELkuMwo/edit
 \end{figure}
 
-\subsubsection{Mapping of Properties}
+\subsection{Data Property Mapping}
 
 For the mapping between Freebase and Wikidata properties we have chosen to do it by hand
 with the help of the Wikidata community.
-With that we have been able to map quickly around 360~properties
+With that, we have been able to quickly map around 360~properties
 (note that Wikidata has a~total of 1,660 properties, and Freebase has around 37,700 properties).
-For the mapping of properties where the domain are other topics or literals
+For the mapping of properties where the domain are other topics or literals,
 this mapping provides the Wikidata property to use.
 We have also implemented a~special case for \texttt{/people/person/parents}
 in order to be able to map them to Wikidata properties ``father'' and ``mother''
 based on the person gender.
-The mapping of CVTs is more complicated because it is not possible to have a~1~to~1 relationship
+The mapping of CVTs (see \autoref{fig:cvt-obama}) is more complicated,
+because it is not possible to have a~\mbox{1-to-1} relationship
 between Freebase and Wikidata properties: the CVT is linked to the subject topic by one property
 and has properties pointing to its component values, whereas the Wikidata statement
 has a~main property value group that is qualified by other such groups.
 In order to map a~CVT to a~statement, we have to know which of the CVT's properties
-should be used as the main value of the statement, with the others being mapping to qualifiers.
-In order to keep a~simple mapping associating one Wikidata property to one Freebase property,
-we map both the property linking the topic to the CVT
+should be used as the main value of the statement, with the others being mapped to qualifiers.
+In order to keep a~simple mapping that associates one Wikidata property to one Freebase property,
+we map both the property that links the topic to the CVT
 and the main property of the CVT to the same Wikidata property, and, during the mapping process,
-we pick the later as the main property of the CVT.
-For example, if we try to map the same CVT as \autoref{fig:cvt-obama}
-we will use the Wikidata property ``position held (P39)'' to map
+pick the latter as the main property of the CVT.
+For example, if we map the CVT shown in \autoref{fig:cvt-obama},
+we first use the Wikidata property \texttt{position held (P39)} to map
 \texttt{/politician/government\_positions\_held} and
-\texttt{/government\_position\_held/office\_position\_or\_title}, use ``start time (P580)''
-for \texttt{/government\_position\_held/from} and ``end time (P582)'' for
-\texttt{/government\_position\_held/to}.
-With this mapping the created Wikidata statement will be
-like the one presented in \autoref{fig:statement-obama}.
+\texttt{/government\_position\_held/office\_position\_or\_title}.
+Second, for the qualifiers, we use \texttt{start time (P580)}
+for \texttt{/government\_position\_held/from} and \texttt{end time (P582)}
+for \texttt{/government\_position\_held/to}.
+With the resulting property mapping, the created Wikidata statement
+looks like the one presented in \autoref{fig:statement-obama}.
 
 \begin{figure}[!htbp]
 \centering
@@ -308,24 +321,24 @@ like the one presented in \autoref{fig:statement-obama}.
 
 For CVTs that include sources, we map the property that links the CVT
 to the source as a~Wikidata reference instead of a~qualifier.
-The last challenge is to do the real mapping, taking care of CVTs
-and the complex datatypes of Wikidata.
+The hardest part then is to actually create the full topic mapping
+by considering CVTs and the complex datatypes of Wikidata.
 For CVTs, when we have a~triple whose value is a~CVT, we just retrieve it,
-map all its component triples (while ignoring ones that can't be mapped)
+map all its component triples (while ignoring ones that cannot be mapped)
 and apply the above mechanism to get its main value.
 For values, we use the datatype information stored with Wikidata properties
 in order to cast values to the right type.
-For quantities we assume that the amounts are precise
+For quantities, we assume that the amounts are precise,
 as there is no precision information in Freebase.
-For globe coordinates we have hardcoded the mapping of the \texttt{/location/geocode} CVT
-into the globe-coordinate value type of Wikibase
-and use the same precision guess algorithm as the one used by Wikidata user interface.
-For dates we just map the date and time values (encoded using XSD%
+For globe coordinates, we have hardcoded the mapping of the \texttt{/location/geocode} CVT
+into the globe-coordinate value type of Wikidata
+and use the same precision guessing algorithm as the one used by the Wikidata user interface.
+For dates, we just map the date and time values (encoded using XSD%
 \footnote{\url{ http://www.w3.org/TR/xmlschema11-2/}} types)
-to the Wikidata ``time'' datatype but we filterout dates before 1920 that have
-a higher precision than year because we do not know
-if there are in Julian or Gregorian calendar and so,
-we are not able to fill the ``calendar'' metadata of the Wikidata ``time'' datatype.
+to the Wikidata ``time'' datatype, however, filter out dates before 1920 that have
+a~higher precision than year because we do not know
+if they are relative to the Julian or the Gregorian calendar.
+In such cases, we are not able to fill the ``calendar'' value of the Wikidata ``time'' datatype.
 
 \section{Primary Sources Tool}\label{sec:primary-sources-tool}
 
@@ -383,7 +396,7 @@ Here is an overview of the size of the last dump of Freebase:
       after having filterout the data about ids (\texttt{/type/object/id}),
       types (\texttt{/type/object/type}), labels and descriptions (\texttt{/type/object/name},
       \texttt{/common/topic/description}...) and triples that should be filtered
-      for legal reasons (see \autoref{sec-licensing}).}
+      for legal reasons (see \autoref{sec:licensing}).}
   \item 68M~labels
 \end{itemize}
 
