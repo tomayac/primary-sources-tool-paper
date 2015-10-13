@@ -360,7 +360,8 @@ Therefore, we have implemented an upload API in the back-end
 and a~dataset filter in the front-end that allows users
 to display only statements from a~selected dataset.
 This flexibility is indeed much-wanted, and during the development period of the project
-another researcher approached us in order to upload a~dataset extracted from natural language text.
+another researcher approached us in order to upload
+a~dataset extracted from natural language text.
 To visualize the migration progress, we have created a~realtime dashboard
 available publicly at \url{https://tools.wmflabs.org/wikidata-primary-sources/status.html}.
 At the time of writing (October, 2015), the tool has been used by more than a~hundred users
@@ -462,7 +463,8 @@ Such reverse properties sometimes exist in Wikidata
 but are far less common.
 Another point is that CVTs use a~lot of facts to convey the exact same information
 that can be represented with a~single Wikidata statement.
-For example, to encode that Barack Obama is the president of the United States as of June~20, 2009,
+For example, to encode that Barack Obama is the president
+of the United States as of June~20, 2009,
 Freebase requires more than six facts as shown in \autoref{fig:cvt-obama}.
 If we attempted to encode Wikidata statements as if they were Freebase facts, \emph{i.e.},
 by removing sources, representing statements with qualifiers using CVTs,
@@ -515,60 +517,61 @@ to judge the proportion of additional good data.
         \label{fig:wikidata}
     \end{subfigure}
     \caption{Spatio-temporal distribution of Freebase and Wikidata items,
-      the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time from the year 0 to 2015, following a~power law ($y' = y^8$)}
+      the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
+      from the year 0 to 2015, following a~power law ($y' = y^8$)}
     \label{fig:time-space}
 \end{figure*}
 
 \subsection{Raw Statistics}
 
-From the Freebase dump we have been able to create more than 17M~Wikidata claims
-(\emph{i.e.}, statement without references) including 1.5M~IDs.
-For that we have used 31M~facts.
-When we add some references we get 19.6M~statements, and, after removing 1M~of duplicates
-and the ones already in Wikidata, we obtain 14M~new statements.
-So, if all these statements were added to Wikidata,
-it would lead to a~21\% increase of Wikidata statements number.
-But why are these numbers so low compared to the size of Freebase?
-We believe that the main reason is that we have only mapped to Wikidata 4.56M~items, (\emph{i.e.},
-only 9.5\% of Freebase topics), that are the subject of only 64M~facts.
-So, we could not hope to map more than 64M~statements
-assuming that we could map all reverse properties, and we couldn't.
-So, assuming that we do not care about the not mapped topics,
-we have created a~statement for more than 24\% of the facts.
-If we restrict ourselves to the reviewed facts, a~set of 1.6M~facts
-that have been human curated, we have far better results.
-There are 0.58M~facts which subjects are mapped to Wikidata and 0.52M~of them
-(\emph{i.e.}, 92\%) are converted into Wikidata statements.
+From the Freebase dump, we have been able to create more than 17M~Wikidata claims
+(\emph{i.e.}, statements without references), including 1.5M~IDs.
+For that, we have used 31M~Freebase facts.
+With additional references, we obtain 19.6M~statements, and, after removing 1M~duplicates
+and facts already contained in Wikidata, we obtain 14M~new statements.
+Thus, if all these statements were added to Wikidata,
+this would lead to a~21\% increase of the number of statements in Wikidata.
+The question raises why these numbers are so low compared to the size of Freebase.
+We argue that the main reason is that we have only mapped 4.56M~items to Wikidata,
+\emph{i.e.}, only 9.5\% of Freebase's topics in total, which are the subject of only 64M~facts.
+Even under ideal circumstances, we cannot map more than 64M~statements,
+and this is assuming that we could map all reverse properties, which, in fact, we could not.
+So leaving aside the not mapped topics, we have created a~statement for more than 24\% of the facts.
+If we restrict ourselves to reviewed facts---a~set of 1.6M~human curated facts---we have far better results.
+There are 0.58M~facts whose subjects are mapped to Wikidata, and 0.52M~of them
+(\emph{i.e.}, 92\%) are converted to Wikidata statements.
 58\% of the statements created from reviewed fact are already in Wikidata,
 allowing us to add 0.25M~of new reviewed statements to Wikidata.
 
 \section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
 
-We believe that the main way of improvements is to extend the migration to more Freebase topics
+We reckon that the most improvements can be achieved
+by extending the migration to more Freebase topics
 by suggesting Wikidata users to create new Wikidata items.
-A possible way of doing it is to create a~small gamified user interface that would allow users
-to create new Wikidata items for a~suggested topic or to add map them to an existing Wikidata item.
-In order to suggest interesting topics to add to Wikidata
-we could rank the not mapped yet topics per number of incoming links from already mapped topic
-and filter not interesting types like ISBNs.
-Another way of improvement is to upload using a~bot high quality datasets,
-like the reviewed facts or some sets,
-for external ids in order to speed up the integration of Freebase content into Wikidata.
-We have already started to upload the simple reviewed facts about humans
+A~possible way of realizing this is to create a~user interface%
+---possibly leveraging elements of gamification---%
+that would allow users to create new Wikidata items for a~suggested topic
+or to add a~mapping for them to an existing Wikidata item.
+In order to suggest interesting topics to add to Wikidata,
+we could rank the not mapped yet topics per number of incoming links
+from already mapped topics and filter less interesting types like ISBNs.
+Another area for improvement is to upload high quality datasets using a~bot,
+like the reviewed facts or some sets for external IDs,
+in order to speed up the integration of Freebase content into Wikidata.
+We have already started to upload simple reviewed facts about humans
 like birth date, death place or gender using a~bot.
-We have also started to investigate on importing some labels
-that are in Freebase and are missing in Wikidata.
-In the 17.2M~of Freebase labels for mapped topics only 0.9M, \emph{i.e.},
-5\%, are missing in Wikidata.
+We have also begun to import labels that are in Freebase and are absent from Wikidata.
+In the 17.2M~Freebase labels for mapped topics, only 0.9M, \emph{i.e.}, 5\%, are missing in Wikidata.
 
-We have been able in a~fairly short amount of time to provide to the Wikidata community
-more than 14M~of new Wikidata statements using a~new tool
-well integrated into the Wikidata user interface.
+Concluding, in a~fairly short amount of time, we have been able
+to provide to the Wikidata community more than 14M~new Wikidata statements
+using a~novel customizable and generalizable software solution called Primary Sources Tool
+that is well integrated into the Wikidata user interface.
 The effort needed to map two fairly different knowledge bases has also been a~good occasion
-to highlight the difficulty to have good metrics to measure the size
-and, so, the ``value'', of such databases.
-We hope that this project will allow to increase the completeness of Wikidata and,
-helped by the comparison to another database, to improve its quality.
+to highlight the difficulty of having good metrics to measure the size
+and in consequence the ``value'' of such collaborative knowledge bases.
+We envision that this project now with Freebase, and for even more datasets in the future,
+will facilitate to increase the completeness of Wikidata.
 
 \bibliographystyle{abbrv}
 \bibliography{biblio}
