@@ -374,11 +374,17 @@ of the tool that integrates nicely into the Wikidata user interface.
 
 \subsection{Data Preparation}
 
-\todo{Denny: write me}
+In order to prepare the data for the integration into the Primary Sources Tool, we have created a set of scripts which map the content of the last Freebase dump into Wikidata statements.\footnote{The source code is available under the terms of the Apache~2.0 license here: \url{https://github.com/google/freebase-wikidata-converter}}.
+
+Primary Sources has been developed at the same time as the mapping tool: we have first created a small dataset of around 1M statements based on a few properties (\texttt{/people/person/birth\_place}...) and deployed both the first dataset and a basic version of the tool in order to get user feedbacks. Then, we progressively had more statement to the tool database and made the opt-in process to use the tool inside of Wikidata easier, from a line to copy and paste in a user page to an option in user preference. So, we were able to both increase slowly the number of users of the tool and the size of the tool database.
+
+The process of adding data by small batches of 1 or 2M each time allowed us to detect some performances issues in the tool and to fix them before they became too important. And other good effect is it allowed us to have quick feedbacks from the community about the already mapped data and, so, to adapt easily the mapping scripts and to fix quickly the data already in the tool.
+
+\todo{Thomas: Proofread and expand}
 
 \subsection{Back-end of the Tool}
 
-\todo{Sebastian: write me}
+\todo{Sebastian or Thomas: write me}
 
 \subsection{Front-end of the Tool}
 
