@@ -19,7 +19,7 @@
 
 \numberofauthors{3}
 \author{
-Thomas Pellissier Tanon,\titlenote{The author was an intern at Google when the majority of the work was done.}\ Denny Vrandečić\\
+Thomas Pellissier Tanon,\titlenote{The author was an intern at Google when the majority of the work was done.} Denny Vrandečić\\
    \affaddr{Google San Francisco, United States of America}\\   
    \email{\{thomaspt, vrandecic\}@google.com}
 \alignauthor
@@ -108,7 +108,7 @@ and the literal integer ``44'' as the value.
 \begin{figure}[!htbp]
 \centering
 \includegraphics[trim=0cm 3cm 0cm 5cm, width=8.45 cm]{img/freebase-cvt-obama.pdf}
-\caption{Exemplary Compound Value Type (CVT) in Freebase: Presidency of Barack Obama}
+\caption{Exemplary Compound Value Type (CVT) in Freebase: Presidency of Barack Obama.}
 %The source is https://docs.google.com/document/d/1ELrBtxxs4ghhe7FloTUnhvpD3f7RFczT7UfxahAfjgE/edit
 \label{fig:cvt-obama}
 \end{figure}
@@ -158,7 +158,7 @@ we refer the reader to~\cite{farbercomparative} by Färber \emph{et~al.}
 \centering
 \includegraphics[width=8.45 cm]{img/Wikidata_statement.pdf}
 \caption{Wikidata nomenclature illustrated with an example (Source:
-	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg})}
+	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg}).}
 \label{fig:statement}
 \end{figure}
 
@@ -277,12 +277,15 @@ whereas the topics that were \emph{not} mapped have an average number of only 5.
 We have mapped the majority of topics with more than 47~facts
 (191K~non mapped topics \textit{vs.} 195K~mapped topics).
 This allows us to conclude that we have mapped the most important items of Freebase.
+\autoref{fig:mapped-not-mapped} provides an overview of mapped and non-mapped items
+put in relation to the number of facts per item.
 
 \begin{figure}[!htbp]
-\centering
-\includegraphics[width=8.45 cm]{img/facts-topics-mapping.pdf}
-\caption{Number of mapped and not mapped topics with more than $x$ facts (log scale on both axes)}
-%Data sheet: https://docs.google.com/spreadsheets/d/1jYGVIqAmyouHKjvhM6FbpgTD8bb5tkJy9PEMELkuMwo/edit
+  \centering
+  \includegraphics[width=8.45 cm]{img/facts-topics-mapping.pdf}
+  \caption{Number of mapped and not mapped topics with more than $x$ facts (log scale on both axes).}
+  \label{fig:mapped-not-mapped}
+  %Data sheet: https://docs.google.com/spreadsheets/d/1jYGVIqAmyouHKjvhM6FbpgTD8bb5tkJy9PEMELkuMwo/edit  
 \end{figure}
 
 \subsection{Data Property Mapping}
@@ -313,14 +316,15 @@ we first use the Wikidata property \texttt{position held (P39)} to map
 \texttt{/government\_position\_held/office\_position\_or\_title}.
 Second, for the qualifiers, we use \texttt{start time (P580)}
 for \texttt{/government\_position\_held/from} and \texttt{end time (P582)}
-for \texttt{/government\_position\_held/to}.
+for\linebreak \texttt{/government\_position\_held/to}.
 With the resulting property mapping, the created Wikidata statement
 looks like the one presented in \autoref{fig:statement-obama}.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=1\columnwidth]{img/wikidata-statement-obama.pdf}
-\caption{Target Wikidata statement}
+\caption{Wikidata statement for a~Freebase Compound Value Type (CVT).
+  See \autoref{fig:cvt-obama} for comparison.}
 \label{fig:statement-obama}
 \end{figure}
 
@@ -371,21 +375,21 @@ More than 12M~statements have been uploaded in total.
 \autoref{fig:primary-sources-tool} shows two screenshots
 of the tool that integrates nicely with the Wikidata user interface.
 
-\begin{figure}[!htbp]
+\begin{figure}[!t]
     \centering
     \begin{subfigure}[b]{1.0\columnwidth}
         \includegraphics[width=\textwidth]{img/primary-sources.pdf}
-        \caption{Incoming references}
+        \caption{Incoming references.}
         \label{fig:barack-obama}
     \end{subfigure}
     \begin{subfigure}[b]{1.0\columnwidth}
         \includegraphics[width=\textwidth]{img/wikidata-cause-of-death.pdf}
-        \caption{Incoming claims and references}
+        \caption{Incoming claims and references.}
         \label{fig:cause-of-death}
     \end{subfigure}
     \caption{Primary Sources Tool user interface. Statements coming from
-      Freebase and not yet available in Wikidata are shown in light blue. Users
-      can approve or reject these statements using the ``approve''/``reject'' buttons.}
+       Freebase that are not yet available in Wikidata are shown in light blue.
+       Users can approve or reject these statements using the ``approve'' or ``reject'' buttons.}
     \label{fig:primary-sources-tool}
 \end{figure}
 
@@ -417,56 +421,62 @@ the potentially changed state of the migration, as,
 in case of incoming claims with references, freshly accepted claims 
 can require incoming references to be attached elsewhere in the hierarchy. 
 
-\subsection{Backend of the Tool}
+\subsection{Back-end of the Tool}
 
-The objective of the backend was to have a REST API allowing us to serve data
-efficiently to the front-end of the tool and providing statistical data about
-the approvals and rejections done over time. As the resources of the Wikimedia
-foundation are limited, the backend has been implemented in C++ and runs as a
-fastcgi application in the lighttpd webserver.
+The objective of the back-end was to have a~REST API allowing us
+to serve data efficiently to the front-end of the tool and
+providing statistical data about the approvals and rejections done over time.
+As the resources of the Wikimedia foundation are limited,
+the back-end was implemented in highly optimized C++
+and runs as a~FastCGI application in the lighttpd Web server.
+\autoref{fig:architecture} shows the overall architecture of the Primary Sources tool.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=.7\columnwidth]{img/architecture.png}
-    \caption{Sources Tool Architecture. The frontend is implemented in
-      Javascript and sends REST requests to the C++ backend to retrieve and
-      update entities or statements, which are stored in a relational database.}
+    \caption{Primary Sources Tool architecture. The front-end is implemented in
+      JavaScript and sends HTTP requests to the C++ back-end to retrieve and
+      update entities or statements, which are stored in a relational database.
+      \todo{Create PDF version of the diagram, improve consistency of used terms}}
     \label{fig:architecture}
 \end{figure}
 
-
-Entities and statements are stored in a relational database (MySQL or SQLite) and
-follow the Wikidata data structure with an additional status field to keep track
-of statements that have already been approved or rejected, or not yet
-visited. Statements can be grouped in ``datasets'' and ``uploads'' to
+Entities and statements are stored in a relational database (MySQL or SQLite)
+and follow the Wikidata data structure with an additional status field
+to keep track of statements that either already have been approved or rejected,
+or not yet visited.
+Statements can be grouped in ``datasets'' and ``uploads'' to
 distinguish data from different sources.\footnote{At the time of this writing,
-  the backend contained 5 different datasets}
+the back-end contained five different datasets.}
 
-The REST API of the backend supports the following main types of requests:
+The REST API of the back-end supports the following main types of requests:
+
 \begin{itemize}
-\item Get an entity (i.e. its statements) by Wikidata QID
-  (e.g. \verb|GET /entities/Q2529789|).
-\item Get a random entity with unapproved (or approved, rejected) statements
+  \setlength\itemsep{0em}
+  \item Get an entity (\emph{i.e.}, its statements) by Wikidata QID
+  (\emph{e.g.}, \verb|GET /entities/Q2529789|).
+  \item Get a~random entity with unapproved (or approved or rejected) statements
   (\verb|/entities/any|).
-\item Get a statement by database ID (\verb|GET /statements/1|) or get a list of
+  \item Get a~statement by database ID (\verb|GET /statements/1|) or get a~list of
   random statements (\verb|GET /statements/any|).
-\item Set a new state for a statement \\(\verb|POST /statements/1?state=approved&user=Alice|).
+  \item Set a~new state for a~statement \\(\verb|POST /statements/1?state=approved&user=Alice|).
 \end{itemize}
-All GET requests support an additional \verb|state=...| query parameter to
-filter by state. This allows Wikidata developers to analyse statements that have
-already been updated (e.g. ``return 10 random rejected statements'') for further
-analysis. The default of this parameter is \verb|unapproved|.
+
+All GET requests support an additional \verb|&state={state}| query parameter to filter by state.
+This allows Wikidata developers to examine statements
+that have already been updated (\emph{e.g.}, ``return 10 random rejected statements'')
+for further analysis.
+The default of this parameter is \verb|unapproved|.
 
 In addition to these main request types, the REST API also provides endpoints
-for importing and deleting datasets, as well as for retrieving system
-status.\footnote{The system status is also presented in more convenient form at
-  \url{http://tools.wmflabs.org/wikidata-primary-sources/status.html}}
+for importing and deleting datasets, as well as for retrieving the system's status.%
+\footnote{The system's status is also presented in more convenient form at
+\url{http://tools.wmflabs.org/wikidata-primary-sources/status.html}.}
 
-All update activity around statements is logged in an activity log for
-statistical purposes using the Wikidata user name of the user who performed the
-update. Activity information can be displayed in an aggregated form (top users,
-top rejecters, trends) to give to the Wikidata contributors a more gamified
-experience.
+All update activity around statements is logged in an activity log
+for statistical purposes using the Wikidata user name of the user who performed the update.
+Activity information can be displayed in an aggregated leader board form
+(top users, top rejecters, trends, \emph{etc.}) to add aspects of gamification to the migration process.
 
 \subsection{Front-end of the Tool}
 
@@ -596,17 +606,17 @@ to judge the proportion of additional good data.
     \centering
     \begin{subfigure}[b]{1.0\columnwidth}
         \includegraphics[width=\textwidth]{img/freebase-time-space.png}
-        \caption{Freebase}
+        \caption{Spatio-temporal distribution of Freebase.}
         \label{fig:freebase}
     \end{subfigure}
     \begin{subfigure}[b]{1.0\columnwidth}
         \includegraphics[width=\textwidth]{img/wikidata-time-space.png}
-        \caption{Wikidata}
+        \caption{Spatio-temporal distribution of Wikidata.}
         \label{fig:wikidata}
     \end{subfigure}
     \caption{Spatio-temporal distribution of Freebase and Wikidata items,
       the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
-      from the year 0 to 2015, following a~power law ($y' = y^8$) \todo{Create PDF versions of both diagrams}}
+      from the year 0 to 2015, following a~power law ($y' = y^8$). \todo{Create PDF versions of both diagrams}}
     \label{fig:time-space}
 \end{figure*}
 
@@ -652,7 +662,7 @@ We have also begun to import labels that are in Freebase and are absent from Wik
 In the 17.2M~Freebase labels for mapped topics, only 0.9M, \emph{i.e.}, 5\%, are missing in Wikidata.
 
 Concluding, in a~fairly short amount of time, we have been able
-to provide to the Wikidata community more than 14M~new Wikidata statements
+to provide to the Wikidata community more than\linebreak 14M~new Wikidata statements
 using a~novel customizable and generalizable software solution called Primary Sources Tool
 that is well integrated into the Wikidata user interface.
 The effort needed to map two fairly different knowledge bases has also been a~good occasion
