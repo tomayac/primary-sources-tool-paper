@@ -417,7 +417,16 @@ can require incoming references to be attached elsewhere in the hierarchy.
 
 \subsection{Back-end of the Tool}
 
-\todo{Sebastian or Thomas: write me}
+For the back-end, our objective was to have a REST API allowing us
+to serve efficiently the front-end of the tool and providing statistical data.
+Each statement has a status allowing to query only statements that have been
+approved, rejected, not reviewed yet, \textit{etc.}
+We keep also an history of all status changes allowing to display a list of the tool top users
+and, so, to give to the Wikidata contributors a more gamified experience.
+
+The storage is done using an SQL database where each statement is fully exploded into atomic parts (property, value, qualifier...) allowing us to do easily queries on the tool data like ``get all the statements with property \texttt{P31}'', and so, to easily fix mapping errors detected by the tool users.
+
+\todo{Review and expand}
 
 \subsection{Front-end of the Tool}
 
