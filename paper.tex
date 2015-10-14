@@ -442,7 +442,7 @@ The REST API of the backend supports the following types of queries:
   random statements (\verb|GET /statements/any|).
 \item Set a new state for a statement \\(\verb|POST /statements/1?state=approved&user=Alice|).
 \end{itemize}
-All GET requests support an additional \Verb|state=...| query parameter to
+All GET requests support an additional \verb|state=...| query parameter to
 filter by state. This allows Wikidata developers to analyse statements that have
 already been updated (e.g. ``return 10 random rejected statements'') for further
 analysis. The default of this parameter is \verb|unapproved|.
