@@ -383,7 +383,9 @@ of the tool that integrates nicely with the Wikidata user interface.
         \caption{Incoming claims and references}
         \label{fig:cause-of-death}
     \end{subfigure}
-    \caption{Primary Sources Tool user interface, incoming data from Freebase shown in light blue}
+    \caption{Primary Sources Tool user interface. Statements coming from
+      Freebase and not yet available in Wikidata are shown in light blue. Users
+      can approve or reject these statements using the ``approve''/``reject'' buttons.}
     \label{fig:primary-sources-tool}
 \end{figure}
 
@@ -415,16 +417,46 @@ the potentially changed state of the migration, as,
 in case of incoming claims with references, freshly accepted claims 
 can require incoming references to be attached elsewhere in the hierarchy. 
 
-\subsection{Back-end of the Tool}
+\subsection{Backend of the Tool}
 
-For the back-end, our objective was to have a REST API allowing us
-to serve efficiently the front-end of the tool and providing statistical data.
-Each statement has a status allowing to query only statements that have been
-approved, rejected, not reviewed yet, \textit{etc.}
-We keep also an history of all status changes allowing to display a list of the tool top users
-and, so, to give to the Wikidata contributors a more gamified experience.
+The objective of the backend was to have a REST API allowing us to serve data
+efficiently to the front-end of the tool and providing statistical data about
+the approvals and rejections done over time. As the resources of the Wikimedia
+foundation are limited, the backend has been implemented in C++ and runs as a
+fastcgi application in the lighttpd webserver.
 
-The storage is done using an SQL database where each statement is fully exploded into atomic parts (property, value, qualifier...) allowing us to do easily queries on the tool data like ``get all the statements with property \texttt{P31}'', and so, to easily fix mapping errors detected by the tool users.
+Entities and statements are stored in an SQL database (MySQL or SQLite) and
+follow the Wikidata data structure with an additional status field to keep track
+of statements that have already been approved or rejected, or not yet
+visited. Statements can be grouped in ``datasets'' and ``uploads'' to
+distinguish data from different sources.\footnote{At the time of this writing,
+  the backend contained 5 different datasets}
+
+The REST API of the backend supports the following types of queries:
+\begin{itemize}
+\item Get an entity (i.e. its statements) by Wikidata QID
+  (e.g. \verb|GET /entities/Q2529789|).
+\item Get a random entity with unapproved (or approved, rejected) statements
+  (\verb|/entities/any|).
+\item Get a statement by database ID (\verb|GET /statements/1|) or get a list of
+  random statements (\verb|GET /statements/any|).
+\item Set a new state for a statement \\(\verb|POST /statements/1?state=approved&user=Alice|).
+\end{itemize}
+All GET requests support an additional \Verb|state=...| query parameter to
+filter by state. This allows Wikidata developers to analyse statements that have
+already been updated (e.g. ``return 10 random rejected statements'') for further
+analysis. The default of this parameter is \verb|unapproved|.
+
+In addition to these main request types, the REST API also provides endpoints
+for importing and deleting datasets, as well as for retrieving system
+status.\footnote{The system status is also presented in more convenient form at
+  \url{http://tools.wmflabs.org/wikidata-primary-sources/status.html}}
+
+All update activity around statements is logged in an activity log for
+statistical purposes using the Wikidata user name of the user who performed the
+update. Activity information can be displayed in an aggregated form (top users,
+top rejecters, trends) to give to the Wikidata contributors a more gamified
+experience.
 
 \todo{Review and expand}
 
