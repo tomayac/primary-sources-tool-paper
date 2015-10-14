@@ -589,8 +589,9 @@ we have further created a~spatio-temporal visualization of Freebase and Wikidata
 that is shown in \autoref{fig:time-space}.
 The used method is to extract the earliest date and the longitude
 linked to each of the entities of the two knowledge bases
-and propagate them to the connected entities which do not have such data
-using a~decreasing exponential distribution \todo{Please clarify the ``propagate'' part}.
+and propagate them to the connected entities which do not have such data.
+To implement this propagation we set as value (date or longitude) the average of the values of the entities which distance is less than $10$ with,
+as weighting, $2^{-d}$ with $d$ the distance between the two entities.
 We see that the two knowledge bases follow the same basic patterns,
 with their coverage mostly concentrated on Europe and North America.
 There are no strong differences between them,
