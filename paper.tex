@@ -425,14 +425,24 @@ the approvals and rejections done over time. As the resources of the Wikimedia
 foundation are limited, the backend has been implemented in C++ and runs as a
 fastcgi application in the lighttpd webserver.
 
-Entities and statements are stored in an SQL database (MySQL or SQLite) and
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=.7\columnwidth]{img/architecture.png}
+    \caption{Sources Tool Architecture. The frontend is implemented in
+      Javascript and sends REST requests to the C++ backend to retrieve and
+      update entities or statements, which are stored in a relational database.}
+    \label{fig:architecture}
+\end{figure}
+
+
+Entities and statements are stored in a relational database (MySQL or SQLite) and
 follow the Wikidata data structure with an additional status field to keep track
 of statements that have already been approved or rejected, or not yet
 visited. Statements can be grouped in ``datasets'' and ``uploads'' to
 distinguish data from different sources.\footnote{At the time of this writing,
   the backend contained 5 different datasets}
 
-The REST API of the backend supports the following types of queries:
+The REST API of the backend supports the following main types of requests:
 \begin{itemize}
 \item Get an entity (i.e. its statements) by Wikidata QID
   (e.g. \verb|GET /entities/Q2529789|).
@@ -457,8 +467,6 @@ statistical purposes using the Wikidata user name of the user who performed the
 update. Activity information can be displayed in an aggregated form (top users,
 top rejecters, trends) to give to the Wikidata contributors a more gamified
 experience.
-
-\todo{Review and expand}
 
 \subsection{Front-end of the Tool}
 
