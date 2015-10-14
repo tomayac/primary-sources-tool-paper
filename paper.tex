@@ -20,15 +20,15 @@
 \numberofauthors{3}
 \author{
 Thomas Pellissier Tanon,\titlenote{The author was an intern at Google when the majority of the work was done.}\ Denny Vrandečić\\
-   \affaddr{Google, San Francisco, United States of America}\\   
+   \affaddr{Google San Francisco, United States of America}\\   
    \email{\{thomaspt, vrandecic\}@google.com}
 \alignauthor
 Sebastian Schaffert\\
-   \affaddr{Google, Zurich, Switzerland}\\   
+   \affaddr{Google Zurich, Switzerland}\\   
    \email{schaffert@google.com}
 \alignauthor
 Thomas Steiner\\
-   \affaddr{Google, Hamburg, Germany}\\   
+   \affaddr{Google Hamburg, Germany}\\   
    \email{tsteiner@google.com}
 }
 
@@ -368,15 +368,25 @@ available publicly at \url{https://tools.wmflabs.org/wikidata-primary-sources/st
 At the time of writing (October, 2015), the tool has been used by more than a~hundred users
 who performed about 30,000 approval or rejection actions.
 More than 12M~statements have been uploaded in total.
-\autoref{fig:primary-sources-tool} shows a~screenshot of the user interface
+\autoref{fig:primary-sources-tool} shows two screenshots
 of the tool that integrates nicely with the Wikidata user interface.
 
 \begin{figure}[!htbp]
-\centering
-\includegraphics[width=1\columnwidth]{img/primary-sources.pdf}
-\caption{Primary Sources Tool user interface}
-\label{fig:primary-sources-tool}
+    \centering
+    \begin{subfigure}[b]{1.0\columnwidth}
+        \includegraphics[width=\textwidth]{img/primary-sources.pdf}
+        \caption{Incoming references}
+        \label{fig:barack-obama}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\columnwidth}
+        \includegraphics[width=\textwidth]{img/wikidata-cause-of-death.pdf}
+        \caption{Incoming claims and references}
+        \label{fig:cause-of-death}
+    \end{subfigure}
+    \caption{Primary Sources Tool user interface, incoming data from Freebase shown in light blue}
+    \label{fig:primary-sources-tool}
 \end{figure}
+
 
 \subsection{Data Preparation}
 
@@ -390,20 +400,20 @@ We first created a~small dataset of around 1M statements
 based on few select properties (\emph{e.g.}, \texttt{/people/person/birth\_place})
 and deployed both the first dataset and a~basic version of the tool
 in order to gather initial user feedback.
-In the following, we progressively added more statements to the tool's database back-end
-and made the opt-in process to use the tool in Wikidata easier for users.
-Initially, in order to use the tool, users had to manually copy and paste a~line
-in their individual \texttt{common.js} user profiles,
-whereas after the conversion to a~Wikidata gadget,
-the tool could simply be activated via an option in the user preferences.
-Thereby, we were able to both slowly increase the number of users of the tool
-and upscale the tool's database back-end without risking performance bottlenecks.
-The process of adding data in small batches of 1M~to~2M statements per batch allowed us
-to detect some potential performances issues in the tool and fix them
-before they became actual problems.
+In the following, we progressively added more statements to the tool's database back-end.
+Thereby, we were able to slowly upscale the tool's database back-end
+without risking back-end performance bottlenecks.
+The process of adding data in small batches of 1M~to~2M statements per batch
+further allowed us to detect some potential issues in the front-end
+and fix them before they became actual problems.
 Another positive side-effect of this approach was that it allowed us to gather quick feedback
 from the community about the already mapped data and thus to adapt the mapping scripts easily
 and correct minor issues with the data early on already in the back-end.
+Upon approval or rejection of either a~claim or a~reference,
+the Wikidata item page in question reloads in order to reflect
+the potentially changed state of the migration, as,
+in case of incoming claims with references, freshly accepted claims 
+can require incoming references to be attached elsewhere in the hierarchy. 
 
 \subsection{Back-end of the Tool}
 
@@ -411,7 +421,35 @@ and correct minor issues with the data early on already in the back-end.
 
 \subsection{Front-end of the Tool}
 
-\todo{Tom: write me}
+For the front-end, our objective was to make the migration process
+as close to the natural Wikidata editing flow as possible.
+Ideally, the user should barely notice the different underlying datasources
+when navigating Wikidata.
+To achieve this, we have in a~first step created a~Wikidata \emph{user script}.
+Wikidata user scripts are part of the Wikidata tool chain%
+\footnote{Wikidata tool chain:
+\url{https://www.wikidata.org/wiki/Wikidata:Tools}}
+and are created by users, but unlike gadgets---to be explained in the following---%
+do not appear in a~user's preferences.
+Instead, one has to add a~line of code into ones \texttt{common.js} file
+in order to activate and use the script.
+User scripts can be created by anyone and might not always be stable.
+Once a~user script has matured, it can be converted into a~\emph{gadget}.
+Gadgets are scripts that are likewise created by users,
+but which can be simply enabled in user preferences under the section ``Gadgets''.
+They can only be edited by administrators and are assumed to be stable.
+With our front-end, we went through this maturation steps
+and started with a~user script called \texttt{freebase2wikidata.js}%
+\footnote{Initial user script:
+\url{https://www.wikidata.org/wiki/User:Tomayac/freebase2wikidata.js}}
+that we later converted into a~gadget.%
+\footnote{Final gadget: \url{https://www.wikidata.org/wiki/MediaWiki:Gadget-PrimarySources.js}}
+\autoref{fig:primary-sources-tool} illustrates the user interface in action.
+Existing Wikidata statements are shown as usual,
+Freebase facts that could potentially be imported into Wikidata are shown in light blue
+with instead of an ``edit'' button two new buttons ``approve reference'' and ``reject reference''
+(\autoref{fig:barack-obama}) or ``approve claim'' and ``reject claim''
+(\autoref{fig:cause-of-death}) respectively.
 
 \section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
@@ -426,11 +464,11 @@ from March 2015:
   \item 48M~topics
   \item 2,997M triples
   \item 442M facts owned by Google%
-    \footnote{These facts are the remaining Freebase triples
+    \footnote{That is, the remaining Freebase triples
       after filtering out data about IDs (\texttt{/type/object/id}),
       types (\texttt{/type/object/type}), labels, descriptions (\texttt{/type/object/name},
-      \texttt{/common/topic/description}, \emph{etc.}), and triples that were removed
-      due to their licensing (see \autoref{sec:licensing})}
+      \texttt{/common/topic/description}, \emph{etc.}), and triples removed
+      for licensing (see \autoref{sec:licensing})}
   \item 68M~labels
 \end{itemize}
 
@@ -519,7 +557,7 @@ to judge the proportion of additional good data.
     \end{subfigure}
     \caption{Spatio-temporal distribution of Freebase and Wikidata items,
       the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
-      from the year 0 to 2015, following a~power law ($y' = y^8$)}
+      from the year 0 to 2015, following a~power law ($y' = y^8$) \todo{Create PDF versions of both diagrams}}
     \label{fig:time-space}
 \end{figure*}
 
