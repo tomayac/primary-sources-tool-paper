@@ -22,9 +22,9 @@
 \alignauthor
 Thomas Pellissier Tanon\titlenote{The author was an intern at Google when the majority of the work was done.}
    \affaddr{Google, San Francisco, USA}\\   
-   \email{thomas@pellissier-tanon.fr}
+   \email{\mbox{thomas@pellissier-tanon.fr}}
 \alignauthor
-Denny Vrandečić
+Denny Vrandečić\\
    \affaddr{Google, San Francisco, USA}\\   
    \email{vrandecic@google.com}
 \alignauthor
@@ -407,7 +407,7 @@ of the tool that integrates nicely with the Wikidata user interface.
 \subsection{Data Preparation}
 
 In order to prepare the data for integration into the Primary Sources Tool,
-we have created a set of scripts which map the content
+we have created a~set of scripts which map the content
 of the last Freebase dump to Wikidata statements.%
 \footnote{The source code is available under the terms of the Apache~2.0 license:
 \url{https://github.com/google/freebase-wikidata-converter}}
@@ -446,12 +446,12 @@ and runs as a~FastCGI application in the lighttpd Web server.
     \includegraphics[width=.7\columnwidth]{img/architecture.png}
     \caption{Primary Sources Tool architecture. The front-end is implemented in
       JavaScript and sends HTTP requests to the C++ back-end to retrieve and
-      update entities or statements, which are stored in a relational database.
+      update entities or statements, which are stored in a~relational database.
       \todo{Create PDF version of the diagram, improve consistency of used terms}}
     \label{fig:architecture}
 \end{figure}
 
-Entities and statements are stored in a relational database (MySQL or SQLite)
+Entities and statements are stored in a~relational database (MySQL or SQLite)
 and follow the Wikidata data structure with an additional status field
 to keep track of statements that either already have been approved or rejected,
 or not yet visited.
@@ -589,10 +589,10 @@ we have further created a~spatio-temporal visualization of Freebase and Wikidata
 that is shown in \autoref{fig:time-space}.
 The used method is to extract the earliest date and the longitude
 linked to each of the entities of the two knowledge bases
-and propagate them to the connected entities which do not have such data.
-To implement this propagation we set as value (date or longitude)
-the average of the values of the entities which distance is less than $10$ with,
-as weighting, $2^{-d}$ with $d$ the distance between the two entities.
+and propagate them to the connected entities that do not have such data.
+To implement this propagation, we set as value (date or longitude)
+the average of the values of the entities whose distance is $<10$
+with $2^{-d}$ as weighting, $d$~being the distance between the two entities.
 We see that the two knowledge bases follow the same basic patterns,
 with their coverage mostly concentrated on Europe and North America.
 There are no strong differences between them,
