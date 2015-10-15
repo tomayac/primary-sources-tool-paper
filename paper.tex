@@ -48,24 +48,20 @@ Lydia Pintscher\\
 \begin{abstract}
 Collaborative knowledge bases that make their data freely available in a~machine-readable form
 are central for the data strategy of many projects and organizations.
-One such collaborative knowledge base is Freebase, initially launched by Metaweb in 2007,
-who were then acquired by Google in 2010.
-Another example is Wikidata, a~collaborative knowledge base developed by
-Wikimedia Deutschland since 2012 and operated by the Wikimedia Foundation.
-Due to the success of Wikidata, Google decided 2015 to shut down Freebase and
-help the community with the transfer of Freebase's content to Wikidata.
+The two major collaborative knowledge bases are Google's Freebase and Wikimedia's Wikidata.
+Due to the success of Wikidata, Google decided in 2015 to offer the content of Freebase
+to the Wikidata community.
 In this paper, we describe the ongoing transfer efforts and data mapping challenges,
 and provide an analysis of the effort so far.
-We have created the \emph{Primary Sources Tool}
-that we have released as open source to facilitate the transfer of this dataset,
-but also future data migrations.
+We describe the \emph{Primary Sources Tool}, which aims to facilitate
+this and future data migrations.
 Throughout the migration, we have gained insights into both Wikidata and Freebase,
 and share and discuss detailed statistics on both knowledge bases. 
 \end{abstract}
 
 \category{H.3.5}{Information Storage and Retrieval}{Online Information Systems}
 \category{H.5.3}{Information Interfaces}{Group and Organization Interfaces?Web-based interactions}
-\category{I.2.4}{Artifical Intelligence}{Knowledge Representation}
+\category{I.2.4}{Artificial Intelligence}{Knowledge Representation}
 \category{K.4.3}{Computers and Society}{Organizational Impacts Computer-supported collaborative work}
 
 \terms{Human Factors, Documentation}
@@ -74,36 +70,56 @@ and share and discuss detailed statistics on both knowledge bases.
 
 \section{Introduction}
 
+Large web-based knowledge bases that make their data available
+under free licenses in a~machine-readable form
+have become central for the data strategy of many projects and organizations.
+They find applications in areas as diverse as web search,
+natural language annotation, or translation.
+\todo{add references to papers with examples}
+
+One such collaborative knowledge base is Freebase,
+initially launched by Metaweb in 2007 and acquired by Google in 2010.
+Another example is Wikidata, a~collaborative knowledge base developed by
+Wikimedia Deutschland since 2012 and operated by the Wikimedia Foundation.
+Due to the success of Wikidata, Google announced in 2014 to shut down Freebase and
+help the community with the transfer of Freebase's content to Wikidata.
+
 Moving data between two knowledge bases that do not share a~similar design
 is usually a~problematic task and requires the careful mapping between their structures.
-In this paper, we describe how we facilitated the migration of
-Freebase\footnote{Freebase: \url{https://www.freebase.com}} content to
-Wikidata.\footnote{Wikidata: \url{https://www.wikidata.org}}
-That migration was no exception to this rule, and had a~number of \emph{structural} challenges.
+The migration from Freebase to Wikidata was no exception to this rule:
+we encountered a~number of \emph{structural} challenges.
 Even more challenging was the \emph{cultural} difference between the two involved communities.
 The Freebase and Wikidata communities have a~very different background,
 subtly different goals and understandings of their tasks,
 and different requirements regarding their data.
-\todo{Expand}
 
-The remainder of this paper is structured as follows.
-After an introduction to the two collaborative knowledge bases
-Freebase and Wikidata in \autoref{sec:background},
-we describe our methodology and the metrics used to measure the migration
+In this paper we describe how we support the Wikidata community with
+the migration of Freebase content to Wikidata.
+We created the \emph{Primary Sources Tool},
+released as open source to facilitate the transfer of the Freebase dataset.
+The \emph{Primary Sources Tool} is also developed with an eye on
+future data migrations from other source.
+We created and published mappings of the Freebase dataset.
+Throughout the migration, we have gained insights into both Wikidata and Freebase,
+and share and discuss detailed statistics on both knowledge bases. 
+
+The paper is structured as follows.
+First, we introduce Freebase and Wikidata in \autoref{sec:background}.
+Then we describe our methodology and the metrics used to measure the migration
 in \autoref{sec:challenges-of-the-migration}.
 In order to support the migration, we have developed a~set of open source tools
 that we present in \autoref{sec:primary-sources-tool}.
 We then present the results of the migration
 and discuss these statistics in \autoref{sec:statistics-of-the-migration}.
-In \autoref{sec:related-work} we discuss the relation to other work.
-The paper terminates with an outlook at proposed next steps
+Before we close, we discuss related work in \autoref{sec:related-work},
+followed by an outlook at proposed next steps
 and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 
 \section{Background}\label{sec:background}
 
 \subsection{Freebase}
 
-Freebase is an open and
+Freebase\footnote{Freebase: \url{https://www.freebase.com}} is an open and
 collaborative knowledge base created in 2007 by Metaweb and 
 acquired in 2010 by Google~\cite{freebase}.
 It was used as the open core of the Google Knowledge Graph,
@@ -112,10 +128,10 @@ Due to the success of Wikidata,
 Google announced in 2014 to close Freebase and offer most of its content to the
 Wikidata community~\cite{freebase-end}.
 
-Freebase relies on the notions of \emph{topics}, \emph{facts}, \emph{types}, and \emph{properties}.
-Each Freebase topic has a~stable identifier called \emph{``mid''} (for Metaweb ID),
+Freebase is build on the notions of \emph{objects}, \emph{facts}, \emph{types}, and \emph{properties}.
+Each Freebase object has a~stable identifier called a \emph{``mid''} (for Metaweb ID),
 one or more types, and uses properties from these types in order to provide facts.
-For example, the Freebase topic for Barack Obama has the mid \texttt{/m/02mjmr}
+For example, the Freebase object for Barack Obama has the mid \texttt{/m/02mjmr}
 and the type \texttt{/government/us\_president} (among others) that allows the entity to have
 a fact with the property \texttt{/government/us\_president/presidency\_number}
 and the literal integer ``44'' as the value.
@@ -130,49 +146,51 @@ and the literal integer ``44'' as the value.
 
 Freebase uses Compound Value Types (CVTs, see \autoref{fig:cvt-obama}) to represent
 n-ary relations with $n>2$, e.g. values like geographic coordinates,
-political positions held with a start and end date, or actors playing a specific character in a movie.
-CVT values are much like topics, \emph{i.e.} they have a~mid and can have types
-(usually only the compound value type).
+political positions held with a start and end date, or actors playing a character in a movie.
+CVT values are just objects, \emph{i.e.} they have a~mid and can have types
+(although they usually have only the compound value type itself).
+Most non-CVT objects are called \emph{topics} in order to discern them from CVTs.
 
-The content of Freebase has been imported from various sources like Wikipedia
-or the Internet Movie Database IMDB,
-in consequence Google does not own the copyright of some parts of the content of the knowledge base
-like images or long entity descriptions extracted from Wikipedia.
-As of the closing of Freebase on March~31, 2015,
+The content of Freebase has been partially imported from various sources like Wikipedia
+or the license-compatible part of MusicBrainz.
+Over the years, the Freebase community and Google have maintained the knowledge base.
+When Freebase was turned read-only on March~31, 2015,
 it counted more than 3~billion facts about almost 50M~entities.
+
+The data from Freebase is published as an N-Triples dump in RDF~\cite{rdf} under
+the Creative Commons CC-BY license.\footnote{\url{https://developers.google.com/freebase/data}}
 
 \subsection{Wikidata}
 
 Wikidata\footnote{Wikidata: \url{https://www.wikidata.org}}
 is a~collaborative knowledge base
-launched in October 2012 and hosted by the Wikimedia Foundation.
-Its community has been growing quickly since the beginning, and as of mid 2015,
-the community comprises about 6,000 active contributors.
+launched in October 2012 and hosted by the Wikimedia Foundation~\cite{vrandevcic2014wikidata}.
+Its community has been growing quickly, and as of mid 2015,
+the community comprises about 6,000 active contributors~\cite{wikidatastats}.
 
 Wikidata's data model relies on the notions of \emph{item} and \emph{statement}.
-An item represent a~concept, has a~stable identifier and may have some labels,
+An item represents an~entity, has a~stable identifier and may have labels,
 descriptions, and aliases in multiple languages, links to pages about this concept
-in the others Wikimedia projects, like Wikipedia, and statements.
-Contrary to Freebase, Wikidata encodes with its statements not true facts,
-but \emph{claims} from different sources.
+in the others Wikimedia projects, most prominently Wikipedia, and statements.
+Contrary to Freebase, Wikidata statements do not aim to encode true facts,
+but \emph{claims} from different sources which can also contradict each other.
 
-A~statement is composed of one claim and zero or more references for this claim.
+A~statement is composed of a claim and zero or more references for this claim.
 The claim itself is composed of one main property--value couple that encodes
 the main (claimed) fact like ``population is 8,173,900'' and optional qualifiers
 to add information about it like ``as of June 2012''.
-\autoref{fig:statement} illustrates the used nomenclature with an example.
+\autoref{fig:statement} illustrates the terminology with an example.
 
-The content of Wikidata is freely available under a~Creative Commons~0 (CC0) license.
-As of mid 2015, Wikidata counted about 66M~statements on 14M~entities.
-For more background information about Wikidata, see~\cite{vrandevcic2014wikidata}
-by Vrandečić and Krötzsch.
-For a~comparison between Freebase and Wikidata,
-we refer the reader to~\cite{farbercomparative} by Färber \emph{et~al.}
+The content of Wikidata is available under the Creative Commons CC0 license.
+As of mid 2015, Wikidata counted about 66M~statements on 14M~entities. \todo{update}
+
+A~comparison between Freebase, Wikidata, and other free and open knowledge bases
+(DBpedia, YAGO, and OpenCyc) is available in~\cite{farbercomparative}.
 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=8.45 cm]{img/Wikidata_statement.pdf}
-\caption{Wikidata nomenclature illustrated with an example (Source:
+\caption{Wikidata terminology illustrated with an example (Source:
 	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg}).}
 \label{fig:statement}
 \end{figure}
@@ -192,6 +210,8 @@ that effectively puts the data in the public domain,
 whereas Freebase is published under a~Creative Commons Attribution (CC~BY~2.5) license
 and contains data imported from external projects not owned by Google,
 like images or descriptions extracted from Wikipedia.
+In consequence Google does not own the copyright of some parts of the content of the knowledge base,
+such as images or long entity descriptions extracted from Wikipedia.
 In a~first step, we filtered the Freebase dump for this kind of content
 before being able to create a~dump that we could relicense under CC0~1.0.
 This step reduced the number of Freebase facts that could be republished by about 42M~facts
