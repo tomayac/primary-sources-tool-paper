@@ -93,6 +93,7 @@ In order to support the migration, we have developed a~set of open source tools
 that we present in \autoref{sec:primary-sources-tool}.
 We then present the results of the migration
 and discuss these statistics in \autoref{sec:statistics-of-the-migration}.
+In \autoref{sec:related-work} we discuss the relation to other work.
 The paper terminates with an outlook at proposed next steps
 and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 
@@ -101,7 +102,8 @@ and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 \subsection{Freebase}
 
 Freebase is an open source and
-collaborative knowledge base created in 2007 by Metaweb and acquired in 2010 by Google.
+collaborative knowledge base created in 2007 by Metaweb and 
+acquired in 2010 by Google~\cite{freebase}.
 It was used as the open core of the Google Knowledge Graph,
 and also has many use cases outside of Google.
 
@@ -111,7 +113,7 @@ Freebase relies on the notions of \emph{topics}, \emph{facts}, \emph{types}, and
 Each Freebase topic has a~stable identifier called \emph{``mid''} (for Metaweb ID),
 one or more types, and uses properties from these types in order to provide facts.
 For example, the Freebase topic for Barack Obama has the mid \texttt{/m/02mjmr}
-and the type \texttt{/government/us\_president} that allows the entity to have
+and the type \texttt{/government/us\_president} (among others) that allows the entity to have
 a fact with the property \texttt{/government/us\_president/presidency\_number}
 and the literal integer ``44'' as the value.
 
@@ -656,6 +658,10 @@ There are 0.58M~facts whose subjects are mapped to Wikidata, and 0.52M~of them
 (\emph{i.e.}, 92\%) are converted to Wikidata statements.
 58\% of the statements created from reviewed fact are already in Wikidata,
 allowing us to add 0.25M~of new reviewed statements to Wikidata.
+
+\section{Related Work}\label{sec:related-work}
+
+There has been a lot of research on ontology mapping.
 
 \section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
 
