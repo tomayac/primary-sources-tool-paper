@@ -443,10 +443,11 @@ and runs as a~FastCGI application in the lighttpd Web server.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=.7\columnwidth]{img/architecture.pdf}
-    \caption{Primary Sources Tool architecture. The front-end is implemented in
-      JavaScript and sends HTTP requests to the C++ back-end to retrieve and
-      update entities or statements, which are stored in a~relational database.}
+    \includegraphics[width=.65\columnwidth]{img/architecture.pdf}
+    \caption{Primary Sources Tool architecture. The front-end (JavaScript) sends
+      HTTP requests to the back-end (C++) to retrieve and update entities or
+      statements, stored in a~relational database. Approved statements are in
+      addition written by the front-end to the Wikidata REST API.}    
     \label{fig:architecture}
     % Source: https://docs.google.com/a/google.com/drawings/d/1vKAftQVjrso907UtbMXnEOabXwQHDVyyz2ewxcqz3b0/edit?usp=sharing
 \end{figure}
@@ -465,9 +466,12 @@ The REST API of the back-end supports the following main types of requests:
   \setlength\itemsep{0em}
   \item Get an entity (\emph{i.e.}, its statements) by Wikidata QID
   (\emph{e.g.}, \verb|GET /entities/Q2529789|).
+  \item Get all entities with unapproved (or approved or rejected) statements
+  (\verb|/entities/all|).
   \item Get a~random entity with unapproved (or approved or rejected) statements
   (\verb|/entities/any|).
-  \item Get a~statement by database ID (\verb|GET /statements/1|) or get a~list of
+  \item Get a~statement by database ID (\verb|GET /statements/1|), get all
+    statements (\verb|GET /statements/all|), or get a~list of
   random statements (\verb|GET /statements/any|).
   \item Set a~new state for a~statement \\(\verb|POST /statements/1?state=approved&user=Alice|).
 \end{itemize}
