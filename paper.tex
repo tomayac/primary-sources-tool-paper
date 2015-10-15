@@ -63,12 +63,14 @@ Throughout the migration, we have gained insights into both Wikidata and Freebas
 and share and discuss detailed statistics on both knowledge bases. 
 \end{abstract}
 
-% a~category with the (minimum) three required fields
-\category{H.4}{\todo{Hierarchy}}{Miscellaneous}
+\category{H.3.5}{Information Storage and Retrieval}{Online Information Systems}
+\category{H.5.3}{Information Interfaces}{Group and Organization Interfaces?Web-based interactions}
+\category{I.2.4}{Artifical Intelligence}{Knowledge Representation}
+\category{K.4.3}{Computers and Society}{Organizational Impacts Computer-supported collaborative work}
 
-\terms{\todo{Terms}}
+\terms{Human Factors, Documentation}
 
-\keywords{\todo{Keywords}}
+\keywords{AIW: AI for Web-Based Collaboration and Cooperation, AIW: Crowdsourcing Techniques and Methodologies, KRR: Knowledge Acquisition}
 
 \section{Introduction}
 
@@ -101,14 +103,15 @@ and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 
 \subsection{Freebase}
 
-Freebase is an open source and
+Freebase is an open and
 collaborative knowledge base created in 2007 by Metaweb and 
 acquired in 2010 by Google~\cite{freebase}.
 It was used as the open core of the Google Knowledge Graph,
-and also has many use cases outside of Google.
-
+and has found many use cases outside of Google.
 Due to the success of Wikidata,
-it was decided to close Freebase and support the migration of its content to Wikidata.
+Google announced in 2014 to close Freebase and offer most of its content to the
+Wikidata community~\cite{freebase-end}.
+
 Freebase relies on the notions of \emph{topics}, \emph{facts}, \emph{types}, and \emph{properties}.
 Each Freebase topic has a~stable identifier called \emph{``mid''} (for Metaweb ID),
 one or more types, and uses properties from these types in order to provide facts.
@@ -125,11 +128,11 @@ and the literal integer ``44'' as the value.
 \label{fig:cvt-obama}
 \end{figure}
 
-To represent complex values like geographic coordinates or to annotate relations,
-for example, in order to add start and end dates for a~position held,
-Freebase has introduced the notion of Compound Value Types (CVTs, see \autoref{fig:cvt-obama}).
-They behave like topics, \emph{e.g.}, have a~mid and can have types,
-but do not have the \texttt{/common/topic} type.
+Freebase uses Compound Value Types (CVTs, see \autoref{fig:cvt-obama}) to represent
+n-ary relations with $n>2$, e.g. values like geographic coordinates,
+political positions held with a start and end date, or actors playing a specific character in a movie.
+CVT values are much like topics, \emph{i.e.} they have a~mid and can have types
+(usually only the compound value type).
 
 The content of Freebase has been imported from various sources like Wikipedia
 or the Internet Movie Database IMDB,
