@@ -71,10 +71,10 @@ and share and discuss detailed statistics on both knowledge bases.
 
 \section{Introduction}
 
-Large web-based knowledge bases that make their data available
+Large Web-based knowledge bases that make their data available
 under free licenses in a~machine-readable form
 have become central for the data strategy of many projects and organizations.
-They find applications in areas as diverse as web search,
+They find applications in areas as diverse as Web search,
 natural language annotation, or translation.
 \todo{add references to papers with examples}
 
@@ -83,25 +83,25 @@ initially launched by Metaweb in 2007 and acquired by Google in 2010.
 Another example is Wikidata, a~collaborative knowledge base developed by
 Wikimedia Deutschland since 2012 and operated by the Wikimedia Foundation.
 Due to the success of Wikidata, Google announced in 2014 to shut down Freebase and
-help the community with the transfer of Freebase's content to Wikidata.
+help the community with the transfer of Freebase's content to Wikidata~\cite{freebase2014shutdown}.
 
 Moving data between two knowledge bases that do not share a~similar design
 is usually a~problematic task and requires the careful mapping between their structures.
 The migration from Freebase to Wikidata was no exception to this rule:
-we encountered a~number of \emph{structural} challenges.
-Even more challenging was the \emph{cultural} difference between the two involved communities.
+we encountered a~number of to-be-expected \emph{structural} challenges.
+However, even more demanding was the \emph{cultural} difference between the two involved communities.
 The Freebase and Wikidata communities have a~very different background,
 subtly different goals and understandings of their tasks,
 and different requirements regarding their data.
 
-In this paper we describe how we support the Wikidata community with
+In this paper, we describe how we support the Wikidata community with
 the migration of Freebase content to Wikidata.
-We created the \emph{Primary Sources Tool},
-released as open source software to facilitate the transfer of the Freebase dataset.
+We programmed the \emph{Primary Sources Tool} and
+released it as open source software to facilitate the transfer of the Freebase dataset.
 The \emph{Primary Sources Tool} is also developed with an eye on
-future data migrations from other source.
+future data migrations from other sources.
 We created and published mappings of the Freebase dataset.
-Throughout the migration, we have gained insights into both Wikidata and Freebase,
+Throughout the migration, we have gained deep insights into both Wikidata and Freebase,
 and share and discuss detailed statistics on both knowledge bases. 
 
 The paper is structured as follows.
@@ -110,9 +110,9 @@ Then we describe our methodology and the metrics used to measure the migration
 in \autoref{sec:challenges-of-the-migration}.
 In order to support the migration, we have developed a~set of open source tools
 that we present in \autoref{sec:primary-sources-tool}.
-We then present the results of the migration
+We then show the results of the migration
 and discuss these statistics in \autoref{sec:statistics-of-the-migration}.
-Before we close, we discuss related work in \autoref{sec:related-work},
+Before we close, we report on related work in \autoref{sec:related-work},
 followed by an outlook at proposed next steps
 and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 
@@ -130,7 +130,7 @@ Google announced in 2014 to close Freebase and offer most of its content to the
 Wikidata community~\cite{freebase-end}.
 
 Freebase is build on the notions of \emph{objects}, \emph{facts}, \emph{types}, and \emph{properties}.
-Each Freebase object has a~stable identifier called a \emph{``mid''} (for Metaweb ID),
+Each Freebase object has a~stable identifier called a~\emph{``mid''} (for Metaweb ID),
 one or more types, and uses properties from these types in order to provide facts.
 For example, the Freebase object for Barack Obama has the mid \texttt{/m/02mjmr}
 and the type \texttt{/government/us\_president} (among others) that allows the entity to have
@@ -147,7 +147,7 @@ and the literal integer ``44'' as the value.
 
 Freebase uses Compound Value Types (CVTs, see \autoref{fig:cvt-obama}) to represent
 n-ary relations with $n>2$, e.g. values like geographic coordinates,
-political positions held with a start and end date, or actors playing a character in a movie.
+political positions held with a~start and end date, or actors playing a~character in a~movie.
 CVT values are just objects, \emph{i.e.} they have a~mid and can have types
 (although they usually have only the compound value type itself).
 Most non-CVT objects are called \emph{topics} in order to discern them from CVTs.
@@ -177,7 +177,7 @@ in the others Wikimedia projects, most prominently Wikipedia, and statements.
 Contrary to Freebase, Wikidata statements do not aim to encode true facts,
 but \emph{claims} from different sources which can also contradict each other.
 
-A~statement is composed of a claim and zero or more references for this claim.
+A~statement is composed of a~claim and zero or more references for this claim.
 The claim itself is composed of one main property--value couple that encodes
 the main (claimed) fact like ``population is 8,173,900'' and optional qualifiers
 to add information about it like ``as of June 2012''.
@@ -265,13 +265,13 @@ Wikidata's editing community is in charge of the project's content. This include
 data as well as long-term maintenance of it. Data needs to be updated as the world changes but also
 kept free of vandalism. An increase in the amount of data comes with an increase in maintenance
 cost for the community. Simply ingesting the Freebase data would have meant overwhelming the
-existing editors and thereby harming the project in the long run. To counter this, a significant
+existing editors and thereby harming the project in the long run. To counter this, a~significant
 increase in the amount of data needs to go along with either an increase in the number of editors
 or providing of tools to assist the existing editors to allow them to be more effective. With the
 Primary Sources Tool we aim to help grow the community in step with the amount of data. It is
-useful as a means to get more people to edit because it lowers the barrier to entry. It does this
+useful as a~means to get more people to edit because it lowers the barrier to entry. It does this
 by making it easier to find potential edits. At the same time it helps make some of the existing
-editors more effective by allowing them to add statements with a single click.
+editors more effective by allowing them to add statements with a~single click.
 
 \subsection{Data Topic Mappings}
 
@@ -346,7 +346,7 @@ For the mapping between Freebase and Wikidata properties we have chosen to do it
 with the help of the Wikidata community.
 With that, we have been able to quickly map around 360~properties
 (note that Wikidata has a~total of 1,660 properties, and Freebase has around 37,700 properties
-\todo{This should probably have a date. As of today Wikidata has 1863 properties.}).
+\todo{This should probably have a~date. As of today Wikidata has 1863 properties.}).
 For the mapping of properties where the domain are other topics or literals,
 this mapping provides the Wikidata property to use.
 We have also implemented a~special case for \texttt{/people/person/parents}
@@ -703,7 +703,7 @@ allowing us to add 0.25M~of new reviewed statements to Wikidata.
 \section{Related Work}\label{sec:related-work}
 
 For the challenges listed in \autoref{section:challenges-of-the-migration}
-there is a body of work dealing with it. In many cases, the problems we have encountered in
+there is a~body of work dealing with it. In many cases, the problems we have encountered in
 this migration have turned out to be much simpler than the problems solved in existing research.
 
 \textbf{Data licensing.}
@@ -716,9 +716,9 @@ Since both databases build on Wikipedia...
 There has been extensive research on the topic of mapping the structures
 of two databases or knowledge bases~\cite{mappingsurvey1,mappingsurvey2,mappingsurvey3}.
 The current work is, in many technical respects, rather simple:
-we are looking for a one-directional mapping (since the case of data
+we are looking for a~one-directional mapping (since the case of data
 flowing from Wikidata back to Freebase is not relevant),
-for a one-off data flow (since Freebase is now read-only),
+for a~one-off data flow (since Freebase is now read-only),
 evaluated by human contributors (therefore the quality of the mapping 
 
 \textbf{Data maintenance.}
