@@ -568,6 +568,24 @@ with instead of an ``edit'' button two new buttons ``approve reference'' and ``r
 
 \section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
+\begin{figure*}[h]
+    \centering
+    \begin{subfigure}[b]{1.0\columnwidth}
+        \includegraphics[width=\textwidth]{img/freebase-projection-bw.pdf}
+        \caption{Spatio-temporal distribution of Freebase.}
+        \label{fig:freebase}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\columnwidth}
+        \includegraphics[width=\textwidth]{img/wikidata-projection-bw.pdf}
+        \caption{Spatio-temporal distribution of Wikidata.}
+        \label{fig:wikidata}
+    \end{subfigure}
+    \caption{Spatio-temporal distribution of Freebase and Wikidata items,
+      the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
+      from the year 0 to 2015, following a~power law ($y' = y^8$).}
+    \label{fig:time-space}
+\end{figure*}
+
 \subsection{Quantitative Comparison}
 
 In order to put the statistics in this section in context,
@@ -630,24 +648,6 @@ where the only change is the encoding of the source.
 
 \subsection{Spatio-Temporal Comparison}
 
-\begin{figure*}[!ht]
-    \centering
-    \begin{subfigure}[b]{1.0\columnwidth}
-        \includegraphics[width=\textwidth]{img/freebase-projection-bw.pdf}
-        \caption{Spatio-temporal distribution of Freebase.}
-        \label{fig:freebase}
-    \end{subfigure}
-    \begin{subfigure}[b]{1.0\columnwidth}
-        \includegraphics[width=\textwidth]{img/wikidata-projection-bw.pdf}
-        \caption{Spatio-temporal distribution of Wikidata.}
-        \label{fig:wikidata}
-    \end{subfigure}
-    \caption{Spatio-temporal distribution of Freebase and Wikidata items,
-      the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
-      from the year 0 to 2015, following a~power law ($y' = y^8$).}
-    \label{fig:time-space}
-\end{figure*}
-
 In order to get an idea of the coverage of the two knowledge bases,
 we have further created a~spatio-temporal visualization of Freebase and Wikidata 
 that is shown in \autoref{fig:time-space}.
@@ -701,7 +701,27 @@ allowing us to add 0.25M~of new reviewed statements to Wikidata.
 
 \section{Related Work}\label{sec:related-work}
 
-There has been a lot of research on ontology mapping.
+For the challenges listed in \autoref{section:challenges-of-the-migration}
+there is a body of work dealing with it. In many cases, the problems we have encountered in
+this migration have turned out to be much simpler than the problems solved in existing research.
+
+\textbf{Data licensing.}
+Only dealing with two open licenses.
+
+\textbf{Topic mappings.}
+Since both databases build on Wikipedia...
+
+\textbf{Schema mappings.}
+There has been extensive research on the topic of mapping the structures
+of two databases or knowledge bases~\cite{mappingsurvey1,mappingsurvey2,mappingsurvey3}.
+The current work is, in many technical respects, rather simple:
+we are looking for a one-directional mapping (since the case of data
+flowing from Wikidata back to Freebase is not relevant),
+for a one-off data flow (since Freebase is now read-only),
+evaluated by human contributors (therefore the quality of the mapping 
+
+\textbf{Data maintenance.}
+Should also cover references (kvault) and quality.
 
 \section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
 
