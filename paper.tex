@@ -127,40 +127,40 @@ It was used as the open core of the Google Knowledge Graph,
 and has found many use cases outside of Google.
 Due to the success of Wikidata,
 Google announced in 2014 to close Freebase and offer most of its content to the
-Wikidata community~\cite{freebase-end}.
+Wikidata community~\cite{freebase2014shutdown,freebase-end}.
 
-Freebase is build on the notions of \emph{objects}, \emph{facts}, \emph{types}, and \emph{properties}.
+Freebase is built on the notions of \emph{objects}, \emph{facts}, \emph{types}, and \emph{properties}.
 Each Freebase object has a~stable identifier called a~\emph{``mid''} (for Metaweb ID),
 one or more types, and uses properties from these types in order to provide facts.
 For example, the Freebase object for Barack Obama has the mid \texttt{/m/02mjmr}
 and the type \texttt{/government/us\_president} (among others) that allows the entity to have
-a fact with the property \texttt{/government/us\_president/presidency\_number}
+a fact with the property \texttt{/government/us\_president/presidency\_number} \linebreak
 and the literal integer ``44'' as the value.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[trim=0cm 3cm 0cm 5cm, width=8.45 cm]{img/freebase-cvt-obama.pdf}
-\caption{Exemplary Compound Value Type (CVT) in Freebase: Presidency of Barack Obama.}
-%The source is https://docs.google.com/document/d/1ELrBtxxs4ghhe7FloTUnhvpD3f7RFczT7UfxahAfjgE/edit
-\label{fig:cvt-obama}
-\end{figure}
-
-Freebase uses Compound Value Types (CVTs, see \autoref{fig:cvt-obama}) to represent
-n-ary relations with $n>2$, e.g. values like geographic coordinates,
-political positions held with a~start and end date, or actors playing a~character in a~movie.
-CVT values are just objects, \emph{i.e.} they have a~mid and can have types
+Freebase uses Compound Value Types (CVTs) to represent
+n-ary relations with $n>2$, \emph{e.g.}, values like geographic coordinates,
+political positions held with a~start and an end date (see \autoref{fig:cvt-obama} for an example),
+or actors playing a~character in a~movie.
+CVT values are just objects, \emph{i.e.}, they have a~mid and can have types
 (although they usually have only the compound value type itself).
 Most non-CVT objects are called \emph{topics} in order to discern them from CVTs.
 
+\begin{figure}[!t]
+  \centering
+  \includegraphics[trim=0cm 3cm 0cm 5cm, width=8.45 cm]{img/freebase-cvt-obama.pdf}
+  \caption{Exemplary Compound Value Type (CVT) in Freebase: Presidency of Barack Obama.}
+  % Source: https://docs.google.com/document/d/1ELrBtxxs4ghhe7FloTUnhvpD3f7RFczT7UfxahAfjgE/edit
+  \label{fig:cvt-obama}
+\end{figure}
+
 The content of Freebase has been partially imported from various sources
 such as Wikipedia~\cite{wikipedia-works} or
-the license-compatible part of MusicBrainz~\cite{musicbrainz}.
+the license-compa\-tible part of MusicBrainz~\cite{musicbrainz}.
 Over the years, the Freebase community and Google have maintained the knowledge base.
 When Freebase was turned read-only on March~31, 2015,
 it counted more than 3~billion facts about almost 50M~entities.
-
 The data from Freebase is published as an N-Triples dump in RDF~\cite{rdf} under
-the Creative Commons CC-BY license.\footnote{\url{https://developers.google.com/freebase/data}}
+the Creative Commons CC-BY license.\footnote{Dump: \url{https://developers.google.com/freebase/data}}
 
 \subsection{Wikidata}
 
@@ -171,31 +171,30 @@ Its community has been growing quickly, and as of mid 2015,
 the community comprises about 6,000 active contributors~\cite{wikidatastats}.
 
 Wikidata's data model relies on the notions of \emph{item} and \emph{statement}.
-An item represents an~entity, has a~stable identifier and may have labels,
-descriptions, and aliases in multiple languages, links to pages about this concept
-in the others Wikimedia projects, most prominently Wikipedia, and statements.
+An item represents an~entity, has a~stable identifier called ``qid'', and may have labels,
+descriptions, and aliases in multiple languages; further statements and links to pages
+about the entity in other Wikimedia projects---most prominently Wikipedia.
 Contrary to Freebase, Wikidata statements do not aim to encode true facts,
-but \emph{claims} from different sources which can also contradict each other.
+but \emph{claims} from different sources, which can also contradict each other.
 
 A~statement is composed of a~claim and zero or more references for this claim.
-The claim itself is composed of one main property--value couple that encodes
+The claim itself is composed of one main property--value pair that encodes
 the main (claimed) fact like ``population is 8,173,900'' and optional qualifiers
 to add information about it like ``as of June 2012''.
-\autoref{fig:statement} illustrates the terminology with an example.
+\autoref{fig:statement} illustrates the used terminology with an example.
 
-The content of Wikidata is available under Creative Commons CC0.
-As of September 2015, Wikidata counted about 70M~statements on 18M~entities.
-
-A~comparison between Freebase, Wikidata, and other free and open knowledge bases
-(DBpedia, YAGO, and OpenCyc) is available in~\cite{farbercomparative}.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=8.45 cm]{img/Wikidata_statement.pdf}
-\caption{Wikidata terminology illustrated with an example (Source:
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=8.45 cm]{img/Wikidata_statement.pdf}
+  \caption{Wikidata terminology illustrated with an example (Source:
 	\url{https://commons.wikimedia.org/wiki/File:Wikidata_statement.svg}).}
-\label{fig:statement}
+  \label{fig:statement}
 \end{figure}
+
+The content of Wikidata is in the public domain under Creative Commons CC0.
+As of September 2015, Wikidata counted about 70M~statements on 18M~entities.
+A~more in-depth comparison between Freebase, Wikidata, and other free and open knowledge bases
+(DBpedia, YAGO, and OpenCyc) is available in~\cite{farbercomparative} by Färber \emph{et~al.}
 
 \section{Challenges of the migration}\label{sec:challenges-of-the-migration}
 
