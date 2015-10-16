@@ -151,8 +151,9 @@ CVT values are just objects, \emph{i.e.} they have a~mid and can have types
 (although they usually have only the compound value type itself).
 Most non-CVT objects are called \emph{topics} in order to discern them from CVTs.
 
-The content of Freebase has been partially imported from various sources like Wikipedia
-or the license-compatible part of MusicBrainz.
+The content of Freebase has been partially imported from various sources
+such as Wikipedia~\cite{wikipedia-works} or
+the license-compatible part of MusicBrainz~\cite{musicbrainz}.
 Over the years, the Freebase community and Google have maintained the knowledge base.
 When Freebase was turned read-only on March~31, 2015,
 it counted more than 3~billion facts about almost 50M~entities.
@@ -205,7 +206,7 @@ that we will outline in the following.
 \label{sec:licensing}
 
 The first challenge concerns the licenses under which the datasets are published.
-Wikidata is published under Creative Commons~0 (CC0~1.0)
+Wikidata is published under the Creative Commons~0 (CC0~1.0)~\cite{cc0} license.
 that effectively puts the data in the public domain,
 whereas Freebase is published under a~Creative Commons Attribution (CC~BY~2.5) license
 and contains data imported from external projects not owned by Google,
@@ -629,6 +630,24 @@ where the only change is the encoding of the source.
 
 \subsection{Spatio-Temporal Comparison}
 
+\begin{figure*}[!ht]
+    \centering
+    \begin{subfigure}[b]{1.0\columnwidth}
+        \includegraphics[width=\textwidth]{img/freebase-projection-bw.pdf}
+        \caption{Spatio-temporal distribution of Freebase.}
+        \label{fig:freebase}
+    \end{subfigure}
+    \begin{subfigure}[b]{1.0\columnwidth}
+        \includegraphics[width=\textwidth]{img/wikidata-projection-bw.pdf}
+        \caption{Spatio-temporal distribution of Wikidata.}
+        \label{fig:wikidata}
+    \end{subfigure}
+    \caption{Spatio-temporal distribution of Freebase and Wikidata items,
+      the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
+      from the year 0 to 2015, following a~power law ($y' = y^8$).}
+    \label{fig:time-space}
+\end{figure*}
+
 In order to get an idea of the coverage of the two knowledge bases,
 we have further created a~spatio-temporal visualization of Freebase and Wikidata 
 that is shown in \autoref{fig:time-space}.
@@ -658,24 +677,6 @@ Nonetheless, it is very challenging to find objective ways to compare the two da
 and good metrics of success for the migration.
 We certainly note that for knowledge bases the amount of triples is not an adequate measure
 to judge the proportion of additional good data.
-
-\begin{figure*}[!htbp]
-    \centering
-    \begin{subfigure}[b]{1.0\columnwidth}
-        \includegraphics[width=\textwidth]{img/freebase-projection-bw.pdf}
-        \caption{Spatio-temporal distribution of Freebase.}
-        \label{fig:freebase}
-    \end{subfigure}
-    \begin{subfigure}[b]{1.0\columnwidth}
-        \includegraphics[width=\textwidth]{img/wikidata-projection-bw.pdf}
-        \caption{Spatio-temporal distribution of Wikidata.}
-        \label{fig:wikidata}
-    \end{subfigure}
-    \caption{Spatio-temporal distribution of Freebase and Wikidata items,
-      the $x$ axis shows longitude degrees from 180°~E to 180°~W, the $y$ axis shows time
-      from the year 0 to 2015, following a~power law ($y' = y^8$).}
-    \label{fig:time-space}
-\end{figure*}
 
 \subsection{Raw Statistics}
 
