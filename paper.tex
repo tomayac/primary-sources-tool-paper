@@ -226,8 +226,12 @@ from 3~billion facts in the original corpus, i.e. by about $1.4\%$.
 The second challenge is that the Wikidata community is very eager to have references
 for their statements, \emph{i.e.}, sources that Freebase usually did not store,
 except for some specific data like populations and unemployment rates.
-For these two specific cases, we have just kept the references from Freebase.
-\todo{Thomas, can you expand?}
+For these two specific cases, we just map the ``\texttt{source}''
+\footnote{The two main properties used in Freebase for sources are
+\texttt{/measurement\_unit/dated\_integer/source} and
+\texttt{/measurement\_unit/dated\_percentage/source}}
+Freebase properties included the CVTs encoding these data into Wikidata references.
+\todo{Denny: Could you find a better formulation?}
 
 In order to provide the Wikidata community with references for the facts in Freebase,
 we have reused data from the Google
