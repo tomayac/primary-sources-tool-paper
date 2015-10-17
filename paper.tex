@@ -436,28 +436,32 @@ In such cases, we are not able to fill the ``calendar'' value of the Wikidata ``
 \section{Primary Sources Tool}\label{sec:primary-sources-tool}
 
 As outlined earlier, the \emph{Primary Sources Tool} is a~crowdsourced human curation
-software solution that displays Freebase statements for verification to the user
+software solution that displays Freebase statements for verification to the Wikidata contributor
 so that these statements can be added to the currently shown Wikidata item.
-With just one click, the user can reject or approve a~statement,
-and, in case of approval, therewith add the statement to Wikidata.
+With just one click, the contributor can reject or approve a~statement,
+and, in case of approval, add the statement to Wikidata.
 The code of the Primary Sources Tool is openly available
 under the terms of the Apache~2.0 license (\url{https://github.com/google/primarysources}).
 The tool is deployed as a~so-called gadget,
-\emph{i.e.}, as an easily activatable add-on feature in Wikidata.
+\emph{i.e.}, as an easily to active add-on feature in Wikidata.
 It is independent from Freebase and can easily be reused to import other datasets into Wikidata.
-Therefore, we have implemented an upload API in the back-end
+
+We have implemented an upload API in the back-end
 and a~dataset filter in the front-end that allows users
 to display only statements from a~selected dataset.
 This flexibility is indeed much-wanted, and during the development period of the project
 another researcher approached us in order to upload
 a~dataset extracted from natural language text.
-To visualize the migration progress, we have created a~realtime dashboard
-available publicly at \url{https://tools.wmflabs.org/wikidata-primary-sources/status.html}.
+We expect more datasets to be added to the Primary Sources Tool in the future.
+
 At the time of writing (October, 2015), the tool has been used by more than a~hundred users
 who performed about 30,000 approval or rejection actions.
-More than 12M~statements have been uploaded in total.
+More than 12~million statements have been uploaded in total.
 \autoref{fig:primary-sources-tool} shows two screenshots
 of the tool that integrates nicely with the Wikidata user interface.
+To visualize the migration progress, we have created a~realtime dashboard.%
+\footnote{Primary Sources Dashboard:
+\url{https://tools.wmflabs.org/wikidata-primary-sources/status.html}}
 
 \begin{figure}[!t]
     \centering
@@ -477,44 +481,8 @@ of the tool that integrates nicely with the Wikidata user interface.
     \label{fig:primary-sources-tool}
 \end{figure}
 
-
-\subsection{Data Preparation}
-\todo{"the section seems to describe something more like a phased rollout or release plan than "data preparation"" -- Jamie}
-
-In order to prepare the data for integration into the Primary Sources Tool,
-we have created a~set of scripts which map the content
-of the last Freebase dump to Wikidata statements.%
-\footnote{The source code is available under the terms of the Apache~2.0 license:
-\url{https://github.com/google/freebase-wikidata-converter}}
-The Primary Sources Tool was developed in parallel with the mapping tool.
-We first created a~small dataset of around 1M statements
-based on few select properties (\emph{e.g.}, \texttt{/people/person/birth\_place})
-and deployed both the first dataset and a~basic version of the tool
-in order to gather initial user feedback.
-In the following months, we progressively added more statements to the tool's database back-end.
-Thereby, we were able to slowly upscale the tool's database back-end
-without risking back-end performance bottlenecks.
-The process of adding data in small batches of 1M~to~2M statements per batch
-further allowed us to detect some potential issues in the front-end
-and fix them before they became actual problems.
-Another positive side-effect of this approach was that it allowed us to gather quick feedback
-from the community about the already mapped data and thus to adapt the mapping scripts easily
-and correct minor issues with the data early on in the back-end.
-Upon approval or rejection of either a~claim or a~reference,
-the Wikidata item page in question reloads in order to reflect
-the potentially changed state of the migration, as,
-in case of incoming claims with references, freshly accepted claims 
-can require incoming references to be attached elsewhere in the hierarchy. 
-
-\subsection{Back-end of the Tool}
-
-The objective of the back-end was to have a~REST API allowing us
-to serve data efficiently to the front-end of the tool and
-providing statistical data about the approvals and rejections done over time.
-As the resources of the Wikimedia Foundation are limited,
-the back-end was implemented in highly optimized C++
-and runs as a~FastCGI application in the lighttpd Web server.
 \autoref{fig:architecture} shows the overall architecture of the Primary Sources tool.
+In the following, we describe the back-end, the front-end, and the chosen data rollout plan.
 
 \begin{figure}[!htbp]
     \centering
@@ -527,12 +495,22 @@ and runs as a~FastCGI application in the lighttpd Web server.
     % Source: https://docs.google.com/a/google.com/drawings/d/1vKAftQVjrso907UtbMXnEOabXwQHDVyyz2ewxcqz3b0/edit?usp=sharing
 \end{figure}
 
-Entities and statements are stored in a~relational database (MySQL or SQLite)
+\subsection{Back-end}
+
+The objective of the back-end was to have a~REST API allowing us
+to serve data efficiently to the front-end of the tool and
+providing statistical data about the approvals and rejections done over time.
+As the resources of the Wikimedia Foundation are limited,
+the back-end was implemented in highly optimized C++
+and runs as a~FastCGI application in the lighttpd Web server.
+
+Entities and statements are stored in a~relational database
+(first SQLite, later migrated to MariaDB)
 and follow the Wikidata data structure with an additional status field
 to keep track of statements that either already have been approved or rejected,
 or not yet visited.
 Statements can be grouped in ``datasets'' (set of statements from the same origin)
-and ``uploads'' (set of statements uploaded at the same time) to
+and ``uploads'' (set of statements uploaded at the same time) in order to
 distinguish data from different sources.\footnote{At the time of this writing,
 the back-end contained five different datasets.}
 
@@ -568,12 +546,13 @@ for statistical purposes using the Wikidata user name of the user who performed 
 Activity information can be displayed in an aggregated leader board form
 (top users, top rejecters, trends, \emph{etc.}) to add aspects of gamification to the migration process.
 
-\subsection{Front-end of the Tool}
+\subsection{Front-end}
 
-For the front-end, our objective was to make the migration process
+For the front-end, our objective was to model the migration process
 as close to the natural Wikidata editing flow as possible.
 Ideally, the user should barely notice the different underlying datasources
 when navigating Wikidata.
+
 To achieve this, we have in a~first step created a~Wikidata \emph{user script}.
 Wikidata user scripts are part of the Wikidata tool chain%
 \footnote{Wikidata tool chain:
@@ -583,10 +562,12 @@ do not appear in a~user's preferences.
 Instead, one has to add a~line of code into ones \texttt{common.js} file
 in order to activate and use the script.
 User scripts can be created by anyone and might not always be stable.
+
 Once a~user script has matured, it can be converted into a~\emph{gadget}.
 Gadgets are scripts that are likewise created by users,
 but which can be simply enabled in user preferences under the section ``Gadgets''.
 They can only be edited by administrators and are assumed to be stable.
+
 With our front-end, we went through this maturation steps
 and started with a~user script called \texttt{freebase2wikidata.js}%
 \footnote{Initial user script:
@@ -595,10 +576,40 @@ that we later converted into a~gadget.%
 \footnote{Final gadget: \url{https://www.wikidata.org/wiki/MediaWiki:Gadget-PrimarySources.js}}
 \autoref{fig:primary-sources-tool} illustrates the user interface in action.
 Existing Wikidata statements are shown as usual,
-Freebase facts that could potentially be imported into Wikidata are shown in light blue
-with instead of an ``edit'' button two new buttons ``approve reference'' and ``reject reference''
+Freebase facts that could potentially be imported into Wikidata are shown in light blue.
+Instead of an ``edit'' button they feature two new buttons,
+``approve reference'' and ``reject reference''
 (\autoref{fig:barack-obama}) or ``approve claim'' and ``reject claim''
 (\autoref{fig:cause-of-death}) respectively.
+
+\subsection{Data Rollout}
+
+In order to prepare the data for integration into the Primary Sources Tool,
+we have created a~set of scripts which map the content
+of the last Freebase dump to Wikidata statements.%
+\footnote{The source code of theses scripts is also available under the terms of the Apache~2.0 license:
+\url{https://github.com/google/freebase-wikidata-converter}}
+The Primary Sources Tool was developed in parallel with the mapping scripts.
+We first created a~small dataset of around 1 million statements
+based on few select properties (\emph{e.g.}, \texttt{/people/person/birth\_place})
+and deployed both the first dataset and a~basic version of the tool
+in order to gather initial user feedback.
+
+In the following months, we progressively added more statements to the tool's database back-end.
+Thereby, we were able to slowly upscale the tool's database back-end
+without risking back-end performance bottlenecks.
+The process of adding data in small batches of 1~million to 2~million statements per batch
+further allowed us to detect some potential issues in the front-end
+and fix them before they became actual problems.
+Another positive side-effect of this approach was that it allowed us to gather quick feedback
+from the community about the already mapped data and thus to adapt the mapping scripts early
+and correct minor issues with the data in the back-end.
+
+Upon approval or rejection of either a~claim or a~reference,
+the Wikidata item page in question reloads in order to reflect
+the potentially changed state of the migration, as,
+in case of incoming claims with references, freshly accepted claims 
+can require incoming references to be attached elsewhere in the item. 
 
 \section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
@@ -623,30 +634,33 @@ with instead of an ``edit'' button two new buttons ``approve reference'' and ``r
 \subsection{Quantitative Comparison}
 
 In order to put the statistics in this section in context,
-in the following we provide an overview of the size of the last dump of Freebase
+we first provide an overview of the size of the last dump of Freebase
 from March 2015:
 
 \begin{itemize}
   \setlength\itemsep{0em}
-  \item 48M~topics
-  \item 2,997M triples
-  \item 442M unencumbered facts%
-    \footnote{That is, the remaining Freebase triples
-      after filtering out data about IDs (\texttt{/type/object/id}),
-      types (\texttt{/type/object/type}), labels, descriptions (\texttt{/type/object/name},
-      \texttt{/common/topic/description}, \emph{etc.}), and triples removed
-      for licensing (see \autoref{sec:licensing})}
-  \item 68M~labels
+  \item 48~million topics
+  \item 2,997~million triples
+  \item 442~million ``useful'' facts%
+  \item 68~million labels
 \end{itemize}
 
-As a~direct comparison, below the raw statistics for Wikidata as of August 2015
-that make the differences in pure size between the two knowledge bases quite evident.
+``Useful'' facts are the triples that remain 
+after filtering out all triples about IDs (\texttt{/type/object/id}),
+types \linebreak (\texttt{/type/object/type}), labels, descriptions \linebreak
+(\texttt{/type/object/name},
+\texttt{/common/topic/description}, \emph{etc.}), \linebreak and triples removed
+for licensing reasons (the latter were about 42~million, see \autoref{sec:licensing}).
+The triples removed in this step are not considered to be potentially useful for
+Wikidata, since IDs, labels, and descriptions are not handled through statements.
+
+As a~direct comparison, here are the raw statistics for Wikidata as of August 2015.
 
 \begin{itemize}
     \setlength\itemsep{0em}
-    \item 14.5M~items
-    \item 66M~statements
-    \item 82M~labels
+    \item 14.5~million items
+    \item 66~million statements
+    \item 82~million labels
 \end{itemize}
 
 Why are these numbers so different?
@@ -654,84 +668,101 @@ Regarding the number of topics, Freebase has a~lot of topics about subjects
 that do not match Wikidata's notability criteria.%
 \footnote{Wikidata notability criteria:
 \url{https://www.wikidata.org/wiki/Wikidata:Notability}}
-For example, Freebase holds data about 11.3M~musical recordings,
-8.3M~music canonical versions, 2.6M~ISBNs, \emph{etc.} that are not contained in Wikidata.
+For example, Freebase holds data about 11.3~million musical recordings,
+8.3~million music canonical versions, 2.6~million ISBNs, \emph{etc.} that are not contained in Wikidata.
+
 We also cannot compare the number of facts and the number of statements directly,
 even considering the lower number of topics.
 Freebase encodes its knowledge far more redundantly than Wikidata.
 To illustrate this, properties in Freebase often have a~\emph{reverse} property
 that is used in order to be able to traverse the Freebase graph easily in both directions.
 For example, the property \texttt{/people/person/place\_of\_birth} has the corresponding
-reverse property \texttt{/location/location/people\_born\_here}
+reverse property \linebreak \texttt{/location/location/people\_born\_here}
 that encodes exactly the same semantic information.
 Such reverse properties sometimes exist in Wikidata
-(like \texttt{children} for \texttt{father} and \texttt{mother}),
-but are far less common.
+(like \textit{``children''} for \textit{``father''} and \textit{``mother''}),
+but are far less common and also not automatically handled.
+
 Another point is that CVTs use a~lot of facts to convey the exact same information
 that can be represented with a~single Wikidata statement.
 For example, to encode that Barack Obama is the president
-of the United States as of June~20, 2009,
+of the United States since January~20, 2009,
 Freebase requires more than six facts as shown in \autoref{fig:cvt-obama}.
 If we attempted to encode Wikidata statements as if they were Freebase facts, \emph{i.e.},
 by removing sources, representing statements with qualifiers using CVTs,
-and adding reverse properties, this would lead to 110M facts,
-\emph{i.e.}, 167\% of the raw number of statements.
+and adding reverse properties, this would lead to a number of 110~million facts,
+\emph{i.e.} an increase of 167\% over the raw number of statements.
+The representation of Wikidata in RDF and its impact on the number of triples
+is discussed in more detail in~\cite{reification-wikidata}.
+
 In a~considerable amount of cases, Freebase also contains duplicate data.
 For example, many cities in the United States have duplicate CVTs for the population,
-where the only change is the encoding of the source.
+where the only difference is the encoding of the source.
 
 \subsection{Spatio-Temporal Comparison}
 
 In order to get an idea of the coverage of the two knowledge bases,
 we have further created a~spatio-temporal visualization of Freebase and Wikidata 
 that is shown in \autoref{fig:time-space}.
-The used method is to extract the earliest date and the longitude
-linked to each of the entities of the two knowledge bases
-and propagate them to the connected entities that do not have such data.
+
+We extracted the earliest date and the longitude
+linked to each of the entities of the two knowledge bases.
+We then propagated them to the connected entities that do not have such data.
 To implement this propagation, we set as value (date or longitude)
 the average of the values of the entities whose distance is $<10$
-with $2^{-d}$ as weighting, $d$~being the distance between the two entities.
-We see that the two knowledge bases follow the same basic patterns,
-with their coverage mostly concentrated on Europe and North America.
+with a weight of $2^{-d}$ (with $d$~being the distance between the two entities).
+
+We see that the two knowledge bases display the same basic patterns,
+with their coverage mostly concentrated on the longitudes of Europe and North America.
 There are no strong differences between them,
-yet coverage of \mbox{\emph{post}-year-2000} entities seems better in Freebase.
-Our theory is that this is \emph{(i)}~due to the absence of a~lot of musical data in Wikidata
-that in contrast is present in Freebase,
+yet coverage of \mbox{\emph{post}-year-2000} entities seems stronger in Freebase.
+
+Our theory is that this is
+\emph{(i)}~due to the absence of a~lot of musical data in Wikidata that is present in Freebase,
 and \emph{(ii)} due to the US population CVTs in Freebase.
-The big horizontal lines in \autoref{fig:freebase} and more even in \autoref{fig:wikidata}
+
+The big horizontal lines in \autoref{fig:freebase} and even more in \autoref{fig:wikidata}
 can most probably be traced back to places that do not have any linked date,
 and in consequence inherit the foundation date of their country.
 For Wikidata (\autoref{fig:wikidata}), two lines that are definitely caused by this effect
 are the big line over the USA around 1780
 and the one covering Russia around 850.
+
 One possible conclusion from this visualization could be that Wikidata,
 despite its smaller absolute size, appears to have
 a~nearly as complete coverage of the world as Freebase.
 Nonetheless, it is very challenging to find objective ways to compare the two databases
 and good metrics of success for the migration.
-We certainly note that for knowledge bases the amount of triples is not an adequate measure
-to judge the proportion of additional good data.
+We certainly can note that for data sets to be added to a knowledge bases,
+the raw number of triples is not an adequate measure of quality.
 
 \subsection{Raw Statistics}
 
-From the Freebase dump, we have been able to create more than 17M~Wikidata claims
-(\emph{i.e.}, statements without references), including 1.5M~IDs.
-For that, we have used 31M~Freebase facts.
-With additional references, we obtain 19.6M~statements, and, after removing 1M~duplicates
-and facts already contained in Wikidata, we obtain 14M~new statements.
-Thus, if all these statements were added to Wikidata,
-this would lead to a~21\% increase of the number of statements in Wikidata.
-This raises the question why these numbers are so low compared to the size of Freebase.
-We argue that the main reason is that we have only mapped 4.56M~items to Wikidata,
-\emph{i.e.}, only 9.5\% of Freebase's topics in total, which are the subject of only 64M~facts.
-Even under ideal circumstances, we cannot map more than 64M~statements,
-and this is assuming that we could map all reverse properties, which, in fact, we could not.
+From the Freebase dump, we have been able to create more than 17~million Wikidata claims
+(\emph{i.e.}, statements without references), including 1.5~million IDs.
+For that, we have used 31~million Freebase facts.
+Including the references, we obtain 19.6~million statements, and, after removing duplicates
+and facts already contained in Wikidata, we obtain 14~million new statements.
+
+If all these statements were added to Wikidata,
+we would see a~21\% increase of the number of statements in Wikidata.
+
+This raises the question why these numbers are so low compared to the size of Freebase, given at
+3~billion facts.
+The main reason is that we have only mapped 4.56~million items to Wikidata,
+\emph{i.e.}, only 9.5\% of Freebase's topics in total.
+The mapped topics are the subject of only 64~million facts.
+So even under otherwise ideal circumstances, we cannot map more than 64~million statements.
+This assumes that we could map all reverse properties, which, in fact, we could not.
 So leaving aside the not mapped topics, we have created a~statement for more than 24\% of the facts.
-If we restrict ourselves to reviewed facts---a~set of 1.6M~human curated facts---we have far better results.
-There are 0.58M~facts whose subjects are mapped to Wikidata, and 0.52M~of them
+
+If we restrict ourselves to reviewed facts---a~set of
+1.6~million human curated facts---we have far better results.
+Of the human curated facts, 0.58~million facts have their subject mapped to Wikidata.
+Based on our property mappings, 0.52~million of these facts
 (\emph{i.e.}, 92\%) are converted to Wikidata statements.
-58\% of the statements created from reviewed fact are already in Wikidata,
-allowing us to add 0.25M~of new reviewed statements to Wikidata.
+Finally, 58\% of the statements created from reviewed fact are already in Wikidata,
+allowing us to add 0.25~million new reviewed statements to Wikidata.
 
 \section{Related Work}\label{sec:related-work}
 
@@ -791,9 +822,8 @@ and the availability of tools for working with Wikipedia~\cite{milne2013open}.
 
 \section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
 
-We reckon that the most improvements can be achieved
-by extending the migration to more Freebase topics
-by suggesting Wikidata users to create new Wikidata items.
+The largest gains for the migration can be achieved
+by extending the mapping to more Freebase topics.
 A~possible way of realizing this is to create a~user interface%
 ---possibly leveraging elements of gamification---%
 that would allow users to create new Wikidata items for a~suggested topic
