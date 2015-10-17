@@ -272,7 +272,7 @@ useful as a~means to get more people to edit because it lowers the barrier to en
 by making it easier to find potential edits. At the same time it helps make some of the existing
 editors more effective by allowing them to add statements with a~single click.
 
-\subsection{Data Topic Mappings}
+\subsection{Data Topic Mappings}\label{subsec:topic-mappings}
 
 \subsubsection{Merger of Existing Mappings}
 
@@ -701,27 +701,59 @@ allowing us to add 0.25M~of new reviewed statements to Wikidata.
 
 \section{Related Work}\label{sec:related-work}
 
-For the challenges listed in \autoref{section:challenges-of-the-migration}
+For the challenges listed in \autoref{sec:challenges-of-the-migration}
 there is a~body of work dealing with it. In many cases, the problems we have encountered in
 this migration have turned out to be much simpler than the problems solved in existing research.
 
 \textbf{Data licensing.}
-Only dealing with two open licenses.
-
-\textbf{Topic mappings.}
-Since both databases build on Wikipedia...
+Although many books and tutorials on publishing data on the Web of Data
+(e.g.~\cite{linkeddatabook,linkeddatabestpractises}) mention the importance of licenses,
+they are often added as an afterthought.
+They have been preciously few dedicated publications on the
+topic~\cite{licenses,licensius}, none of them written by lawyers.
+Due to the lack of understanding surronding these topics, we have been
+cautious and chose to simply remove any facts from the migrating data
+where the situation is in doubt.
 
 \textbf{Schema mappings.}
 There has been extensive research on the topic of mapping the structures
-of two databases or knowledge bases~\cite{mappingsurvey1,mappingsurvey2,mappingsurvey3}.
+of two databases or knowledge bases
+(some surveys are~\cite{mappingsurvey1,mappingsurvey2,mappingsurvey3}).
 The current work is, in many technical respects, rather simple:
 we are looking for a~one-directional mapping (since the case of data
 flowing from Wikidata back to Freebase is not relevant),
-for a~one-off data flow (since Freebase is now read-only),
-evaluated by human contributors (therefore the quality of the mapping 
+a~one-off data flow (since Freebase is now read-only),
+mostly individually evaluated by human contributors
+(therefore not requiring a perfect mapping).
+The effort most similar to ours is the DBpedia Mapping Wiki~\cite{lehmann2014dbpedia}.
+The DBpedia community is manually writing and maintaining the mapping from
+the DBpedia extraction process (working on Wikipedia) to the DBpedia ontology.
+The main difference is that the DBpedia mapping is running continuously
+and does not allow for point-fixes, thus necessitating a higher quality of the mapping,
+whereas for the Freebase to Wikidata mapping every single results is expected to be curated.
+
+\textbf{Entity mappings.}
+Entity mapping (often called entity linking) deals with finding the objects
+in several sources that refer to the same entity in the domain of discourse.
+There is extensive work in this area (e.g.~\cite{entitylinkingsurvey1,entitylinkingsurvey2})
+but we avoided most of the challenges by relying on the simple fact that
+both Freebase and Wikidata have historically been bootstrapped by using Wikipedia.
+Wikipedia is often used as a benchmark for entity mapping systems~\cite{entitylinkingwikipedia}.
+As described in \autoref{subsec:topic-mappings} this lead to sufficiently good results for the head,
+and we think it would be surprising if further effort in this area would lead to reasonable gains.
 
 \textbf{Data maintenance.}
-Should also cover references (kvault) and quality.
+The Wikidata requirements~\cite{wikidatareqs} states that the data uploaded to Wikidata
+must not overwhelm the community.
+Research in understanding how systems for collaborative knowledge creation are impacted
+by events like this data migration are still in its early stages~\cite{moskaliuk2012collaborative},
+in particular for structured knowledge~\cite{horridge2014webprotege}.
+Most of the research is focused on Wikipedia~\cite{flock2015towards},
+which is understandable considering the availability of its data sets,
+in particular the whole edit history~\cite{schindler2011introducing}
+and the availability of tools for working with Wikipedia~\cite{milne2013open}.
+
+%Should also cover references (kvault) and quality.
 
 \section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
 
