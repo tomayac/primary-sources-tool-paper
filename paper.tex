@@ -207,16 +207,15 @@ that we will outline in the following.
 
 The first challenge concerns the licenses under which the datasets are published.
 Wikidata is published under the Creative Commons~0 (CC0~1.0)~\cite{cc0} license,
-which effectively puts the data in the public domain,
-whereas Freebase is published under a~Creative Commons Attribution (CC~BY~2.5) license
-and contains data imported from external projects not owned by Google,
-like images or descriptions extracted from Wikipedia.
-In consequence Google does not own the copyright of some parts of the content of the knowledge base,
+which effectively puts the data into the public domain.
+Freebase is published under a~Creative Commons Attribution (CC~BY~2.5) license.
+Google does not own the copyright of some parts of the content of the knowledge base,
 such as images or long entity descriptions extracted from Wikipedia.
-In a~first step, we filtered the Freebase dump for this kind of content
-before being able to create a~data dump that we could relicense under CC0~1.0.
-This step reduced the number of Freebase facts that could be republished by about 42M~facts
-from 3~billion facts in the original corpus.
+
+We filtered the Freebase dump by removing this kind of content
+before creating a~data dump that Google could relicense under CC0.
+This step reduced the number of Freebase facts that could be republished by about 42 million facts
+from 3~billion facts in the original corpus, i.e. by about $1.4\%$.
 
 \subsection{References}
 
@@ -224,12 +223,18 @@ The second challenge is that the Wikidata community is very eager to have refere
 for their statements, \emph{i.e.}, sources that Freebase usually did not store,
 except for some specific data like populations and unemployment rates.
 For these two specific cases, we have just kept the references from Freebase.
+\todo{Thomas, can you expand?}
+
 In order to provide the Wikidata community with references for the facts in Freebase,
-we have reused data from another Google research project
-called Knowledge Vault~\cite{dong2014knowledge} aimed at extracting facts from the Web.
-Whereas the fact extraction was usually correct, the pages Knowledge Vault extracted
-the references from often do not meet the Wikidata requirements for reliable references:
-they include pages in social networks, shopping sites, file sharing hosters, \emph{etc.}
+we have reused data from the Google
+Knowledge Vault~\cite{dong2014knowledge}. Knowledge Vault aims at extracting facts from the Web.
+
+The result of this step was surprising: 
+the fact extraction was usually correct, in the sense that the fact was indeed being stated on the page.
+Also the fact itself was usually accurate, in the sense that it corresponded to reality.
+But the pages the facts were extracted from in many cases did not meet
+the Wikidata requirements for reliable references:
+they include pages in social networks, reviews on shopping sites, file sharing hosters, \emph{etc.}
 It became necessary to filter the references before potential inclusion in Wikidata
 by introducing a~domain blacklist.%
 \footnote{Domain blacklist:
