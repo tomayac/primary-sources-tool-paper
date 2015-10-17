@@ -79,7 +79,7 @@ natural language annotation, or translation.
 \todo{add references to papers with examples}
 
 One such collaborative knowledge base is Freebase,
-initially launched by Metaweb in 2007 and acquired by Google in 2010.
+publicly launched by Metaweb in 2007 and acquired by Google in 2010.
 Another example is Wikidata, a~collaborative knowledge base developed by
 Wikimedia Deutschland since 2012 and operated by the Wikimedia Foundation.
 Due to the success of Wikidata, Google announced in 2014 to shut down Freebase and
@@ -121,7 +121,7 @@ and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 \subsection{Freebase}
 
 Freebase\footnote{Freebase: \url{https://www.freebase.com}} is an open and
-collaborative knowledge base created in 2007 by Metaweb and 
+collaborative knowledge base publicly launched in 2007 by Metaweb and 
 acquired in 2010 by Google~\cite{freebase}.
 It was used as the open core of the Google Knowledge Graph,
 and has found many use cases outside of Google.
@@ -331,15 +331,25 @@ we mapped 4.56~million items in total.
 Thanks to these efforts, we have already mapped most of the topics that could be mapped automatically,
 which is also backed by the comparably small increases gained from the ID reconciliation approach 
 and the Knowledge Graph data described in the previous paragraph.
-Furthermore, the \emph{mapped} topics have an average number of facts of about~13.9,
+This is no surprise, since the core of both projects was kickstarted by using
+Wikipedia as a~repository of topics.
+
+The \emph{mapped} topics have an average number of 13.9~facts,
 whereas the topics that were \emph{not} mapped have an average number of only 5.7~facts.
 We have mapped the majority of all topics with more than 47~facts
 (191K~non mapped topics \textit{vs.} 195K~mapped topics).
-This allows us to conclude that we have mapped the most important items of Freebase.
+This indicates that we have mapped the most important items of Freebase.
 \autoref{fig:mapped-not-mapped} provides an overview of mapped and non-mapped items
-put in relation to the number of facts per item.
-\todo{"There is no reference in the text to \autoref{fig:mapped-not-mapped}
-(which has a lot of subtle information in it.) It needs some real explanation." -- Jamie}
+put in relation to the number of facts per item: note that the Figure is log-scaled
+on both axes, so the seemingly small area between the two lines covers a majority of
+the topics. It can also be seen that there are a very small number of topics with
+a high number of facts which have not been covered (in the lower part of the Figure).
+These have all been manually inspected and found to be specific to the way knowledge
+in Freebase is built. The vast majority of items with more than ten facts - in the
+center of the Figure - has been mapped. The items that have not been mapped -
+visible in the upper left corner of the image - are very thin,
+i.e. mostly have a very small number of facts and
+would not have added much to the knowledge base.
 
 \begin{figure}[!htbp]
   \centering
