@@ -330,7 +330,7 @@ which may create cases where a~person has more than one male or female \texttt{/
 Eventually, with these four sources (Google mapping, Samsung mapping, external IDs, Knowledge Graph),
 we mapped 4.56~million items in total.
 
-\subsubsection{Mapping Completeness Analysis}
+\subsubsection{Topic Mapping Completeness Analysis}
 
 Thanks to these efforts, we have already mapped most of the topics that could be mapped automatically,
 which is also backed by the comparably small increases gained from the ID reconciliation approach 
@@ -365,16 +365,22 @@ would not have added much to the knowledge base.
 
 \subsection{Data Property Mapping}
 
-For the mapping between Freebase and Wikidata properties, we have chosen to do it by hand
-with the help of the Wikidata community.
-With that, we have been able to quickly map around 360~properties
-(note that Wikidata has a~total of 1,863 properties, and Freebase has around 37,700 properties
-\todo{This should probably have a~date.}).
+For the mapping between Freebase and Wikidata properties, we have chosen to apply a~manual
+approach with the help of the Wikidata community.
+Note that a mapping of types is not needed, since Wikidata has no real notion of types
+(or, to be more specific, the property \textit{``instance of''} (P31) is just another
+property and connects to items without any special status).
+With the help of the community, we have been able to quickly map around 360~properties
+(note that Wikidata had a~total of about 1,800 properties at the time when this work
+has been conducted in the Summer of 2015, and Freebase has around 37,700 properties).
 For the mapping of properties where the domain are other topics or literals,
 this mapping provides the Wikidata property to use.
-We have also implemented a~special case for \texttt{/people/person/parents}
-in order to be able to map them to Wikidata properties ``father'' and ``mother''
-based on the person gender.
+
+For \texttt{/people/person/parents}, we have implemented a~special case
+in order to be able to map them to the Wikidata properties
+\textit{``father''} (P22) and \textit{``mother''} (P25)
+based on the person's gender.
+
 The mapping of CVTs (see \autoref{fig:cvt-obama}) is more complicated,
 because it is not possible to have a~\mbox{1-to-1} relationship
 between Freebase and Wikidata properties: the CVT is linked to the subject topic by one property
@@ -384,16 +390,18 @@ In order to map a~CVT to a~statement, we have to know which of the CVT's propert
 should be used as the main value of the statement, with the others being mapped to qualifiers.
 In order to keep a~simple mapping that associates one Wikidata property to one Freebase property,
 we map both the property that links the topic to the CVT
-and the main property of the CVT to the same Wikidata property. Then, during the mapping process
-we pick the latter as the main property of the CVT \todo{Rewrite this sentence to be more understandable?}.
+and the main property of the CVT to the same Wikidata property. In a second step, we
+then use merge these two mappings int a single Wikidata claim, on which we add the
+other properties from the CVT.
+
 For example, if we map the CVT shown in \autoref{fig:cvt-obama},
-we first use the Wikidata property \texttt{position held (P39)} to map
-\texttt{/politician/government\_positions\_held} and
-\texttt{/government\_position\_held/office\_position\_or\_title}.
-Second, for the qualifiers, we use \texttt{start time (P580)}
-for \texttt{/government\_position\_held/from} and \texttt{end time (P582)}
-for\linebreak \texttt{/government\_position\_held/to}.
-With the resulting property mapping, the created Wikidata statement
+we first use the Wikidata property \textit{``position held''} (P39) to map
+\texttt{/politician/government\_positions\_held} and \linebreak
+\texttt{/government\_position\_held/office\_position\_or\_title}. \linebreak
+Second, for the qualifiers, we use \textit{``start time''} (P580)
+for \texttt{/government\_position\_held/from} and \textit{``end time''} (P582)
+for \texttt{/government\_position\_held/to}.
+With the resulting \linebreak property mapping, the created Wikidata statement
 looks like the one presented in \autoref{fig:statement-obama}.
 
 \begin{figure}[!htbp]
@@ -420,8 +428,8 @@ into the globe-coordinate value type of Wikidata
 and use the same precision guessing algorithm as the one used by the Wikidata user interface.
 For dates, we just map the date and time values
 (encoded using XSD types~\cite{campbell2003xmlschema})
-to the Wikidata ``time'' datatype, however, filter out dates before 1920 that have
-a~higher precision than year because we do not know
+to the Wikidata ``time'' datatype. However, we remove dates before 1920 that have
+a~precision higher than year because we do not know
 if they are relative to the Julian or the Gregorian calendar.
 In such cases, we are not able to fill the ``calendar'' value of the Wikidata ``time'' datatype.
 
