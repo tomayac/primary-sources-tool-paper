@@ -262,8 +262,8 @@ such a~fast increase of available data would certainly have endangered
 the sense of ownership of the Wikidata community for its data.
 As an alternative approach, we decided to rely on crowdsourced human curation
 and created the \emph{Primary Sources Tool},
-a~software solution that displays Freebase statements
-for verification to the user that can be added to the currently shown Wikidata item.
+a~widget that displays Freebase statements
+for curation by the contributor that can be added to the currently shown Wikidata item.
 The tool will be described in more detail in \autoref{sec:primary-sources-tool}.
 
 \subsection{Long-term maintenance}
@@ -285,7 +285,7 @@ editors more effective by allowing them to add statements with a~single click.
 
 \subsubsection{Merger of Existing Mappings}
 
-The last challenge concerns the data mappings between Freebase topics and properties
+The next challenge concerns the data mappings between Freebase topics and properties
 and Wikidata items and properties.
 Two mappings between Freebase topics and Wikidata items were initially available,
 and in addition to those, we worked on further mappings.
@@ -295,37 +295,40 @@ and is based on Wikipedia links already present in Freebase: if a~Freebase topic
 a~Wikidata item share at least two Wikipedia links, they are assumed to describe the same subject.
 The quality of this mapping is considered very good by the Wikidata community,
 who thus have decided to use it and further curate and maintain it by hand.
-It maps 1.15M~Freebase topics to their corresponding Wikidata items.
+It maps 1.15~million Freebase topics to their corresponding Wikidata items.
 A~second actively maintained mapping has been created by Samsung.%
 \footnote{Samsung mappings: \url{http://github.com/Samsung/KnowledgeSharingPlatform}}
 It is based on the same idea, but matches a~Freebase topic with a~Wikidata item
 even if there is only a~single shared Wikipedia link.
 The precision of the mapping is naturally lower compared to Google's mapping
 as there are more wrong matches (often because there is no clear separation between topics
-and disambiguation pages in Wikipedia), however, the recall increases to 4.4M~links.
+and disambiguation pages in Wikipedia), however, the recall increases to 4.4~million~links.
 As we have shown in \autoref{sec:dataquality},
-human curation is required before importation anyway,
-which is why we have decided to merge the two mapping dumps,
-and for the resulting 6,000 conflicts decided to prioritize Google's mapping.
+human curation is required before import anyway,
+which is why we have decided to merge the two mapping dumps.
+For the 6,000 conflicts that appeared, we decided to prioritize Google's mapping.
 
 \subsubsection{Reconciliation Based on External Database IDs}
 
 To improve the result, we have also done some reconciliation based on third-party database IDs
-shared by Freebase and Wikidata, like MusicBrainz,\footnote{MusicBrainz: \url{https://musicbrainz.org}}
-VIAF,\footnote{VIAF: \url{http://viaf.org}} \emph{etc.}
-With this technique, we were able to match 800K~external database IDs,
-creating an additional mapping for 600K~topics---%
+shared by Freebase and Wikidata, like MusicBrainz~\cite{musicbrainz},
+VIAF~\cite{viaf}, \emph{etc.}
+With this technique, we were able to match 800,000~external database IDs,
+creating an additional mapping for 600,000~topics---%
 most of them already in the merged version of Google's and Samsung's mappings.
-Eventually, this reconciliation effort resulted in an additional 84K mapped items.
-We also used Google's Knowledge Graph~\cite{singhal2012} to add 100K~further mappings
+Eventually, this reconciliation effort resulted in an additional 84,000 mapped items.
+
+We also used Google's Knowledge Graph~\cite{singhal2012} to add 100,000 further mappings
 by also matching a~topic and an item if they share a~Wikipedia link with the Knowledge Graph item.
 There is some potential to add more data by looking at functional relations
-like ``father'' and ``mother'', but these relations only apply to relatively small sets of data
+like \textit{``father''} and \textit{``mother''},
+but these relations only apply to relatively small sets of data
 (like well known families), and the functional assumptions may run into some edge cases.
 For example, the \texttt{/people/person/parents} property in Freebase also covers stepparents,
 which may create cases where a~person has more than one male or female \texttt{/people/person/parents}.
+
 Eventually, with these four sources (Google mapping, Samsung mapping, external IDs, Knowledge Graph),
-we mapped 4.56M~items in total.
+we mapped 4.56~million items in total.
 
 \subsubsection{Mapping Completeness Analysis}
 
