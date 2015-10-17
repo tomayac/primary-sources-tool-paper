@@ -145,7 +145,7 @@ CVT values are just objects, \emph{i.e.}, they have a~mid and can have types
 (although they usually have only the compound value type itself).
 Most non-CVT objects are called \emph{topics} in order to discern them from CVTs.
 
-\begin{figure}[!t]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[trim=0cm 3cm 0cm 5cm, width=8.45 cm]{img/freebase-cvt-obama.pdf}
   \caption{Exemplary Compound Value Type (CVT) in Freebase: Presidency of Barack Obama.}
@@ -183,7 +183,7 @@ the main (claimed) fact like ``population is 8,173,900'' and optional qualifiers
 to add information about it like ``as of June 2012''.
 \autoref{fig:statement} illustrates the used terminology with an example.
 
-\begin{figure}[!t]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=8.45 cm]{img/Wikidata_statement.pdf}
   \caption{Wikidata terminology illustrated with an example (Source:
@@ -198,7 +198,7 @@ A~more in-depth comparison between Freebase, Wikidata, and other free and open k
 
 \section{Challenges of the migration}\label{sec:challenges-of-the-migration}
 
-During our ongoing efforts with the migration of Freebase to Wikidata
+During our ongoing efforts with the migration of Freebase to Wikidata,
 we were faced with a~number of technical and non-technical challenges
 that we will outline in the following.
 
@@ -206,15 +206,15 @@ that we will outline in the following.
 \label{sec:licensing}
 
 The first challenge concerns the licenses under which the datasets are published.
-Wikidata is published under the Creative Commons~0 (CC0~1.0)~\cite{cc0} license.
-that effectively puts the data in the public domain,
+Wikidata is published under the Creative Commons~0 (CC0~1.0)~\cite{cc0} license,
+which effectively puts the data in the public domain,
 whereas Freebase is published under a~Creative Commons Attribution (CC~BY~2.5) license
 and contains data imported from external projects not owned by Google,
 like images or descriptions extracted from Wikipedia.
 In consequence Google does not own the copyright of some parts of the content of the knowledge base,
 such as images or long entity descriptions extracted from Wikipedia.
 In a~first step, we filtered the Freebase dump for this kind of content
-before being able to create a~dump that we could relicense under CC0~1.0.
+before being able to create a~data dump that we could relicense under CC0~1.0.
 This step reduced the number of Freebase facts that could be republished by about 42M~facts
 from 3~billion facts in the original corpus.
 
@@ -232,7 +232,7 @@ the references from often do not meet the Wikidata requirements for reliable ref
 they include pages in social networks, shopping sites, file sharing hosters, \emph{etc.}
 It became necessary to filter the references before potential inclusion in Wikidata
 by introducing a~domain blacklist.%
-\footnote{URL blacklist:
+\footnote{Domain blacklist:
 \url{https://www.wikidata.org/wiki/Wikidata:Primary_sources_tool/URL_blacklist}}
 
 \subsection{Data Quality}
@@ -261,15 +261,15 @@ The tool will be described in more detail in \autoref{sec:primary-sources-tool}.
 \label{sec:longtermmaintenance}
 
 Wikidata's editing community is in charge of the project's content. This includes collecting the
-data as well as long-term maintenance of it. Data needs to be updated as the world changes but also
+data as well as long-term maintenance of it. Data needs to be updated as the world changes, but also
 kept free of vandalism. An increase in the amount of data comes with an increase in maintenance
 cost for the community. Simply ingesting the Freebase data would have meant overwhelming the
 existing editors and thereby harming the project in the long run. To counter this, a~significant
 increase in the amount of data needs to go along with either an increase in the number of editors
-or providing of tools to assist the existing editors to allow them to be more effective. With the
-Primary Sources Tool we aim to help grow the community in step with the amount of data. It is
+or provision of tools to assist the existing editors to allow them to be more effective. With the
+Primary Sources Tool, we aim to help grow the community in step with the amount of data. It is
 useful as a~means to get more people to edit because it lowers the barrier to entry. It does this
-by making it easier to find potential edits. At the same time it helps make some of the existing
+by making it easier to find potential edits. At the same time, it helps make some of the existing
 editors more effective by allowing them to add statements with a~single click.
 
 \subsection{Data Topic Mappings}\label{subsec:topic-mappings}
@@ -291,11 +291,11 @@ A~second actively maintained mapping has been created by Samsung.%
 \footnote{Samsung mappings: \url{http://github.com/Samsung/KnowledgeSharingPlatform}}
 It is based on the same idea, but matches a~Freebase topic with a~Wikidata item
 even if there is only a~single shared Wikipedia link.
-The precision of the mapping is naturally lower compared to Google's mapping,
+The precision of the mapping is naturally lower compared to Google's mapping
 as there are more wrong matches (often because there is no clear separation between topics
 and disambiguation pages in Wikipedia), however, the recall increases to 4.4M~links.
 As we have shown in \autoref{sec:dataquality},
-that human curation is required before importation anyway,
+human curation is required before importation anyway,
 which is why we have decided to merge the two mapping dumps,
 and for the resulting 6,000 conflicts decided to prioritize Google's mapping.
 
@@ -325,7 +325,7 @@ which is also backed by the comparably small increases gained from the ID reconc
 and the Knowledge Graph data described in the previous paragraph.
 Furthermore, the \emph{mapped} topics have an average number of facts of about~13.9,
 whereas the topics that were \emph{not} mapped have an average number of only 5.7~facts.
-We have mapped the majority of topics with more than 47~facts
+We have mapped the majority of all topics with more than 47~facts
 (191K~non mapped topics \textit{vs.} 195K~mapped topics).
 This allows us to conclude that we have mapped the most important items of Freebase.
 \autoref{fig:mapped-not-mapped} provides an overview of mapped and non-mapped items
@@ -341,11 +341,11 @@ put in relation to the number of facts per item.
 
 \subsection{Data Property Mapping}
 
-For the mapping between Freebase and Wikidata properties we have chosen to do it by hand
+For the mapping between Freebase and Wikidata properties, we have chosen to do it by hand
 with the help of the Wikidata community.
 With that, we have been able to quickly map around 360~properties
-(note that Wikidata has a~total of 1,660 properties, and Freebase has around 37,700 properties
-\todo{This should probably have a~date. As of today Wikidata has 1863 properties.}).
+(note that Wikidata has a~total of 1,863 properties, and Freebase has around 37,700 properties
+\todo{This should probably have a~date.}).
 For the mapping of properties where the domain are other topics or literals,
 this mapping provides the Wikidata property to use.
 We have also implemented a~special case for \texttt{/people/person/parents}
@@ -360,7 +360,7 @@ In order to map a~CVT to a~statement, we have to know which of the CVT's propert
 should be used as the main value of the statement, with the others being mapped to qualifiers.
 In order to keep a~simple mapping that associates one Wikidata property to one Freebase property,
 we map both the property that links the topic to the CVT
-and the main property of the CVT to the same Wikidata property, and, during the mapping process,
+and the main property of the CVT to the same Wikidata property, and during the mapping process
 pick the latter as the main property of the CVT.
 For example, if we map the CVT shown in \autoref{fig:cvt-obama},
 we first use the Wikidata property \texttt{position held (P39)} to map
@@ -373,11 +373,11 @@ With the resulting property mapping, the created Wikidata statement
 looks like the one presented in \autoref{fig:statement-obama}.
 
 \begin{figure}[!htbp]
-\centering
-\includegraphics[width=1\columnwidth]{img/wikidata-statement-obama.pdf}
-\caption{Wikidata statement for a~Freebase Compound Value Type (CVT).
-  See \autoref{fig:cvt-obama} for comparison.}
-\label{fig:statement-obama}
+  \centering
+  \includegraphics[width=1\columnwidth]{img/wikidata-statement-obama.pdf}
+  \caption{Wikidata statement for a~Freebase Compound Value Type (CVT).
+    See \autoref{fig:cvt-obama} for comparison.}
+  \label{fig:statement-obama}
 \end{figure}
 
 For CVTs that include sources, we map the property that links the CVT
@@ -394,8 +394,8 @@ as there is no precision information in Freebase.
 For globe coordinates, we have hardcoded the mapping of the \texttt{/location/geocode} CVT
 into the globe-coordinate value type of Wikidata
 and use the same precision guessing algorithm as the one used by the Wikidata user interface.
-For dates, we just map the date and time values (encoded using XSD%
-\footnote{\url{ http://www.w3.org/TR/xmlschema11-2/}} types)
+For dates, we just map the date and time values
+(encoded using XSD types~\cite{campbell2003xmlschema})
 to the Wikidata ``time'' datatype, however, filter out dates before 1920 that have
 a~higher precision than year because we do not know
 if they are relative to the Julian or the Gregorian calendar.
