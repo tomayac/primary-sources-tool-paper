@@ -86,7 +86,7 @@ One such collaborative knowledge base is Freebase,
 publicly launched by Metaweb in 2007 and acquired by Google in 2010.
 Another example is Wikidata, a~collaborative knowledge base developed by
 Wikimedia Deutschland since 2012 and operated by the Wikimedia Foundation.
-Due to the success of Wikidata, Google announced in 2014 to shut down Freebase and
+Due to the success of Wikidata, Google announced in 2014 their intent to shut down Freebase and
 help the community with the transfer of Freebase's content to Wikidata~\cite{freebase2014shutdown}.
 
 Moving data between two knowledge bases that do not share a~similar design
@@ -130,8 +130,8 @@ acquired in 2010 by Google~\cite{freebase}.
 It was used as the open core of the Google Knowledge Graph,
 and has found many use cases outside of Google.
 Due to the success of Wikidata,
-Google announced in 2014 to close Freebase and offer most of its content to the
-Wikidata community~\cite{freebase2014shutdown,freebase-end}.
+Google announced in 2014 its intent to close Freebase and help with
+the migration of the content to Wikidata~\cite{freebase2014shutdown,freebase-end}.
 
 Freebase is built on the notions of \emph{objects}, \emph{facts}, \emph{types}, and \emph{properties}.
 Each Freebase object has a~stable identifier called a~\emph{``mid''} (for Machine ID),
@@ -226,12 +226,11 @@ from 3~billion facts in the original corpus, i.e. by about $1.4\%$.
 The second challenge is that the Wikidata community is very eager to have references
 for their statements, \emph{i.e.}, sources that Freebase usually did not store,
 except for some specific data like populations and unemployment rates.
-For these two specific cases, we just map the ``\texttt{source}''
+For these two specific cases, we map the Freebase properties describing sources,%
 \footnote{The two main properties used in Freebase for sources are
 \texttt{/measurement\_unit/dated\_integer/source} and
 \texttt{/measurement\_unit/dated\_percentage/source}}
-Freebase properties included the CVTs encoding these data into Wikidata references.
-\todo{Denny: Could you find a better formulation?}
+expressed as CVTs, into Wikidata references on the appropriate claim.
 
 In order to provide the Wikidata community with references for the facts in Freebase,
 we have reused data from the Google
@@ -251,8 +250,8 @@ by introducing a~domain blacklist.%
 \subsection{Data Quality}
 \label{sec:dataquality}
 
-The data quality of Freebase was examined thoroughly by the Wikidata community
-and anecdotal evidence indeed confirmed that there were certain challenges.
+The data quality of Freebase was discussed by the Wikidata community, and it
+was decided that the quality overall was not sufficient for a direct import.
 For example, a~small city in France was assigned an ISO country code,%
 \footnote{Freebase topic page of the city of Saint-Martin: \url{http://www.freebase.com/m/03cc0d0}}
 then Boston (the city in Massachusetts) had the type \texttt{/people/person},
@@ -800,6 +799,13 @@ the DBpedia extraction process (working on Wikipedia) to the DBpedia ontology.
 The main difference is that the DBpedia mapping is running continuously
 and does not allow for point-fixes, thus necessitating a higher quality of the mapping,
 whereas for the Freebase to Wikidata mapping every single results is expected to be curated.
+The schema.org structured data project is also exploring mappings to and from Wikidata,
+to facilitate the use of Wikidata's vocabulary as schema.org markup across the wider Web.
+This involves similar issues mapping schema.org's CVT-like statement qualification mechanism, Roles,
+to Wikidata conventions.%
+\footnote{On Roles: \url{http://schema.org/Role}. Mappings from Schema.org to Wikidata:
+\url{https://github.com/schemaorg/schemaorg/issues/280}. On the interaction of Schema.org
+and Wikidata: \url{https://meta.wikimedia.org/wiki/Wikidata/Notes/Schema.org_and_Wikidata}}
 
 \textbf{Entity mappings.}
 Entity mapping (often called entity linking) deals with finding the objects
