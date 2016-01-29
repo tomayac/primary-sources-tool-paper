@@ -155,11 +155,11 @@ a~fact with the property \texttt{/government/us\_president/presidency\_number} \
 and the literal integer ``44'' as the value.
 
 Freebase uses Compound Value Types (CVTs) to represent
-n-ary relations with $n>2$, \emph{e.g.}, values like geographic coordinates,
+$n$-ary relations with $n>2$, \emph{e.g.}, values like geographic coordinates,
 political positions held with a~start and an end date (see \autoref{fig:cvt-obama} for an example),
 or actors playing a~character in a~movie.
 CVT values are just objects, \emph{i.e.}, they have a~mid and can have types
-(although they usually have only the compound value type itself).
+(although they usually only have the compound value type itself).
 Most non-CVT objects are called \emph{topics} in order to discern them from CVTs.
 
 \begin{figure}[!htbp]
@@ -175,8 +175,8 @@ such as Wikipedia~\cite{wikipedia-works} or
 the license-compa\-tible part of MusicBrainz~\cite{musicbrainz}.
 Over the years, the Freebase community and Google have maintained the knowledge base.
 When Freebase was turned read-only on March~31, 2015,
-it counted more than 3~billion facts about almost 50M~entities.
-The data from Freebase is published as an N-Triples dump in RDF~\cite{rdf} under
+it counted more than 3~billion facts about almost 50~million entities.
+Freebase data is published as an N-Triples dump in RDF~\cite{rdf} under
 the Creative Commons CC-BY license.\footnote{Dump: \url{https://developers.google.com/freebase/data}}
 
 \subsection{Wikidata}
