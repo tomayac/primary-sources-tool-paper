@@ -114,7 +114,7 @@ subtly different goals and understandings of their tasks,
 and different requirements regarding their data.
 
 In this paper, we describe how we support the Wikidata community with
-the migration of Freebase content to Wikidata.
+the migration of Freebase content to\linebreak Wikidata.
 We programmed the \emph{Primary Sources Tool} and
 released it as open source software to facilitate the transfer of the Freebase dataset.
 The \emph{Primary Sources Tool} is also developed with an eye on
@@ -202,7 +202,7 @@ A~statement is composed of a~claim and zero or more references for this claim.
 The claim itself is composed of one main property--value pair that encodes
 the main (claimed) fact like ``taxon name is Pantera Leo'' and optional qualifiers
 to add information about it like ``taxon author is Carl Linnaeus''.
-\autoref{fig:statement} illustrates the used terminology with an example.
+\autoref{fig:statement} illustrates the used Wikidata terminology with an example.
 
 \begin{figure}[!htbp]
   \centering
@@ -310,7 +310,7 @@ A~first one has been created by Google in October 2013%
 \footnote{Freebase mappings: \url{http://developers.google.com/freebase/data}}
 and is based on Wikipedia links already present in Freebase: if a~Freebase topic and
 a~Wikidata item share at least two Wikipedia links, they are assumed to describe the same subject.
-The quality of this mapping is considered very good by the Wikidata community,
+The quality of this mapping is considered very good by the\linebreak Wikidata community,
 who thus have decided to use it and further curate and maintain it by hand.
 It maps 1.15~million Freebase topics to their corresponding Wikidata items.
 
@@ -327,12 +327,12 @@ human curation is required before import anyway,
 which is why we have decided to merge the two mapping dumps.
 For the 6,000 conflicts that appeared, we decided to prioritize Google's mapping.
 
-\subsubsection{Reconciliation Based on External Database IDs}
+\subsubsection{Reconciliation Based on External Identifiers}
 
 To improve the result, we have also done some reconciliation based on third-party database IDs
 shared by Freebase and Wikidata, like MusicBrainz~\cite{musicbrainz},
 VIAF~\cite{viaf}, \emph{etc.}
-With this technique, we were able to match 800,000~external database IDs,
+With this technique, we were able to match 800,000~external data\-base IDs,
 creating an additional mapping for 600,000~to\-pics---%
 most of them already in the merged version of Google's and Samsung's mappings.
 Eventually, this reconciliation effort resulted in an additional 84,000 mapped items.
@@ -455,14 +455,14 @@ In such cases, we are unable to fill the \texttt{calendar} value of the Wikidata
 \section{Primary Sources Tool}\label{sec:primary-sources-tool}
 
 As outlined earlier, the \emph{Primary Sources Tool} is a~crowdsourced human curation
-software solution that displays Freebase statements for verification to the Wikidata contributor
+software solution that displays\linebreak Freebase statements for verification to the Wikidata contributor
 so that these statements can be added to the currently shown Wikidata item.
 With just one click, the contributor can reject or approve a~statement,
 and, in case of approval, add the statement to Wikidata.
-The code of the \emph{Primary Sources Tool} is openly available
-under the terms of the Apache~2.0 license (\url{https://github.com/google/primarysources}).
-The tool is deployed as a~so-called gadget,
-so that it can be easily activated as an add-on feature in Wikidata.
+The code of the \emph{Primary Sources Tool} is openly available (\url{https://github.com/google/primarysources})
+under the terms of the\linebreak Apache~2.0 license.
+The tool is deployed as a~gadget,
+so that it can be easily enabled as an add-on feature in Wikidata.
 It is independent from Freebase and can be---and already has been---reused to import other datasets into Wikidata.
 
 We have implemented an upload API in the back-end
@@ -532,7 +532,6 @@ Statements can be grouped in ``datasets'' (set of statements from the same origi
 and ``uploads'' (set of statements uploaded at the same time) in order to
 distinguish data from different sources.\footnote{At the time of writing,
 the back-end contained five different datasets.}
-
 The REST API of the back-end supports the following main types of requests:
 
 \begin{itemize}
@@ -864,17 +863,17 @@ In the 17.2~million Freebase labels for mapped topics,
 only 0.9~million, \emph{i.e.}, 5\%, are missing in Wikidata.
 
 Concluding, in a~fairly short amount of time, we have been able
-to provide to the Wikidata community more than\linebreak 14~million new Wikidata statements
+to provide the Wikidata community with more than\linebreak 14~million new Wikidata statements
 using a~customizable and generalizable approach, consisting of data preparation scripts
 and the \emph{Primary Sources Tool},
 which is well integrated into the Wikidata user interface.
 The effort needed to map two fairly different knowledge bases has also been a~good occasion
-to highlight the difficulty of having good metrics to measure the size of knowledge bases
+to highlight the difficulty of having adequate metrics to measure the size of knowledge bases
 in a~meaningful way,
 and, in consequence, the ``value'' of such collaborative knowledge bases and the datasets added to them.
 We hope that with the help of the \emph{Primary Sources Tool} and
-the Freebase dataset, and in future also other datasets,
-will increase the completeness and accuracy of Wikidata.
+the Freebase dataset---and in future also other datasets---%
+we will increase the completeness and accuracy of Wikidata.
 
 \bibliographystyle{abbrv}
 \bibliography{biblio}
