@@ -631,7 +631,8 @@ in order to gather initial user feedback.
 
 In the following months, we progressively added more statements to the tool's database back-end.
 Thereby, we were able to slowly upscale the tool's database back-end
-without risking back-end performance bottlenecks.
+without risking back-end performance bottlenecks,
+and so far, scale or throughput have not been a~problem.
 The process of adding data in small batches of 1~million to 2~million statements per batch
 further allowed us to detect some potential issues in the front-end
 and fix them before they became actual problems.
@@ -645,6 +646,26 @@ the potentially changed state of the migration, as,
 in case of incoming claims with references, freshly accepted claims
 can require incoming references to be attached elsewhere in the item,
 which is hard to keep track of without a~refresh.
+
+\subsection{Usage with Other Datasets}
+
+As outlined earlier, the \emph{Primary Sources Tool} from the start was designed to be used
+with other datasets apart from the Freebase dataset.
+A~concrete first example is the ``FBK StrepHit Soccer'' dataset,%
+\footnote{``FBK StrepHit Soccer'' dataset:
+\url{https://lists.wikimedia.org/pipermail/wikidata/2015-September/007014.html}}
+which, among other datasets, can be activated in the tool by clicking on its gears icon.
+The dataset selection dialog is depicted in \autoref{fig:soccer},
+as well as facts coming from this dataset.
+It is also possible to activate all datasets at once in parallel.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.93\columnwidth]{img/fbk-strephit-soccer.pdf}
+    \caption{\emph{Primary Sources Tool} used with the ``FBK StrepHit Soccer'' dataset,
+    the screenshot shows the dataset selection dialog and incoming facts from this dataset.}
+    \label{fig:soccer}
+\end{figure}
 
 \section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
@@ -857,7 +878,7 @@ and the availability of tools for working with Wikipedia~\cite{milne2013open}.
 
 %Should also cover references (kvault) and quality.
 
-\section{Future Work and Conclusion}\label{sec:future-work-and-conclusion}
+\section{Future Work and Conclusions}\label{sec:future-work-and-conclusion}
 
 The largest gains for the migration can be achieved
 by extending the mapping to more Freebase topics.
@@ -868,15 +889,14 @@ or to add a~mapping for them to an existing Wikidata item.
 In order to suggest interesting topics to add to Wikidata,
 we could rank the topics that are not mapped yet by the number of incoming links
 from already mapped topics and filter less interesting types like ISBNs.
-
 Another area for improvement is to upload high quality datasets using a~bot,
 like the reviewed facts or some sets for external IDs,
 in order to speed up the integration of Freebase content into Wikidata.
 We have already started to upload simple reviewed facts about humans
 like birth date, death place or gender using a~bot.
-We have also started to import labels that are in Freebase and are absent from Wikidata.
+We have started to import labels that are in Freebase but not in Wikidata.
 In the 17.2~million Freebase labels for mapped topics,
-only 0.9~million, \emph{i.e.}, 5\%, are missing in Wikidata.
+only 0.9~million, \emph{i.e.}, 5\%, lack from Wikidata.
 
 Concluding, in a~fairly short amount of time, we have been able
 to provide the Wikidata community with more than\linebreak 14~million new Wikidata statements
@@ -888,7 +908,7 @@ to highlight the difficulty of having adequate metrics to measure the size of kn
 in a~meaningful way,
 and, in consequence, the ``value'' of such collaborative knowledge bases and the datasets added to them.
 We hope that with the help of the \emph{Primary Sources Tool} and
-the Freebase dataset---and in future also other datasets---%
+the Freebase dataset---and in future even more datasets---%
 we will increase the completeness and accuracy of Wikidata.
 
 \bibliographystyle{abbrv}
