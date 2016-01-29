@@ -664,15 +664,15 @@ from March 2015:
 \end{itemize}
 
 ``Useful'' facts are the triples that remain
-after filtering out all triples about IDs (\texttt{/type/object/id}),
-types \linebreak (\texttt{/type/object/type}), labels, descriptions \linebreak
-(\texttt{/type/object/name},
-\texttt{/common/topic/description}, \emph{etc.}), \linebreak and triples removed
+after filtering out all triples about labels
+(\texttt{/type/object/name}, identifiers (\texttt{/type/object/id}),
+types (\texttt{/type/object/type}), descript\-ions
+(\texttt{/common/topic/description}), \emph{etc.}), and triples removed
 for licensing reasons (the latter were about 42~million, see \autoref{sec:licensing}).
 The triples removed in this step are not considered to be potentially useful for
 Wikidata, since IDs, labels, and descriptions are not handled through statements.
 
-As a~direct comparison, here are the raw statistics for Wikidata as of August 2015.
+As a~direct comparison, in the following we provide the raw statistics for Wikidata as of August 2015.
 
 \begin{itemize}
     \setlength\itemsep{0em}
@@ -694,7 +694,7 @@ even considering the lower number of topics.
 Freebase encodes its knowledge far more redundantly than Wikidata.
 To illustrate this, properties in Freebase often have a~\emph{reverse} property
 that is used in order to be able to traverse the Freebase graph easily in both directions.
-For example, the property \texttt{/people/person/place\_of\_birth} has the corresponding
+For example, the property \texttt{/people/person/place\-\_of\_birth} has the corresponding
 reverse property \linebreak \texttt{/location/location/people\_born\_here}
 that encodes exactly the same semantic information.
 Such reverse properties sometimes exist in Wikidata
@@ -712,7 +712,6 @@ and adding reverse properties, this would lead to a~number of 110~million facts,
 \emph{i.e.} an increase of 167\% over the raw number of statements.
 The representation of Wikidata in RDF and its impact on the number of triples
 is discussed in more detail in~\cite{reification-wikidata}.
-
 In a~considerable amount of cases, Freebase also contains duplicate data.
 For example, many cities in the United States have duplicate CVTs for the population,
 where the only difference is the encoding of the source.
