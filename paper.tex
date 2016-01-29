@@ -300,7 +300,7 @@ editors more efficient by allowing them to add statements with a~single click.
 
 \subsubsection{Merger of Existing Mappings}
 
-The next challenge concerns the data mappings between Freebase topics and properties
+The next challenge concerns the data mappings between Freebase topics and properties,
 and Wikidata items and properties.
 Two mappings between Freebase topics and Wikidata items were initially available,
 and in addition to those, we worked on further mappings.
@@ -311,13 +311,15 @@ a~Wikidata item share at least two Wikipedia links, they are assumed to describe
 The quality of this mapping is considered very good by the Wikidata community,
 who thus have decided to use it and further curate and maintain it by hand.
 It maps 1.15~million Freebase topics to their corresponding Wikidata items.
+
 A~second actively maintained mapping has been created by Samsung.%
 \footnote{Samsung mappings: \url{http://github.com/Samsung/KnowledgeSharingPlatform}}
 It is based on the same idea, but matches a~Freebase topic with a~Wikidata item
 even if there is only a~single shared Wikipedia link.
-The precision of the mapping is naturally lower compared to Google's mapping
+The precision of the mapping is naturally lower compared to Google's mapping,
 as there are more wrong matches (often because there is no clear separation between topics
 and disambiguation pages in Wikipedia), however, the recall increases to 4.4~million~links.
+
 As we have shown in \autoref{sec:dataquality},
 human curation is required before import anyway,
 which is why we have decided to merge the two mapping dumps.
@@ -329,11 +331,11 @@ To improve the result, we have also done some reconciliation based on third-part
 shared by Freebase and Wikidata, like MusicBrainz~\cite{musicbrainz},
 VIAF~\cite{viaf}, \emph{etc.}
 With this technique, we were able to match 800,000~external database IDs,
-creating an additional mapping for 600,000~topics---%
+creating an additional mapping for 600,000~to\-pics---%
 most of them already in the merged version of Google's and Samsung's mappings.
 Eventually, this reconciliation effort resulted in an additional 84,000 mapped items.
 
-We also used Google's Knowledge Graph~\cite{singhal2012} to add 100,000 further mappings
+We also used Google's Knowledge Graph~\cite{singhal2012} to add about 100,000 further mappings
 by also matching a~topic and an item if they share a~Wikipedia link with the Knowledge Graph item.
 There is some potential to add more data by looking at functional relations
 like \textit{``father''} and \textit{``mother''},
@@ -364,10 +366,10 @@ on both axes, so the seemingly small area between the two lines covers a~majorit
 the topics. It can also be seen that there are a~very small number of topics with
 a~high number of facts which have not been covered (in the lower part of the Figure).
 These have all been manually inspected and found to be specific to the way knowledge
-in Freebase is built. The vast majority of items with more than ten facts - in the
-center of the Figure - has been mapped. The items that have not been mapped -
-visible in the upper left corner of the image - are very thin,
-i.e. mostly have a~very small number of facts and
+in Freebase is modeled. The vast majority of items with more than ten facts---in the
+center of the Figure---has been mapped. The items that have not been mapped---%
+visible in the upper left corner of the image---are very thin,
+\emph{i.e.}, mostly have a~very small number of facts and
 would not have added much to the knowledge base.
 
 \begin{figure}[!htbp]
