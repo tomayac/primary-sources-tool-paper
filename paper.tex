@@ -338,7 +338,7 @@ Eventually, this reconciliation effort resulted in an additional 84,000 mapped i
 We also used Google's Knowledge Graph~\cite{singhal2012} to add about 100,000 further mappings
 by also matching a~topic and an item if they share a~Wikipedia link with the Knowledge Graph item.
 There is some potential to add more data by looking at functional relations
-like \textit{``father''} and \textit{``mother''},
+like \texttt{father} and \texttt{mother},
 but these relations only apply to relatively small sets of data
 (like well known families), and the functional assumptions may run into some edge cases.
 For example, the \texttt{/people/person/parents} property in Freebase also covers stepparents,
@@ -385,21 +385,21 @@ would not have added much to the knowledge base.
 For the mapping between Freebase and Wikidata properties, we have chosen to apply a~manual
 approach with the help of the Wikidata community.
 Note that a~mapping of types is not needed, since Wikidata has no real notion of types
-(or, to be more specific, the property \textit{``instance of''} (P31) is just another
+(or, to be more specific, the property \texttt{instance of} (P31) is just another
 property and connects to items without any special status).
 With the help of the community, we have been able to quickly map around 360~properties
-(note that Wikidata had a~total of about 1,800 properties at the time when this work
-has been conducted in the Summer of 2015, and Freebase has around 37,700 properties).
+(note that Wikidata had a~total of about 1,800 properties in the summer of 2015 when this work
+was conducted, and Freebase had around 37,700 properties).
 For the mapping of properties where the domain are other topics or literals,
 this mapping provides the Wikidata property to use.
 
-For \texttt{/people/person/parents}, we have implemented a~special case
-in order to be able to map them to the Wikidata properties
-\textit{``father''} (P22) and \textit{``mother''} (P25)
+For \texttt{/people/person/parents}, we implemented a~special case
+in order to map them to the Wikidata properties
+\texttt{father} (P22) and \texttt{mother} (P25)
 based on the person's gender.
 
-The mapping of CVTs (see \autoref{fig:cvt-obama}) is more complicated,
-because it is not possible to have a~\mbox{1-to-1} relationship
+\break The mapping of CVTs (see \autoref{fig:cvt-obama}) is more complicated,
+because it is not possible to have a~\mbox{$1$-to-$1$} relationship
 between Freebase and Wikidata properties: the CVT is linked to the subject topic by one property
 and has properties pointing to its component values, whereas the Wikidata statement
 has a~main property value group that is qualified by other such groups.
@@ -408,17 +408,17 @@ should be used as the main value of the statement, with the others being mapped 
 In order to keep a~simple mapping that associates one Wikidata property to one Freebase property,
 we map both the property that links the topic to the CVT
 and the main property of the CVT to the same Wikidata property. In a~second step, we
-then use merge these two mappings int a~single Wikidata claim, on which we add the
+then merge these two mappings int a~single Wikidata claim, on which we add the
 other properties from the CVT.
 
 For example, if we map the CVT shown in \autoref{fig:cvt-obama},
-we first use the Wikidata property \textit{``position held''} (P39) to map
+we first use the Wikidata property \texttt{position held} (P39) to map
 \texttt{/politician/government\_positions\_held} and \linebreak
 \texttt{/government\_position\_held/office\_position\_or\_title}. \linebreak
-Second, for the qualifiers, we use \textit{``start time''} (P580)
-for \texttt{/government\_position\_held/from} and \textit{``end time''} (P582)
+Second, for the qualifiers, we use \texttt{start time} (P580)
+for \texttt{/government\_position\_held/from} and \texttt{end time} (P582)
 for \texttt{/government\_position\_held/to}.
-With the resulting \linebreak property mapping, the created Wikidata statement
+With the then resulting \linebreak property mapping, the created Wikidata statement
 looks like the one presented in \autoref{fig:statement-obama}.
 
 \begin{figure}[!htbp]
@@ -434,7 +434,7 @@ to the source as a~Wikidata reference instead of a~qualifier.
 The hardest part then is to actually create the full topic mapping
 by considering CVTs and the complex datatypes of Wikidata.
 For CVTs, when we have a~triple whose value is a~CVT, we just retrieve it,
-map all its component triples (while ignoring ones that cannot be mapped)
+map all its component triples (while ignoring ones that cannot be mapped),
 and apply the above mechanism to get its main value.
 For values, we use the datatype information stored with Wikidata properties
 in order to cast values to the right type.
@@ -445,10 +445,10 @@ into the globe-coordinate value type of Wikidata
 and use the same precision guessing algorithm as the one used by the Wikidata user interface.
 For dates, we just map the date and time values
 (encoded using XSD types~\cite{campbell2003xmlschema})
-to the Wikidata ``time'' datatype. However, we remove dates before 1920 that have
+to the Wikidata \texttt{time} datatype. However, we remove dates before 1920 that have
 a~precision higher than year because we do not know
 if they are relative to the Julian or the Gregorian calendar.
-In such cases, we are not able to fill the ``calendar'' value of the Wikidata ``time'' datatype.
+In such cases, we are unable to fill the \texttt{calendar} value of the Wikidata \texttt{time} datatype.
 
 \section{Primary Sources Tool}\label{sec:primary-sources-tool}
 
@@ -697,7 +697,7 @@ For example, the property \texttt{/people/person/place\_of\_birth} has the corre
 reverse property \linebreak \texttt{/location/location/people\_born\_here}
 that encodes exactly the same semantic information.
 Such reverse properties sometimes exist in Wikidata
-(like \textit{``children''} for \textit{``father''} and \textit{``mother''}),
+(like \texttt{children} for \texttt{father} and \texttt{mother}),
 but are far less common and also not automatically handled.
 
 Another point is that CVTs use a~lot of facts to convey the exact same information
