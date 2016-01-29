@@ -20,34 +20,37 @@
 \author{
 \alignauthor
 Thomas Pellissier Tanon\titlenote{The author was an intern at Google when the majority of the work was done.}
-   \affaddr{Google, San Francisco, USA}\\   
+   \affaddr{Google, San Francisco, USA}\\
    \email{\mbox{thomas@pellissier-tanon.fr}}
 \alignauthor
 Denny Vrandečić\\
-   \affaddr{Google, San Francisco, USA}\\   
+   \affaddr{Google, San Francisco, USA}\\
    \email{vrandecic@google.com}
 \alignauthor
 Sebastian Schaffert\\
-   \affaddr{Google, Zürich, Switzerland}\\   
+   \affaddr{Google, Zürich, Switzerland}\\
    \email{schaffert@google.com}
 \and
 \alignauthor
 Thomas Steiner\\
-   \affaddr{Google, Hamburg, Germany}\\   
+   \affaddr{Google, Hamburg, Germany}\\
    \email{tomac@google.com}
 \alignauthor
 Lydia Pintscher\\
-   \affaddr{Wikimedia, Berlin, Germany}\\   
+   \affaddr{Wikimedia, Berlin, Germany}\\
    \email{lydia@pintscher.de}
 }
 
-\permission{Copyright is held by the International World Wide Web Conference Committee (IW3C2). IW3C2 reserves the right to provide a hyperlink to the author's site if the Material is used in electronic media.}
-\conferenceinfo{WWW 2016,}{April 11--15, 2016, Montréal, Québec, Canada.}
+\permission{Copyright is held by the International World Wide Web Conference
+Committee (IW3C2). IW3C2 reserves the right to provide a~hyperlink to the
+author's site if the Material is used in electronic media.}
+\conferenceinfo{WWW 2016,}{April 11--15, 2016, Montr\'eal, Qu\'ebec, Canada.}
 \copyrightetc{ACM \the\acmcopyr}
 \crdata{978-1-4503-4143-1/16/04. \\
-\url{http://dx.doi.org/10.1145/2872427.2874809} }
+\url{http://dx.doi.org/10.1145/2872427.2874809}}
 
-\clubpenalty=10000 
+
+\clubpenalty=10000
 \widowpenalty = 10000
 
 \begin{document}
@@ -65,14 +68,14 @@ and provide an analysis of the effort so far.
 We describe the \emph{Primary Sources Tool}, which aims to facilitate
 this and future data migrations.
 Throughout the migration, we have gained deep insights into both Wikidata and Freebase,
-and share and discuss detailed statistics on both knowledge bases. 
+and share and discuss detailed statistics on both knowledge bases.
 \end{abstract}
 
 % \category{CR number}{category}{sub-category}[optional subject descriptor]
-\category{H.3.5}{Information Storage and Retrieval}{Online Information Systems}
-\category{H.5.3}{Information Interfaces}{Group and Organization Interfaces}[Web-based interactions]
-\category{I.2.4}{Artificial Intelligence}{Knowledge Representation}
-\category{K.4.3}{Computers and Society}{Organizational Impacts}[Com\-puter-supported collaborative work]
+% \category{H.3.5}{Information Storage and Retrieval}{Online Information Systems}
+% \category{H.5.3}{Information Interfaces}{Group and Organization Interfaces}[Web-based interactions]
+% \category{I.2.4}{Artificial Intelligence}{Knowledge Representation}
+% \category{K.4.3}{Computers and Society}{Organizational Impacts}[Com\-puter-supported collaborative work]
 
 \terms{Human Factors, Documentation}
 
@@ -115,7 +118,7 @@ The \emph{Primary Sources Tool} is also developed with an eye on
 future data migrations from other sources.
 We created and published mappings of the Freebase dataset.
 Throughout the migration, we have gained deep insights into both Wikidata and Freebase,
-and share and discuss detailed statistics on both knowledge bases. 
+and share and discuss detailed statistics on both knowledge bases.
 
 The paper is structured as follows.
 First, we introduce Freebase and Wikidata in \autoref{sec:background}.
@@ -134,7 +137,7 @@ and a~conclusion in \autoref{sec:future-work-and-conclusion}.
 \subsection{Freebase}
 
 Freebase\footnote{Freebase: \url{https://www.freebase.com}} is an open and
-collaborative knowledge base publicly launched in 2007 by Metaweb and 
+collaborative knowledge base publicly launched in 2007 by Metaweb and
 acquired in 2010 by Google~\cite{freebase}.
 It was used as the open core of the Google Knowledge Graph,
 and has found many use cases outside of Google.
@@ -147,7 +150,7 @@ Each Freebase object has a~stable identifier called a~\emph{``mid''} (for Machin
 one or more types, and uses properties from these types in order to provide facts.
 For example, the Freebase object for Barack Obama has the mid \texttt{/m/02mjmr}
 and the type \texttt{/government/us\_president} (among others) that allows the entity to have
-a fact with the property \texttt{/government/us\_president/presidency\_number} \linebreak
+a~fact with the property \texttt{/government/us\_president/presidency\_number} \linebreak
 and the literal integer ``44'' as the value.
 
 Freebase uses Compound Value Types (CVTs) to represent
@@ -244,7 +247,7 @@ In order to provide the Wikidata community with references for the facts in Free
 we have reused data from the Google
 Knowledge Vault~\cite{dong2014knowledge}. Knowledge Vault aims at extracting facts from the Web.
 
-The result of this step was surprising: 
+The result of this step was surprising:
 the fact extraction was usually correct, in the sense that the fact was indeed being stated on the page.
 Also the fact itself was usually accurate, in the sense that it corresponded to reality.
 But the pages the facts were extracted from in many cases did not meet
@@ -259,7 +262,7 @@ by introducing a~domain blacklist.%
 \label{sec:dataquality}
 
 The data quality of Freebase was discussed by the Wikidata community, and it
-was decided that the quality overall was not sufficient for a direct import.
+was decided that the quality overall was not sufficient for a~direct import.
 For example, a~small city in France was assigned an ISO country code,%
 \footnote{Freebase topic page of the city of Saint-Martin: \url{http://www.freebase.com/m/03cc0d0}}
 then Boston (the city in Massachusetts) had the type \texttt{/people/person},
@@ -344,7 +347,7 @@ we mapped 4.56~million items in total.
 \subsubsection{Topic Mapping Completeness Analysis}
 
 Thanks to these efforts, we have already mapped most of the topics that could be mapped automatically,
-which is also backed by the comparably small increases gained from the ID reconciliation approach 
+which is also backed by the comparably small increases gained from the ID reconciliation approach
 and the Knowledge Graph data described in the previous paragraph.
 This is no surprise, since the core of both projects was kickstarted by using
 Wikipedia as a~repository of topics.
@@ -356,14 +359,14 @@ We have mapped the majority of all topics with more than 47~facts
 This indicates that we have mapped the most important items of Freebase.
 \autoref{fig:mapped-not-mapped} provides an overview of mapped and non-mapped items
 put in relation to the number of facts per item: note that the Figure is log-scaled
-on both axes, so the seemingly small area between the two lines covers a majority of
-the topics. It can also be seen that there are a very small number of topics with
-a high number of facts which have not been covered (in the lower part of the Figure).
+on both axes, so the seemingly small area between the two lines covers a~majority of
+the topics. It can also be seen that there are a~very small number of topics with
+a~high number of facts which have not been covered (in the lower part of the Figure).
 These have all been manually inspected and found to be specific to the way knowledge
 in Freebase is built. The vast majority of items with more than ten facts - in the
 center of the Figure - has been mapped. The items that have not been mapped -
 visible in the upper left corner of the image - are very thin,
-i.e. mostly have a very small number of facts and
+i.e. mostly have a~very small number of facts and
 would not have added much to the knowledge base.
 
 \begin{figure}[!htbp]
@@ -371,14 +374,14 @@ would not have added much to the knowledge base.
   \includegraphics[width=8.45 cm]{img/facts-topics-mapping.pdf}
   \caption{Number of mapped and not mapped topics with more than $x$ facts (log scale on both axes).}
   \label{fig:mapped-not-mapped}
-  %Data sheet: https://docs.google.com/spreadsheets/d/1jYGVIqAmyouHKjvhM6FbpgTD8bb5tkJy9PEMELkuMwo/edit  
+  %Data sheet: https://docs.google.com/spreadsheets/d/1jYGVIqAmyouHKjvhM6FbpgTD8bb5tkJy9PEMELkuMwo/edit
 \end{figure}
 
 \subsection{Data Property Mapping}
 
 For the mapping between Freebase and Wikidata properties, we have chosen to apply a~manual
 approach with the help of the Wikidata community.
-Note that a mapping of types is not needed, since Wikidata has no real notion of types
+Note that a~mapping of types is not needed, since Wikidata has no real notion of types
 (or, to be more specific, the property \textit{``instance of''} (P31) is just another
 property and connects to items without any special status).
 With the help of the community, we have been able to quickly map around 360~properties
@@ -401,8 +404,8 @@ In order to map a~CVT to a~statement, we have to know which of the CVT's propert
 should be used as the main value of the statement, with the others being mapped to qualifiers.
 In order to keep a~simple mapping that associates one Wikidata property to one Freebase property,
 we map both the property that links the topic to the CVT
-and the main property of the CVT to the same Wikidata property. In a second step, we
-then use merge these two mappings int a single Wikidata claim, on which we add the
+and the main property of the CVT to the same Wikidata property. In a~second step, we
+then use merge these two mappings int a~single Wikidata claim, on which we add the
 other properties from the CVT.
 
 For example, if we map the CVT shown in \autoref{fig:cvt-obama},
@@ -501,7 +504,7 @@ In the following, we describe the back-end, the front-end, and the chosen data r
     \caption{Primary Sources Tool architecture. The front-end (JavaScript) sends
       HTTP requests to the back-end (C++) to retrieve and update entities or
       statements, stored in a~relational database. Approved statements are in
-      addition written by the front-end to the Wikidata REST API.}    
+      addition written by the front-end to the Wikidata REST API.}
     \label{fig:architecture}
     % Source: https://docs.google.com/a/google.com/drawings/d/1vKAftQVjrso907UtbMXnEOabXwQHDVyyz2ewxcqz3b0/edit?usp=sharing
 \end{figure}
@@ -601,7 +604,7 @@ of the last Freebase dump to Wikidata statements.%
 \footnote{The source code of theses scripts is also available under the terms of the Apache~2.0 license:
 \url{https://github.com/google/freebase-wikidata-converter}}
 The Primary Sources Tool was developed in parallel with the mapping scripts.
-We first created a~small dataset of around 1 million statements
+We first created a~small dataset of around 1~million statements
 based on few select properties (\emph{e.g.}, \texttt{/people/person/birth\_place})
 and deployed both the first dataset and a~basic version of the tool
 in order to gather initial user feedback.
@@ -619,8 +622,8 @@ and correct minor issues with the data in the back-end.
 Upon approval or rejection of either a~claim or a~reference,
 the Wikidata item page in question reloads in order to reflect
 the potentially changed state of the migration, as,
-in case of incoming claims with references, freshly accepted claims 
-can require incoming references to be attached elsewhere in the item. 
+in case of incoming claims with references, freshly accepted claims
+can require incoming references to be attached elsewhere in the item.
 
 \section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
@@ -656,7 +659,7 @@ from March 2015:
   \item 68~million labels
 \end{itemize}
 
-``Useful'' facts are the triples that remain 
+``Useful'' facts are the triples that remain
 after filtering out all triples about IDs (\texttt{/type/object/id}),
 types \linebreak (\texttt{/type/object/type}), labels, descriptions \linebreak
 (\texttt{/type/object/name},
@@ -701,7 +704,7 @@ of the United States since January~20, 2009,
 Freebase requires more than six facts as shown in \autoref{fig:cvt-obama}.
 If we attempted to encode Wikidata statements as if they were Freebase facts, \emph{i.e.},
 by removing sources, representing statements with qualifiers using CVTs,
-and adding reverse properties, this would lead to a number of 110~million facts,
+and adding reverse properties, this would lead to a~number of 110~million facts,
 \emph{i.e.} an increase of 167\% over the raw number of statements.
 The representation of Wikidata in RDF and its impact on the number of triples
 is discussed in more detail in~\cite{reification-wikidata}.
@@ -713,7 +716,7 @@ where the only difference is the encoding of the source.
 \subsection{Spatio-Temporal Comparison}
 
 In order to get an idea of the coverage of the two knowledge bases,
-we have further created a~spatio-temporal visualization of Freebase and Wikidata 
+we have further created a~spatio-temporal visualization of Freebase and Wikidata
 that is shown in \autoref{fig:time-space}.
 
 We extracted the earliest date and the longitude
@@ -721,7 +724,7 @@ linked to each of the entities of the two knowledge bases.
 We then propagated them to the connected entities that do not have such data.
 To implement this propagation, we set as value (date or longitude)
 the average of the values of the entities whose distance is $<10$
-with a weight of $2^{-d}$ (with $d$~being the distance between the two entities).
+with a~weight of $2^{-d}$ (with $d$~being the distance between the two entities).
 
 We see that the two knowledge bases display the same basic patterns,
 with their coverage mostly concentrated on the longitudes of Europe and North America.
@@ -744,7 +747,7 @@ despite its smaller absolute size, appears to have
 a~nearly as complete coverage of the world as Freebase.
 Nonetheless, it is very challenging to find objective ways to compare the two databases
 and good metrics of success for the migration.
-We certainly can note that for data sets to be added to a knowledge bases,
+We certainly can note that for data sets to be added to a~knowledge bases,
 the raw number of triples is not an adequate measure of quality.
 
 \subsection{Raw Statistics}
@@ -800,12 +803,12 @@ we are looking for a~one-directional mapping (since the case of data
 flowing from Wikidata back to Freebase is not relevant),
 a~one-off data flow (since Freebase is now read-only),
 mostly individually evaluated by human contributors
-(therefore not requiring a perfect mapping).
+(therefore not requiring a~perfect mapping).
 The effort most similar to ours is the DBpedia Mapping Wiki~\cite{lehmann2014dbpedia}.
 The DBpedia community is manually writing and maintaining the mapping from
 the DBpedia extraction process (working on Wikipedia) to the DBpedia ontology.
 The main difference is that the DBpedia mapping is running continuously
-and does not allow for point-fixes, thus necessitating a higher quality of the mapping,
+and does not allow for point-fixes, thus necessitating a~higher quality of the mapping,
 whereas for the Freebase to Wikidata mapping every single results is expected to be curated.
 The schema.org structured data project is also exploring mappings to and from Wikidata,
 to facilitate the use of Wikidata's vocabulary as schema.org markup across the wider Web.
@@ -821,7 +824,7 @@ in several sources that refer to the same entity in the domain of discourse.
 There is extensive work in this area (e.g.~\cite{entitylinkingsurvey1,entitylinkingsurvey2})
 but we avoided most of the challenges by relying on the simple fact that
 both Freebase and Wikidata have historically been bootstrapped by using Wikipedia.
-Wikipedia is often used as a benchmark for entity mapping systems~\cite{entitylinkingwikipedia}.
+Wikipedia is often used as a~benchmark for entity mapping systems~\cite{entitylinkingwikipedia}.
 As described in \autoref{subsec:topic-mappings} this lead to sufficiently good results for the head,
 and we think it would be surprising if further effort in this area would lead to reasonable gains.
 
@@ -866,7 +869,7 @@ and the Primary Sources Tool,
 which is well integrated into the Wikidata user interface.
 The effort needed to map two fairly different knowledge bases has also been a~good occasion
 to highlight the difficulty of having good metrics to measure the size of knowledge bases
-in a meaningful way, 
+in a~meaningful way,
 and, in consequence, the ``value'' of such collaborative knowledge bases and the datasets added to them.
 We hope that with the help of the Primary Sources Tool and
 the Freebase dataset, and in future also other datasets,
