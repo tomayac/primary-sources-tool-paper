@@ -457,11 +457,11 @@ software solution that displays Freebase statements for verification to the Wiki
 so that these statements can be added to the currently shown Wikidata item.
 With just one click, the contributor can reject or approve a~statement,
 and, in case of approval, add the statement to Wikidata.
-The code of the Primary Sources Tool is openly available
+The code of the \emph{Primary Sources Tool} is openly available
 under the terms of the Apache~2.0 license (\url{https://github.com/google/primarysources}).
 The tool is deployed as a~so-called gadget,
-\emph{i.e.}, as an easy to active add-on feature in Wikidata.
-It is independent from Freebase and can easily be reused to import other datasets into Wikidata.
+so that it can be easily activated as an add-on feature in Wikidata.
+It is independent from Freebase and can be---and already has been---reused to import other datasets into Wikidata.
 
 We have implemented an upload API in the back-end
 and a~dataset filter in the front-end that allows users
@@ -469,13 +469,13 @@ to display only statements from a~selected dataset.
 This flexibility is indeed much-wanted, and during the development period of the project
 another researcher approached us in order to upload
 a~dataset extracted from natural language text.
-We expect more datasets to be added to the Primary Sources Tool in the future.
+We expect more datasets to be added to the \emph{Primary Sources Tool} in the future.
 
 At the time of writing (January, 2016), the tool has been used by more than a~hundred users
 who performed about 90,000 approval or rejection actions.
 More than 14~million statements have been uploaded in total.
 \autoref{fig:primary-sources-tool} shows two screenshots
-of the tool that integrates nicely with the Wikidata user interface.
+of the tool and illustrates how it integrates nicely with the Wikidata user interface.
 To visualize the migration progress, we have created a~realtime dashboard.%
 \footnote{Primary Sources Dashboard:
 \url{https://tools.wmflabs.org/wikidata-primary-sources/status.html}}
@@ -492,19 +492,19 @@ To visualize the migration progress, we have created a~realtime dashboard.%
         \caption{Incoming claims and references.}
         \label{fig:cause-of-death}
     \end{subfigure}
-    \caption{Primary Sources Tool user interface. Statements coming from
+    \caption{\emph{Primary Sources Tool} user interface. Statements coming from
        Freebase that are not yet available in Wikidata are shown in light blue.
        Users can approve or reject these statements using the ``approve'' or ``reject'' buttons.}
     \label{fig:primary-sources-tool}
 \end{figure}
 
-\autoref{fig:architecture} shows the overall architecture of the Primary Sources tool.
+\autoref{fig:architecture} shows the overall architecture of the \emph{Primary Sources Tool}.
 In the following, we describe the back-end, the front-end, and the chosen data rollout plan.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=.65\columnwidth]{img/architecture.pdf}
-    \caption{Primary Sources Tool architecture. The front-end (JavaScript) sends
+    \caption{\emph{Primary Sources Tool} architecture. The front-end (JavaScript) sends
       HTTP requests to the back-end (C++) to retrieve and update entities or
       statements, stored in a~relational database. Approved statements are in
       addition written by the front-end to the Wikidata REST API.}
@@ -512,7 +512,7 @@ In the following, we describe the back-end, the front-end, and the chosen data r
     % Source: https://docs.google.com/a/google.com/drawings/d/1vKAftQVjrso907UtbMXnEOabXwQHDVyyz2ewxcqz3b0/edit?usp=sharing
 \end{figure}
 
-\subsection{Back-end}
+\subsection{Back-End}
 
 The objective of the back-end was to have a~REST API allowing us
 to serve data efficiently to the front-end of the tool and
@@ -524,11 +524,11 @@ and runs as a~FastCGI application in the lighttpd Web server.
 Entities and statements are stored in a~relational database
 (first SQLite, later migrated to MariaDB)
 and follow the Wikidata data structure with an additional status field
-to keep track of statements that either already have been approved or rejected,
+to keep track of statements that either already have been approved, rejected,
 or not yet visited.
 Statements can be grouped in ``datasets'' (set of statements from the same origin)
 and ``uploads'' (set of statements uploaded at the same time) in order to
-distinguish data from different sources.\footnote{At the time of this writing,
+distinguish data from different sources.\footnote{At the time of writing,
 the back-end contained five different datasets.}
 
 The REST API of the back-end supports the following main types of requests:
@@ -550,8 +550,8 @@ The REST API of the back-end supports the following main types of requests:
 All GET requests support an additional \verb|&state={state}| query parameter to filter by state.
 This allows Wikidata developers to examine statements
 that have already been updated (\emph{e.g.}, ``return 10 random rejected statements'')
-for further analysis.
-The default of this parameter is \verb|unapproved|.
+for further analysis or reinvestigattion.
+The default value of this parameter is \verb|unapproved|.
 
 In addition to these main request types, the REST API also provides endpoints
 for importing and deleting datasets, as well as for retrieving the system's status.%
@@ -563,7 +563,7 @@ for statistical purposes using the Wikidata user name of the user who performed 
 Activity information can be displayed in an aggregated leader board form
 (top users, top rejecters, trends, \emph{etc.}) to add aspects of gamification to the migration process.
 
-\subsection{Front-end}
+\subsection{Front-End}
 
 For the front-end, our objective was to model the migration process
 as close to the natural Wikidata editing flow as possible.
@@ -576,9 +576,9 @@ Wikidata user scripts are part of the Wikidata tool chain%
 \url{https://www.wikidata.org/wiki/Wikidata:Tools}}
 and are created by users, but unlike gadgets---to be explained in the following---%
 do not appear in a~user's preferences.
-Instead, one has to add a~line of code into ones \texttt{common.js} file
+Instead, users have to add a~line of code into their \texttt{common.js} file
 in order to activate and use the script.
-User scripts can be created by anyone and might not always be stable.
+User scripts can be created by anyone and---unlike gadgets---might not always be stable.
 
 Once a~user script has matured, it can be converted into a~\emph{gadget}.
 Gadgets are scripts that are likewise created by users,
@@ -601,12 +601,12 @@ Instead of an ``edit'' button they feature two new buttons,
 
 \subsection{Data Rollout}
 
-In order to prepare the data for integration into the Primary Sources Tool,
+In order to prepare the data for integration into the \emph{Primary Sources Tool},
 we have created a~set of scripts which map the content
 of the last Freebase dump to Wikidata statements.%
 \footnote{The source code of theses scripts is also available under the terms of the Apache~2.0 license:
 \url{https://github.com/google/freebase-wikidata-converter}}
-The Primary Sources Tool was developed in parallel with the mapping scripts.
+The \emph{Primary Sources Tool} was developed in parallel with the mapping scripts.
 We first created a~small dataset of around 1~million statements
 based on few select properties (\emph{e.g.}, \texttt{/people/person/birth\_place})
 and deployed both the first dataset and a~basic version of the tool
@@ -626,7 +626,8 @@ Upon approval or rejection of either a~claim or a~reference,
 the Wikidata item page in question reloads in order to reflect
 the potentially changed state of the migration, as,
 in case of incoming claims with references, freshly accepted claims
-can require incoming references to be attached elsewhere in the item.
+can require incoming references to be attached elsewhere in the item,
+which is hard to keep track of without a~refresh.
 
 \section{Statistics on the Migration}\label{sec:statistics-of-the-migration}
 
@@ -868,13 +869,13 @@ only 0.9~million, \emph{i.e.}, 5\%, are missing in Wikidata.
 Concluding, in a~fairly short amount of time, we have been able
 to provide to the Wikidata community more than\linebreak 14~million new Wikidata statements
 using a~customizable and generalizable approach, consisting of data preparation scripts
-and the Primary Sources Tool,
+and the \emph{Primary Sources Tool},
 which is well integrated into the Wikidata user interface.
 The effort needed to map two fairly different knowledge bases has also been a~good occasion
 to highlight the difficulty of having good metrics to measure the size of knowledge bases
 in a~meaningful way,
 and, in consequence, the ``value'' of such collaborative knowledge bases and the datasets added to them.
-We hope that with the help of the Primary Sources Tool and
+We hope that with the help of the \emph{Primary Sources Tool} and
 the Freebase dataset, and in future also other datasets,
 will increase the completeness and accuracy of Wikidata.
 
