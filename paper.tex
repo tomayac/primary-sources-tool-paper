@@ -216,6 +216,22 @@ As of September 2015, Wikidata counted about 70~million statements on 18~million
 A~more in-depth comparison between Freebase, Wikidata, and other free and open knowledge bases
 (DBpedia, YAGO, and OpenCyc) is available in~\cite{farbercomparative} by Färber \emph{et~al.}
 
+\subsection{Motivation for the Migration}
+
+When Google publicly launched Freebase back in 2007, Freebase was thought of as a ``Wikipedia for structured data''.
+The Knowledge Graph team at Google have been closely watching the Wikimedia Foundation's project Wikidata since its launch,
+and believe strongly in a robust community-driven effort to collect and curate structured knowledge about the world.
+The team now think they can serve that goal best by supporting Wikidata, as the project is growing fast,
+has an active community, and is better-suited to lead an open collaborative knowledge base~\cite{freebase2014shutdown}.
+
+In consequence, in mid-2015, the Freebase service as a standalone project was wound down.
+Freebase always has supported developer access to the data;
+in order to still cater for this need,
+a~new API for entity search powered by Google's Knowledge Graph was launched.%
+\footnote{Knowledge Graph Search API: \url{https://developers.google.com/knowledge-graph/?hl=en}}
+Freebase has as of March 31, 2015, gone read-only, \emph{i.e.},
+the website no longer accepts edits and the MQL write API was retired.
+
 \section{Challenges of the migration}\label{sec:challenges-of-the-migration}
 
 During our ongoing efforts with the migration of Freebase to Wikidata,
