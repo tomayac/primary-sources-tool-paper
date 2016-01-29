@@ -1,0 +1,220 @@
+\begin{thebibliography}{10}
+
+\bibitem{wikipedia-works}
+P.~Ayers, C.~Matthews, and B.~Yates.
+\newblock {\em How Wikipedia Works: And How You Can Be a Part of It}.
+\newblock No Starch Press, Sept. 2008.
+
+\bibitem{viaf}
+R.~Bennett, C.~Hengel-Dittrich, E.~T. O'Neill, and B.~B. Tillett.
+\newblock {VIAF (Virtual International Authority File): Linking die Deutsche
+  Bibliothek and Library of Congress Name Authority Files}.
+\newblock In {\em {World Library and Information Congress: \nth{72} IFLA
+  General Conference and Council}}, 2006.
+
+\bibitem{freebase}
+K.~Bollacker, C.~Evans, P.~Paritosh, T.~Sturge, and J.~Taylor.
+\newblock {Freebase: A~Collaboratively Created Graph Database for Structuring
+  Human Knowledge}.
+\newblock In {\em Proceedings of the 2008 ACM SIGMOD International Conference
+  on Management of Data}, SIGMOD '08, pages 1247--1250, New York, NY, USA,
+  2008. ACM.
+
+\bibitem{campbell2003xmlschema}
+C.~E. Campbell, A.~Eisenberg, and J.~Melton.
+\newblock {XML Schema}.
+\newblock {\em SIGMOD Rec.}, 32(2):96--101, June 2003.
+
+\bibitem{mappingsurvey3}
+N.~Choi, I.-Y. Song, and H.~Han.
+\newblock {A~Survey on Ontology Mapping}.
+\newblock {\em ACM Sigmod Record}, 35(3):34--41, 2006.
+
+\bibitem{rdf}
+R.~Cyganiak, D.~Wood, and M.~Lanthaler.
+\newblock {\em RDF 1.1 Concepts and Abstract Syntax}.
+\newblock World Wide Web Consortium, Feb. 2014.
+\newblock \url{https://www.w3.org/TR/rdf11-concepts/}.
+
+\bibitem{entitylinkingsurvey1}
+H.-J. Dai, C.-Y. Wu, R.~Tsai, W.~Hsu, et~al.
+\newblock {From Entity Recognition to Entity Linking: A~Survey of Advanced
+  Entity Linking Techniques}.
+\newblock In {\em The \nth{26} Annual Conference of the Japanese Society for
+  Artificial Intelligence}, pages 1--10, 2012.
+
+\bibitem{mappingsurvey2}
+A.~Doan and A.~Y. Halevy.
+\newblock {Semantic Integration Research in the Database Community: A~Brief
+  Survey}.
+\newblock {\em AI Magazine}, 26(1):83, 2005.
+
+\bibitem{dong2014knowledge}
+X.~Dong, E.~Gabrilovich, et~al.
+\newblock {Knowledge Vault: A~Web-Scale Approach to Probabilistic Knowledge
+  Fusion}.
+\newblock In {\em Proceedings of the \nth{20} ACM SIGKDD International
+  Conference on Knowledge Discovery and Data Mining}, pages 601--610. ACM,
+  2014.
+
+\bibitem{freebase2014shutdown}
+J.~Douglas.
+\newblock {Announcement: From Freebase to Wikidata}, Dec 2014.
+\newblock
+  \url{https://groups.google.com/d/msg/freebase-discuss/s_BPoL92edc/Y585r7_2E1YJ}.
+
+\bibitem{flock2015towards}
+F.~Flöck, D.~Laniado, F.~Stadthaus, and M.~Acosta.
+\newblock {Towards Better Visual Tools for Exploring Wikipedia Article
+  Development---The Use Case of ``Gamergate Controversy''}.
+\newblock In {\em Ninth International AAAI Conference on Web and Social Media},
+  2015.
+
+\bibitem{farbercomparative}
+M.~Färber, B.~Ell, C.~Menne, and A.~Rettinger.
+\newblock {A~Comparative Survey of {DB}pedia, {F}reebase, {O}pen{C}yc,
+  {W}ikidata, and {YAGO}}.
+\newblock {\em Semantic Web Journal}, July 2015.
+\newblock
+  \url{http://www.semantic-web-journal.net/content/comparative-survey-dbpedia-freebase-opencyc-wikidata-and-yago}
+  (submitted, pending major revision).
+
+\bibitem{gesmundo2014kb}
+A.~Gesmundo and K.~Hall.
+\newblock {Projecting the Knowledge Graph to Syntactic Parsing}.
+\newblock In G.~Bouma and Y.~Parmentier, editors, {\em Proceedings of the
+  \nth{14} Conference of the European Chapter of the Association for
+  Computational Linguistics, {EACL} 2014, April 26-30, 2014, Gothenburg,
+  Sweden}, pages 28--32. The Association for Computer Linguistics, 2014.
+
+\bibitem{entitylinkingwikipedia}
+B.~Hachey, W.~Radford, J.~Nothman, M.~Honnibal, and J.~R. Curran.
+\newblock {Evaluating Entity Linking with Wikipedia}.
+\newblock {\em Artificial intelligence}, 194:130--150, 2013.
+
+\bibitem{freebase-end}
+D.~Harris.
+\newblock {Google is Shutting Down its {F}reebase Knowledge Base}.
+\newblock {\em GigaOM}, Dec. 2014.
+\newblock
+  \url{https://gigaom.com/2014/12/16/google-is-shutting-down-its-freebase-knowledge-base/}.
+
+\bibitem{linkeddatabook}
+T.~Heath and C.~Bizer.
+\newblock {\em Linked Data: Evolving the Web into a Global Data Space}.
+\newblock Synthesis Lectures on the Semantic Web: Theory and Technology. Morgan
+  and Claypool, 2011.
+
+\bibitem{reification-wikidata}
+D.~Hern{\'{a}}ndez, A.~Hogan, and M.~Kr{\"{o}}tzsch.
+\newblock {Reifying {RDF:} What Works Well With Wikidata?}
+\newblock In T.~Liebig and A.~Fokoue, editors, {\em Proceedings of the \nth{11}
+  International Workshop on Scalable Semantic Web Knowledge Base Systems},
+  volume 1457 of {\em CEUR}, pages 32--47. CEUR-WS.org, 2015.
+
+\bibitem{horridge2014webprotege}
+M.~Horridge, T.~Tudorache, C.~Nuylas, J.~Vendetti, N.~F. Noy, and M.~A. Musen.
+\newblock {WebProtege: A~Collaborative Web Based Platform for Editing
+  Biomedical Ontologies}.
+\newblock {\em Bioinformatics}, pages 1--2, May 2014.
+
+\bibitem{linkeddatabestpractises}
+B.~Hyland, G.~Atemezing, and B.~Villazon-Terrazas.
+\newblock {\em Best Practices for Publishing Linked Data}.
+\newblock W3C Working Group Note. World Wide Web Consortium, Jan. 2014.
+\newblock \url{http://www.w3.org/TR/ld-bp/}.
+
+\bibitem{lehmann2014dbpedia}
+J.~Lehmann, R.~Isele, M.~Jakob, A.~Jentzsch, D.~Kontokostas, P.~N. Mendes,
+  S.~Hellmann, M.~Morsey, P.~van Kleef, S.~Auer, et~al.
+\newblock {DBpedia---A~Large-Scale, Multilingual Knowledge Base Extracted from
+  Wikipedia}.
+\newblock {\em Semantic Web Journal}, 5:1--29, 2014.
+
+\bibitem{licenses}
+P.~Miller, R.~Styles, and T.~Heath.
+\newblock {Open Data Commons, a License for Open Data}.
+\newblock In {\em Proceedings of the Linked Data on the Web workshop}, Beijing,
+  China, Apr. 2008.
+
+\bibitem{milne2013open}
+D.~Milne and I.~H. Witten.
+\newblock {An Open-Source Toolkit for Mining Wikipedia}.
+\newblock {\em Artificial Intelligence}, 194:222--239, 2013.
+
+\bibitem{moskaliuk2012collaborative}
+J.~Moskaliuk, J.~Kimmerle, and U.~Cress.
+\newblock {Collaborative Knowledge Building with Wikis: The Impact of
+  Redundancy and Polarity}.
+\newblock {\em Computers \& Education}, 58(4):1049--1057, 2012.
+\balancecolumns
+
+\bibitem{cc0}
+D.~Peters.
+\newblock {\em Expanding the Public Domain: Part Zero}.
+\newblock Creative Commons, Mar. 2009.
+\newblock \url{http://creativecommons.org/weblog/entry/13304}.
+
+\bibitem{mappingsurvey1}
+R.~Press.
+\newblock {Ontology and Database Mapping: A~Survey of Current Implementations
+  and Future Directions}.
+\newblock {\em Journal of Web Engineering}, 7(1):001--024, 2008.
+
+\bibitem{licensius}
+V.~Rodríguez-Doncel, M.~C. Suárez-Figueroa, A.~Gómez-Pérez, and M.~Poveda.
+\newblock {License Linked Data Resources Pattern}.
+\newblock In {\em Proceedings of the \nth{4}~International Workshop on Ontology
+  Patterns}, Sydney, Australia, 2013.
+
+\bibitem{schindler2011introducing}
+M.~Schindler and D.~Vrande{\v{c}}ić.
+\newblock {Introducing New Features to Wikipedia: Case Studies for Web
+  Science}.
+\newblock {\em IEEE Intelligent Systems}, (1):56--61, 2011.
+
+\bibitem{entitylinkingsurvey2}
+W.~Shen, J.~Wang, and J.~Han.
+\newblock {Entity Linking with a~Knowledge Base: Issues, Techniques, and
+  Solutions}.
+\newblock {\em Knowledge and Data Engineering, IEEE Transactions on},
+  27(2):443--460, 2015.
+
+\bibitem{singhal2012}
+A.~Singhal.
+\newblock {Introducing the Knowledge Graph: Things, not Strings. Official
+  Google Blog}, May 2012.
+\newblock
+  \url{http://googleblog.blogspot.com/2012/05/introducing-knowledge-graph-things-not.html}.
+
+\bibitem{musicbrainz}
+A.~Swartz.
+\newblock {Music{B}rainz: A~Semantic Web Service}.
+\newblock {\em IEEE Intelligent Systems}, 17:76--77, Jan. 2002.
+
+\bibitem{vrandevcic2014wikidata}
+D.~Vrande{\v{c}}ić and M.~Krötzsch.
+\newblock {Wikidata: A~Free Collaborative Knowledgebase}.
+\newblock {\em Communications of the ACM}, 57(10):78--85, 2014.
+
+\bibitem{wikidatareqs}
+D.~Vrande\v{c}i\'{c}.
+\newblock {\em Wikidata Requirements}.
+\newblock Wikimedia Foundation, Apr. 2012.
+\newblock
+  \url{https://meta.wikimedia.org/w/index.php?title=Wikidata/Notes/Requirements&oldid=3646045}.
+
+\bibitem{west2014kb}
+R.~West, E.~Gabrilovich, K.~Murphy, S.~Sun, R.~Gupta, and D.~Lin.
+\newblock {Knowledge Base Completion via Search-based Question Answering}.
+\newblock In {\em Proceedings of the \nth{23} International Conference on World
+  Wide Web}, WWW '14, pages 515--526, New York, NY, USA, 2014. ACM.
+
+\bibitem{wikidatastats}
+E.~Zachte.
+\newblock {\em Statistics {W}ikidata}.
+\newblock Wikimedia Foundation, Sept. 2015.
+\newblock
+  \url{http://stats.wikimedia.org/wikispecial/EN/TablesWikipediaWIKIDATA.htm}.
+
+\end{thebibliography}
